@@ -1,12 +1,16 @@
 # Proyecto de la asignatura Cloud Computing
 
-### Autora: Gema Correa Fernández
-### Curso 2018-2019
-### Máster de Ingenería Informática
+#### Autora: Gema Correa Fernández
+#### Curso 2018-2019
+#### Máster de Ingenería Informática
+
+## Proyecto a desarrollar
+
+Proyecto aún por determinar
 
 ## Descripción
 
-Proyecto aún por elegir
+Descricpión aún por determinar
 
 ## Referencias
 
