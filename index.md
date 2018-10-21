@@ -20,7 +20,7 @@ Proyecto bajo licencia GNU GLP V3.
 
 ## Referencias
 
-- Python: https://www.python.org
-- Flask: http://flask.pocoo.org
-- Publics APIs: https://github.com/toddmotto/public-apis#books
-- Instagram: https://www.instagram.com/developer/
+- [Python](https://www.python.org)
+- [Flask](http://flask.pocoo.org)
+- [Publics APIs](https://github.com/toddmotto/public-apis#books)
+- [Instagram](https://www.instagram.com/developer/)
