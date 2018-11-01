@@ -6,7 +6,7 @@ Análisis de las imágenes geolocalizadas en Twitter.
 
 Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten sus fotografías en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad de obtener información muy valiosa, cómo por ejemplo ver que ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en las imágenes geolocalizadas que suben los usuarios a Twitter. Sin embargo, debemos tener en cuenta que esas imágenes pueden estar localizadas tanto por la ubicación de Twitter como por el uso de un hashtag. Entonces, el objetivo del proyecto es poder clasificar que ciudades son las que más imágenes asociadas hay para una ubicación.
 
-La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [1][1]:
+La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
 - __Tweets__: búsqueda, publicación, filtrado, etc.
 - Anuncios: gestión de campañas, análisis, etc.
