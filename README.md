@@ -1,10 +1,8 @@
-# Proyecto de la asignatura Cloud Computing
+# Proyecto Cloud Computing 2018-2019
 
 #### Autora: Gema Correa Fernández
 #### Curso 2018-2019
 #### Máster de Ingenería Informática
-
-# Proyecto Cloud Computing 2018-2019
 
 Se puede consultar también la información en el siguiente [enlace](https://gecofer.github.io/proyecto-CC/).
 
@@ -14,9 +12,9 @@ Análisis de las imágenes geolocalizadas en Twitter.
 
 ## Descripción del proyecto
 
-Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten sus fotografías en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad de obtener información muy valiosa, cómo por ejemplo ver que ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en las imágenes geolocalizadas que suben los usuarios a Twitter. Sin embargo, debemos tener en cuenta que esas imágenes pueden estar localizadas tanto por la ubicación de Twitter como por el uso de un hashtag. Entonces, el objetivo del proyecto es poder clasificar que ciudades son las que más imágenes asociadas hay para su ubicación.
+Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten sus fotografías en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad de obtener información muy valiosa, cómo por ejemplo ver que ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en las imágenes geolocalizadas que suben los usuarios a Twitter. Sin embargo, debemos tener en cuenta que esas imágenes pueden estar localizadas tanto por la ubicación de Twitter como por el uso de un hashtag. Entonces, el objetivo del proyecto es poder clasificar que ciudades son las que más imágenes asociadas hay para una ubicación.
 
-La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [1]:
+La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
 - __Tweets__: búsqueda, publicación, filtrado, etc.
 - Anuncios: gestión de campañas, análisis, etc.
@@ -55,17 +53,17 @@ Además, necesitamos un sistema de centralización de [__logs__](https://www.ela
 
 ### Comunicación entre los microservicios
 
-La comunicación entre servicios será realizada por _brokers_, en concreto con (RabbitMQ)[https://www.rabbitmq.com], que es un sistema de manejo de colas.
+La comunicación entre servicios será realizada por _brokers_, en concreto con [RabbitMQ](https://www.rabbitmq.com), que es un sistema de manejo de colas.
 
 ### Bibliotecas de Python para la API de Twitter
 
-Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de (tweepy)[https://github.com/tweepy/tweepy] ya que he oído hablar de ella bastante bien. De todas maneras, existen otras librerías cómo (twython)[https://github.com/ryanmcgrath/twython], (python-twitter)[https://github.com/bear/python-twitter] o (TwitterAPI)[https://github.com/geduldig/TwitterAPI]
+Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de [tweepy](https://github.com/tweepy/tweepy) ya que he oído hablar de ella bastante bien. De todas maneras, existen otras librerías cómo [twython](https://github.com/ryanmcgrath/twython), [python-twitter](https://github.com/bear/python-twitter) o [TwitterAPI](https://github.com/geduldig/TwitterAPI)
 
 ### Tests en Python
 
-Para testear en Python [3], podré usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como (unittest)[https://docs.python.org/3.5/library/unittest.html], (doctest)[https://docs.python.org/3.5/library/doctest.html] o (pytest)[https://docs.pytest.org/en/latest/] [4].
+Para testear en Python [[3][3]], podré usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como [unittest](https://docs.python.org/3.5/library/unittest.html), [doctest](https://docs.python.org/3.5/library/doctest.html) o [pytest](https://docs.pytest.org/en/latest/) [[4][4]].
 
-Además para testear en Python, también tengo la posibilidad de hacer uso de (Travis CL)[https://www.travis-ci.org], que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [5] [6].
+Además tengo que hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
 
 ### Despliegue en la nube
 
@@ -73,20 +71,20 @@ Los microservicios serán desplegados en la nube, para el despliege del proyecto
 
 #### Uso de PaaS
 
-Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay vamos a escoger entre (Heroku)[https://www.heroku.com] o (OpenShift)[https://www.openshift.com].
+Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay vamos a escoger entre [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com).
 
 ## Licencia
 
-Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
+Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE].
 
 ## Referencias
 
-[1] https://stackabuse.com/accessing-the-twitter-api-with-python/
-[2] https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
-[3] https://github.com/JJ/tests-python
-[4] https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
-[5] https://www.smartfile.com/blog/testing-python-with-travis-ci/
-[6] https://github.com/softwaresaved/build_and_test_examples
+[1]: https://stackabuse.com/accessing-the-twitter-api-with-python/
+[2]: https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
+[3]: https://github.com/JJ/tests-python
+[4]: https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
+[5]: https://www.smartfile.com/blog/testing-python-with-travis-ci/
+[6]: https://github.com/softwaresaved/build_and_test_examples
 
 ## Enlaces de Interés
 
