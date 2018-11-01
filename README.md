@@ -1,8 +1,6 @@
 # Proyecto Cloud Computing 2018-2019
 
 #### Autora: Gema Correa Fernández
-#### Curso 2018-2019
-#### Máster de Ingenería Informática
 
 Se puede consultar también la información en el siguiente [enlace](https://gecofer.github.io/proyecto-CC/).
 
@@ -24,13 +22,13 @@ La API de Twitter nos permite acceder a toda esa información de forma más simp
 
 ## Arquitectura software
 
-Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [2]:
+Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [[2][2]]:
 
 - __Arquitectura en capas__: arquitectura cliente-servidor, tiene 3 o más capas, normalmente se suelen incluir la capa de presentación, la de aplicación, la de lógica de negocio y la de acceso a datos. El problema principal es que solo permite escalado dentro de cada una de las capas, siendo al final alguna de ellas un cuello de botella.
 - __Arquitectura dirigida por eventos__: tiene una cola de eventos que se originan en el usuario, pero también de una parte a otra de la arquitectura. Es difícil de testear y su desarrollo es más complicado que la anterior.
 - __Arquitectura microkernel__: arquitectura casi monolítica, con un núcleo central al que se pueden añadir funcionalidades mediante _plugins_, siendo su problema principal la escalabilidad, ya que el núcleo puede representar un cuello de botella.
 - __Arquitectura basada en microservicios__: arquitectura muy popular hoy en día, se caracteriza por poder usar unidades que se van a desplegar de forma independiente y por poder usar tecnologías subyacentes que van desde la virtualización completa en la nube hasta el uso de contenedores _Docker_ en una sola máquina virtual.
-__Arquitectura basada en espacios__: arquitectura antigua, de la década de los 90.
+- __Arquitectura basada en espacios__: arquitectura antigua, de la década de los 90.
 
 Entonces, resulta bastante claro que de todas las comentadas anteriormente vayamos a hacer uso de la __arquitectura basada en microservicios__, ya que es la que más actual y la que menos problemas presenta, además de que nos permite tener diferentes servicios trabajando de forma totalmente independiente unos de otros.
 
@@ -46,7 +44,7 @@ Los microservicios previstos a desarrollar son los siguientes:
 
 1. __Consultar API de Twitter__: en este microservicio solo nos vamos a centrar en acceder, consultar y bajarnos información de la API, información obtenida en un [JSON](https://www.json.org).
 2. __Procesar información__: en este microservicio vamos a quedarnos con los datos referentes a las imágenes que tienen localización o el hashtag de esa localización, en un JSON.
-3. __Almacenar información__: en este microservicio nos vamos a centrar en crear una estructura para los datos que hemos realizado, usando principalmente una BD como (MongoDB)[https://www.mongodb.com/es].
+3. __Almacenar información__: en este microservicio nos vamos a centrar en crear una estructura para los datos que hemos realizado, usando principalmente una BD como [MongoDB](https://www.mongodb.com/es).
 4. __Mostrar información__: en este microservicio solo nos interesa mostrar la información relevante de alguna manera específica.
 
 Además, necesitamos un sistema de centralización de [__logs__](https://www.elastic.co/products/logstash), al cual todos deben comunicarse.
@@ -90,5 +88,4 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
-
-Nota: Se debe tener en cuenta que a lo largo del desarrollo de la aplicación, se podrá modificar la documentación o añadir nuevas funcionalidades.
+___Nota__: Se debe tener en cuenta que a lo largo del desarrollo de la aplicación, se podrá modificar la documentación o añadir nuevas funcionalidades._
