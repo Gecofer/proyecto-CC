@@ -1,6 +1,7 @@
 # Proyecto Cloud Computing 2018-2019
 
 #### Autora: Gema Correa Fernández
+#### Máster en Ingeniría Informática
 
 Se puede consultar también la información en el siguiente [enlace](https://gecofer.github.io/proyecto-CC/).
 
@@ -73,7 +74,7 @@ Cuando se quiere desplegar una aplicación sobre una infraestructura ya definid
 
 ## Licencia
 
-Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE].
+Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
 
 ## Referencias
 
@@ -88,4 +89,4 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
-___Nota__: Se debe tener en cuenta que a lo largo del desarrollo de la aplicación, se podrá modificar la documentación o añadir nuevas funcionalidades._
+___Nota__: Se debe tener en cuenta que a lo largo del desarrollo, se podrá modificar la documentación o añadir nuevas funcionalidades._
