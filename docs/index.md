@@ -71,7 +71,7 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 
 ## Referencias
 
-[1] Accessing the Twitter API with Python, https://stackabuse.com/accessing-the-twitter-api-with-python/
+[1]: Accessing the Twitter API with Python, https://stackabuse.com/accessing-the-twitter-api-with-python/
 [2] https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
 [3] https://github.com/JJ/tests-python
 [4] https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
