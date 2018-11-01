@@ -28,7 +28,7 @@ Entonces, resulta bastante claro que de todas las comentadas anteriormente vayam
 
 ### Microservicios a desarrollar
 
-![Twitter+Python](gema/Downloads/imagenes/imagen1.png)
+![Twitter+Python](../images/twitter+python.png)
 
 Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
 
