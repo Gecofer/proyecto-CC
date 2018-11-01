@@ -1,16 +1,12 @@
-# Proyecto Cloud Computing 2018-2019
-
-Se puede consultar también la información en el siguiente enlace.
-
 ## Título del proyecto
 
 Análisis de las imágenes geolocalizadas en Twitter.
 
 ## Descripción del proyecto
 
-Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten sus fotografías en ellas. Este tipo de comportamientos benefician a las empresas con la obtención de información muy diversa, cómo por ejemplo ver que ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en las imágenes geolocalizadas que suben los usuarios a Twitter, para así luego poder clasificar que localizaciones son las más mencionadas. Sin embargo, debemos tener en cuenta que esas imágenes pueden estar localizadas tanto por la ubicación de Twitter como por el uso de un hashtag. Entonces, el objetivo del proyecto es poder clasificar que ciudades son las que más imágenes asociadas a su ubicación
+Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten sus fotografías en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad de obtener información muy valiosa, cómo por ejemplo ver que ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en las imágenes geolocalizadas que suben los usuarios a Twitter. Sin embargo, debemos tener en cuenta que esas imágenes pueden estar localizadas tanto por la ubicación de Twitter como por el uso de un hashtag. Entonces, el objetivo del proyecto es poder clasificar que ciudades son las que más imágenes asociadas hay para una ubicación.
 
-La API de Twitter nos permite acceder a ella de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [1]:
+La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [1][1]:
 
 - __Tweets__: búsqueda, publicación, filtrado, etc.
 - Anuncios: gestión de campañas, análisis, etc.
@@ -75,7 +71,7 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 
 ## Referencias
 
-[1] https://stackabuse.com/accessing-the-twitter-api-with-python/
+[1] Accessing the Twitter API with Python, https://stackabuse.com/accessing-the-twitter-api-with-python/
 [2] https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
 [3] https://github.com/JJ/tests-python
 [4] https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
