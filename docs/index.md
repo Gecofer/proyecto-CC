@@ -16,19 +16,19 @@ La API de Twitter nos permite acceder a toda esa información de forma más simp
 
 ## Arquitectura software
 
-Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [2]:
+Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [[2][2]]:
 
-- __Arquitectura en capas__: arquitectura cliente-servidor, creando 3 o más capas, normalmente se suelen incluir la capa de presentación, la de aplicación, la de lógica de negocio y la de acceso a datos. El problema principal es que solo permite escalado dentro de cada una de las capas, siendo al final alguna de ellas un cuello de botella.
+- __Arquitectura en capas__: arquitectura cliente-servidor, tiene 3 o más capas, normalmente se suelen incluir la capa de presentación, la de aplicación, la de lógica de negocio y la de acceso a datos. El problema principal es que solo permite escalado dentro de cada una de las capas, siendo al final alguna de ellas un cuello de botella.
 - __Arquitectura dirigida por eventos__: tiene una cola de eventos que se originan en el usuario, pero también de una parte a otra de la arquitectura. Es difícil de testear y su desarrollo es más complicado que la anterior.
-- __Arquitectura microkernel__: arquitectura casi monolítica, con un núcleo central al que se pueden añadir funcionalidades mediante plugins, siendo su problema principal la escalabilidad, ya que el núcleo puede representar un cuello de botella.
-- __Arquitectura basada en microservicios__: arquitectura muy popular hoy en día, se caracteriza por poder usar unidades que se van a desplegar de forma independiente y por poder usar tecnologías subyacentes que van desde la virtualización completa en la nube hasta el uso de contenedores Docker en una sola máquina virtual.
-__Arquitectura basada en espacios__: arquitectura antigua, de la década de los 90.
+- __Arquitectura microkernel__: arquitectura casi monolítica, con un núcleo central al que se pueden añadir funcionalidades mediante _plugins_, siendo su problema principal la escalabilidad, ya que el núcleo puede representar un cuello de botella.
+- __Arquitectura basada en microservicios__: arquitectura muy popular hoy en día, se caracteriza por poder usar unidades que se van a desplegar de forma independiente y por poder usar tecnologías subyacentes que van desde la virtualización completa en la nube hasta el uso de contenedores _Docker_ en una sola máquina virtual.
+- __Arquitectura basada en espacios__: arquitectura antigua, de la década de los 90.
 
 Entonces, resulta bastante claro que de todas las comentadas anteriormente vayamos a hacer uso de la __arquitectura basada en microservicios__, ya que es la que más actual y la que menos problemas presenta, además de que nos permite tener diferentes servicios trabajando de forma totalmente independiente unos de otros.
 
 ### Microservicios a desarrollar
 
-[imagen icono twitter] + [imagen icono python]
+![Twitter+Python](/gema/Descargas/imagenes/imagen1.png)
 
 Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
 
@@ -71,8 +71,8 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 
 ## Referencias
 
-[1]: Accessing the Twitter API with Python, https://stackabuse.com/accessing-the-twitter-api-with-python/
-[2] https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
+[1]: https://stackabuse.com/accessing-the-twitter-api-with-python/
+[2]: https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
 [3] https://github.com/JJ/tests-python
 [4] https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
 [5] https://www.smartfile.com/blog/testing-python-with-travis-ci/
