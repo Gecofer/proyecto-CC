@@ -28,13 +28,9 @@ Entonces, resulta bastante claro que de todas las comentadas anteriormente vayam
 
 ### Microservicios a desarrollar
 
-![Twitter+Python](../images/twitter+python.png)
-
 Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
 
 Los microservicios previstos a desarrollar son los siguientes:
-
-[imagen de la estructura]
 
 1. __Consultar API de Twitter__: en este microservicio solo nos vamos a centrar en acceder, consultar y bajarnos información de la API, información obtenida en un [JSON](https://www.json.org).
 2. __Procesar información__: en este microservicio vamos a quedarnos con los datos referentes a las imágenes que tienen localización o el hashtag de esa localización, en un JSON.
@@ -45,17 +41,17 @@ Además, necesitamos un sistema de centralización de [__logs__](https://www.ela
 
 ### Comunicación entre los microservicios
 
-La comunicación entre servicios será realizada por _brokers_, en concreto con (RabbitMQ)[https://www.rabbitmq.com], que es un sistema de manejo de colas.
+La comunicación entre servicios será realizada por _brokers_, en concreto con [RabbitMQ](https://www.rabbitmq.com), que es un sistema de manejo de colas.
 
 ### Bibliotecas de Python para la API de Twitter
 
-Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de (tweepy)[https://github.com/tweepy/tweepy] ya que he oído hablar de ella bastante bien. De todas maneras, existen otras librerías cómo (twython)[https://github.com/ryanmcgrath/twython], (python-twitter)[https://github.com/bear/python-twitter] o (TwitterAPI)[https://github.com/geduldig/TwitterAPI]
+Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de [tweepy](https://github.com/tweepy/tweepy) ya que he oído hablar de ella bastante bien. De todas maneras, existen otras librerías cómo [twython](https://github.com/ryanmcgrath/twython), [python-twitter](https://github.com/bear/python-twitter) o [TwitterAPI](https://github.com/geduldig/TwitterAPI)
 
 ### Tests en Python
 
-Para testear en Python [3], podré usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como (unittest)[https://docs.python.org/3.5/library/unittest.html], (doctest)[https://docs.python.org/3.5/library/doctest.html] o (pytest)[https://docs.pytest.org/en/latest/] [4].
+Para testear en Python [[3][3]], podré usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como [unittest](https://docs.python.org/3.5/library/unittest.html), [doctest](https://docs.python.org/3.5/library/doctest.html) o [pytest](https://docs.pytest.org/en/latest/) [[4][4]].
 
-Además para testear en Python, también tengo la posibilidad de hacer uso de (Travis CL)[https://www.travis-ci.org], que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [5] [6].
+Además tengo que hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
 
 ### Despliegue en la nube
 
@@ -63,24 +59,22 @@ Los microservicios serán desplegados en la nube, para el despliege del proyecto
 
 #### Uso de PaaS
 
-Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay vamos a escoger entre (Heroku)[https://www.heroku.com] o (OpenShift)[https://www.openshift.com].
+Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay vamos a escoger entre [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com).
 
 ## Licencia
 
 Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE].
 
-## Referencias
-
 [1]: https://stackabuse.com/accessing-the-twitter-api-with-python/
 [2]: https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
-[3] https://github.com/JJ/tests-python
-[4] https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
-[5] https://www.smartfile.com/blog/testing-python-with-travis-ci/
-[6] https://github.com/softwaresaved/build_and_test_examples
+[3]: https://github.com/JJ/tests-python
+[4]: https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
+[5]: https://www.smartfile.com/blog/testing-python-with-travis-ci/
+[6]: https://github.com/softwaresaved/build_and_test_examples
 
 ## Enlaces de Interés
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
 
-Nota: Se debe tener en cuenta que a lo largo del desarrollo de la aplicación, se podrá modificar la documentación o añadir nuevas funcionalidades.
+__Nota__: _Se debe tener en cuenta que a lo largo del desarrollo de la aplicación, se podrá modificar la documentación o añadir nuevas funcionalidades._
