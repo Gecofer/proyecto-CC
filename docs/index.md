@@ -60,18 +60,31 @@ Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embar
 
 Para testear en Python [[3][3]], puedo usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como [unittest](https://docs.python.org/3.5/library/unittest.html), [doctest](https://docs.python.org/3.5/library/doctest.html) o [pytest](https://docs.pytest.org/en/latest/) [[4][4]]. En este caso yo voy hacer uso de la biblioteca [unittest](https://docs.python.org/3.5/library/unittest.html), ya que nos ofrece toda la potencia del lenguaje para probar nuestros programas, lo que significa que ayuda a determinar rápidamente el impacto de cualquier modificación en el resto del código.
 
-Para realizar la configuración de los test correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]]. Por tanto, para establecer un testeo cada vez que haga `git push`, he seguido el [tutorial de Travis](https://docs.travis-ci.com/user/tutorial/):
+Para realizar la configuración de los test correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]]. En el apartado siguiente, explico como establecer el testeo con travis, cuando quiero desplegar.
+
+Por tanto, para establecer un testeo cada vez que haga `git push`, he seguido el [tutorial de Travis](https://docs.travis-ci.com/user/tutorial/):
+
+### Despliegue
+
+#### PaaS
+
+Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
+
+Despliegue: https://glacial-castle-84194.herokuapp.com
+
+### Pasos para hacer el despliegue en Heroku [[7][7]]
+
 
 1. Identificarse en Travis mediante Github.
 
-1. Añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
+2. Añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
   *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
   ~~
   language: python
   python:
   - "3.7-dev"
   ~~
-  *  El comando para instalar las dependencias.
+  *  El comando para instalar las dependencias, para ello previamente deberemos habernos creado el fichero [_requirements.txt_](), el cual contiene las dependencias a instalar
   ~~
   install:
   - pip install -r requirements.txt
@@ -88,20 +101,10 @@ Para realizar la configuración de los test correctamente, voy hacer uso de [Tra
   <img width="700" height="100" src="images/travis.png">
 </p>
 
-### Despliegue
-
-#### PaaS
-
-Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
-
-Despliegue: https://glacial-castle-84194.herokuapp.com
-
-#### Pasos para hacer el despliegue en Heroku [[7][7]]
-
 1. Crear cuenta en Heroku.
 2. Instalar el comando de [Heroku Command Line Interface (CLI)](https://devcenter.heroku.com/articles/getting-started-with-python#set-up). _Como anotación comentar que cada semana actualizan la versión._
-3. Nos identificamos introduciendo nuestras credenciales de la cuenta de Heroku:
-4. Creación de los ficheros necesarios para el despliegue:
+3. Identificarse introduciendo nuestras credenciales de la cuenta de Heroku: `heroku login`
+4. Crear los ficheros necesarios para el despliegue:
   - Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`, así usaremos [gunicorn](https://gunicorn.org) que nos permite administrar las peticiones simultaneas que nuestra aplicación reciba
 
 
