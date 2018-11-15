@@ -7,6 +7,8 @@ Fichero que implementa la clase API REST haciendo uso del microframework Flask
 '''
 
 
+
+
 # Bibliotecas a usar
 from flask import Flask     # importamos la clase Flask
 from flask import jsonify   # https://pypi.org/project/Flask-Jsonpify/
