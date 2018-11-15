@@ -70,7 +70,7 @@ Por tanto, para establecer un testeo cada vez que haga `git push`, he seguido el
 
 Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
 
-Despliegue: https://glacial-castle-84194.herokuapp.com
+Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-84194.herokuapp.com)
 
 #### Rutas utilizadas en la aplicación
 
@@ -141,7 +141,7 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
 
 ## Licencia
 
-Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE].
+Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
 
 [1]: https://stackabuse.com/accessing-the-twitter-api-with-python/
 [2]: https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
