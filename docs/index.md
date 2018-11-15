@@ -66,21 +66,21 @@ Para realizar la configuración de los test correctamente, voy hacer uso de [Tra
 
 1. Añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
   *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
-  ~~~~
+  ~~
   language: python
   python:
   - "3.7-dev"
-  ~~~~
+  ~~
   *  El comando para instalar las dependencias.
-  ~~~~
+  ~~
   install:
   - pip install -r requirements.txt
-  ~~~~
+  ~~
   *  El comando para ejecutar los tests.
-  ~~~~
+  ~~~
   script:
   - python3 test/main_test.py
-  ~~~~
+  ~~~
 
 2. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
@@ -100,11 +100,11 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
 
 1. Crear cuenta en Heroku.
 2. Instalar el comando de [Heroku Command Line Interface (CLI)](https://devcenter.heroku.com/articles/getting-started-with-python#set-up). _Como anotación comentar que cada semana actualizan la versión._
-3. Nos identificamos introduciendo nuestras credenciales de la cuenta de Heroku
+3. Nos identificamos introduciendo nuestras credenciales de la cuenta de Heroku:
+4. Creación de los ficheros necesarios para el despliegue:
+  - Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`, así usaremos [gunicorn](https://gunicorn.org) que nos permite administrar las peticiones simultaneas que nuestra aplicación reciba
 
 
-3. Creación de los ficheros necesarios para el despliegue:
-  - Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`
 
 de la she tenido que crear un archivo denominado Procfile que contiene la siguiente instrucción:
 
