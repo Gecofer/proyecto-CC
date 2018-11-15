@@ -68,7 +68,7 @@ Para testear en Python [[3][3]], puedo usar algunas de las librerías que me per
 
 Para realizar la configuración de los test correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
 
-Para saber más información sobre los tests: https://gecofer.github.io/proyecto-CC/
+Para saber más información sobre los [tests](https://gecofer.github.io/proyecto-CC/)
 
 ### Despliegue en la nube
 
