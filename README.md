@@ -35,13 +35,16 @@ Entonces, resulta bastante claro que de todas las comentadas anteriormente vayam
 
 ### Microservicios a desarrollar
 
-![Twitter+Python](images/twitter+python.png)
+![Twitter+Python](docs/images/twitter+python.png)
 
 Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
 
 Los microservicios previstos a desarrollar son los siguientes:
 
-![Estructura microservicios](images/estructura_microservicios.png)
+<p align="center">
+  <img width="700" height="400" src="images/estructura_microservicios.png">
+</p>
+
 
 1. __Consultar API de Twitter__: en este microservicio solo nos vamos a centrar en acceder, consultar y bajarnos información de la API, información obtenida en un [JSON](https://www.json.org).
 2. __Procesar información__: en este microservicio vamos a quedarnos con los datos referentes a las imágenes que tienen localización o el hashtag de esa localización, en un JSON.
