@@ -89,6 +89,9 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
 - _util.py_: fichero que contiene la información a mostrar en la clase TwitterData
 - _test/util_test.py_:
 
+### Datos utilizados
+
+
 ### Pasos para hacer el despliegue
 
 1. Identificarse en Travis mediante Github.

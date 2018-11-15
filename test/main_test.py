@@ -16,7 +16,6 @@ import unittest     # https://docs.python.org/3/library/unittest.html
 import requests     # https://www.pythonforbeginners.com/requests/using-requests-in-python
 
 
-
 # https://stackoverflow.com/questions/20309456/call-a-function-from-another-file-in-python
 
 import main
@@ -44,10 +43,6 @@ class TestTwitterData(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual(result.content_type, "application/json")
         pass
-
-
-# ---------------------------------------------------------------------------- #
-
 
 # ---------------------------------------------------------------------------- #
 
