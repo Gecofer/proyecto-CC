@@ -62,7 +62,9 @@ Para testear en Python [[3][3]], puedo usar algunas de las librerías que me per
 
 Para realizar la configuración de los test correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]]. Por tanto, para establecer un testeo cada vez que haga `git push`, he seguido el [tutorial de Travis](https://docs.travis-ci.com/user/tutorial/):
 
-1. Lo primero que he hecho ha sido añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
+1. Identificarse en Travis mediante Github.
+
+1. Añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
   *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
   ```
   language: python
@@ -70,7 +72,7 @@ Para realizar la configuración de los test correctamente, voy hacer uso de [Tra
   - "3.7-dev"
   ```
   *  El comando para instalar las dependencias.
-  ```
+  ``` python
   install:
   - pip install -r requirements.txt
   ```
@@ -83,16 +85,27 @@ Para realizar la configuración de los test correctamente, voy hacer uso de [Tra
 2. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
 <p align="center">
-  <img width="600" height="200" src="images/travis.png">
+  <img width="700" height="100" src="images/travis.png">
 </p>
 
-### Despliegue en la nube
+### Despliegue
 
-Los microservicios serán desplegados en la nube, para el despliege del proyecto se puede utilizar una maquina virtual en Azure.
+#### PaaS
 
-#### Uso de PaaS
+Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
 
-Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay vamos a escoger entre [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com).
+Despliegue: https://glacial-castle-84194.herokuapp.com
+
+#### Pasos para hacer el despliegue en Heroku
+
+1. Crear cuenta en Heroku.
+2. Instalar el comando de [Heroku Command Line Interface (CLI)](https://devcenter.heroku.com/articles/getting-started-with-python#set-up). _Como anotación comentar que cada semana actualizan la versión._
+3.
+
+
+A continua Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`
+
+de la she tenido que crear un archivo denominado Procfile que contiene la siguiente instrucción:
 
 ## Licencia
 
@@ -109,4 +122,4 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
-__Nota__: _Se debe tener en cuenta que a lo largo del desarrollo de la aplicación, se podrá modificar la documentación o añadir nuevas funcionalidades._
+__Nota__: _Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades._
