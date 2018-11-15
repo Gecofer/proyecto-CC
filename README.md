@@ -96,4 +96,4 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
-___Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo, conlleva modificaciones en el futuro, pudiend modificar la documentación o añadiendo nuevas funcionalidades._
+___Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades._
