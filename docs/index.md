@@ -72,13 +72,22 @@ Cuando se quiere desplegar una aplicación sobre una infraestructura ya definid
 
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
-#### Rutas definidas en la aplicación
+#### Rutas utilizadas en la aplicación
 
-- _/_ devuelve el json {"status":"OK"}.
-- /listas devuelve un json con las listas existentes.
-- /lista devuelve un json con el contenido de la lista solicitada. Requiere parámetro GET (acceder a la ruta para más información).
-- /add añade una película a la lista indicada. Requiere parámetros GET (acceder a la ruta para más información).
+- _/_: devuelve el JSON {"status":"OK"} (https://glacial-castle-84194.herokuapp.com).
+- _error en la ruta_: devuelve el JSON {"msg error":"URL not found"} (https://glacial-castle-84194.herokuapp.com/get_dat)
+- _/get_data_: lista un solo un elemento del JSON mediante el método GET, el cual obtiene un recurso del servidor (https://glacial-castle-84194.herokuapp.com/get_data?id=GR)
+- _/data_twitter_ con GET: lista todos los elementos del JSON (https://glacial-castle-84194.herokuapp.com/data_twitter)
+- _/data_twitter_ con PUT: crea un nuevo elemento del recurso _(curl -i -X PUT http://127.0.0.1:5000/data_twitter)_ y para comprobar que se ha creado _(curl -i http://127.0.0.1:5000/)_
+- _/data_twitter_ con POST:
+- _/data_twitter_ con DELETE:
 
+### Ficheros usados
+
+- _main.py_:
+- _test/main_test.py_:
+- _util.py_:
+- _test/util_test.py_:
 
 ### Pasos para hacer el despliegue
 
@@ -115,13 +124,13 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
   * Seleccionamos GitHub como _Deployment method_
   * Conectamos la app en introduciendo nuestra datos de GitHub
   * Indicamos el repositorio de GitHub de nuestra aplicación
-  * Activamos los despliegues automáticos
+  * Activamos los despliegues automáticos y que Travis ejecute antes de desplegar.
 
   <p align="center">
     <img width="600" height="500" src="images/deploy_heroku.png">
   </p>
 
-11. `git pus heroku master`
+11. `git push heroku master`
 
 12. `git push`
 
