@@ -250,7 +250,6 @@ class TwitterData:
 
                 return result
 
-
             else: # Si no sabemos como escribirlo
                 # aqui debe devolver ERROR
                 data = {} # definimos un diccionario
