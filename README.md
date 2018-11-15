@@ -36,7 +36,7 @@ Entonces, resulta bastante claro que de todas las comentadas anteriormente vayam
 ### Microservicios a desarrollar
 
 <p align="center">
-  <img width="250" height="100" src="images/twitter+python.png">
+  <img width="250" height="100" src="docs/images/twitter+python.png">
 </p>
 
 Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
@@ -44,7 +44,7 @@ Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://ww
 Los microservicios previstos a desarrollar son los siguientes:
 
 <p align="center">
-  <img width="450" height="370" src="images/estructura_microservicios.png">
+  <img width="450" height="370" src="docs/images/estructura_microservicios.png">
 </p>
 
 
