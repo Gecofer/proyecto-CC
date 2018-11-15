@@ -15,8 +15,8 @@ Twitter junto con Instagram son dos de las plataformas sociales más usadas actu
 La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
 - __Tweets__: búsqueda, publicación, filtrado, etc.
-- Anuncios: gestión de campañas, análisis, etc.
-- __Contenido multimedia__: subir y acceder a fotos, videos, GIF animados, etc.
+- __Anuncios__: gestión de campañas, análisis, etc.
+- __Contenido multimedia__: subir y acceder a fotos, vídeos, GIF animados, etc.
 - __Tendencias__: _trending topics_.
 - __Geo__: información sobre lugares conocidos, lugares cerca de una ubicación, etc.
 
@@ -34,11 +34,12 @@ Entonces, resulta bastante claro que de todas las comentadas anteriormente vayam
 
 ### Microservicios a desarrollar
 
+Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para un proyecto de grandes dimensiones o que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que tras haber buscado documentación, hablado con usuarios de ambos microframework
+y ser la primera vez que uso este tipo de tecnología, me he decantado por Flask.
+
 <p align="center">
   <img width="250" height="100" src="docs/images/twitter+python.png">
 </p>
-
-Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
 
 Los microservicios previstos a desarrollar son los siguientes:
 
@@ -46,9 +47,8 @@ Los microservicios previstos a desarrollar son los siguientes:
   <img width="460" height="370" src="docs/images/estructura_microservicios.png">
 </p>
 
-
 1. __Consultar API de Twitter__: en este microservicio solo nos vamos a centrar en acceder, consultar y bajarnos información de la API, información obtenida en un [JSON](https://www.json.org).
-2. __Procesar información__: en este microservicio vamos a quedarnos con los datos referentes a las imágenes que tienen localización o el hashtag de esa localización, en un JSON.
+2. __Procesar información__: en este microservicio vamos a quedarnos con los datos referentes a las tendencias según su localización, en un JSON [`API.trends_place(id[, exclude])`](http://docs.tweepy.org/en/v3.5.0/api.html).
 3. __Almacenar información__: en este microservicio nos vamos a centrar en crear una estructura para los datos que hemos realizado, usando principalmente una BD como [MongoDB](https://www.mongodb.com/es).
 4. __Mostrar información__: en este microservicio solo nos interesa mostrar la información relevante de alguna manera específica.
 
