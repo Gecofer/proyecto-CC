@@ -85,11 +85,13 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
 ### Ficheros usados
 
 - _main.py_: fichero que implementa la clase API REST haciendo uso del microframework Flask
-- _test/main_test.py_:
-- _util.py_: fichero que contiene la información a mostrar en la clase TwitterData
-- _test/util_test.py_:
-
-### Datos utilizados
+- _test/main_test.py_: fichero que testea la clase del _main.py_
+- _util.py_: fichero que contiene la información a mostrar en la clase TwitterData, para ello nos hemos creado una estructura en la que distinguimos:
+  - ID: identficador
+  - name: nombre del ID
+  - url_twitter: link del twitter para el name
+  - user_twitter: usuario del name
+- _test/util_test.py_: fichero que testea _util.py_
 
 
 ### Pasos para hacer el despliegue
@@ -130,12 +132,12 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
   * Activamos los despliegues automáticos y que Travis ejecute antes de desplegar.
 
   <p align="center">
-    <img width="600" height="500" src="images/deploy_heroku.png">
+    <img width="700" height="500" src="images/deploy_heroku.png">
   </p>
 
-11. `git push heroku master`
+11. `git push heroku master`: solo para Heroku.
 
-12. `git push`
+12. `git push`: para Heroku+Travis+Github.
 
 ## Licencia
 
