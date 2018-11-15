@@ -1,12 +1,10 @@
-# ---------------------------------- app.py ---------------------------------- #
+# ---------------------------------- main.py --------------------------------- #
 
 # Autora: Gema Correa Fernández
 
 '''
 Fichero que implementa la clase API REST haciendo uso del microframework Flask
 '''
-
-
 
 
 # Bibliotecas a usar
@@ -49,6 +47,26 @@ class TwitterData:
         result.status_code = 404
 
         return result # devolvemos { "msg error": "URL not found" }
+
+# ---------------------------------------------------------------------------- #
+
+    # Mostrar un 405, cuando el método es no permitido
+    # Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
+    @app.errorhandler(405)
+    def not_found(error):
+        data = {} # definimos un diccionario
+        data['msg error'] = 'Method not allowed'
+
+        # jsonify: convierte la salida JSON en un objeto Response con
+        # la aplication/json mimetype
+        result = jsonify(data)
+
+        # Se modifica el código de estado de la respuesta a 404
+        # 404: Recurso no encontrado, el servidor web no encuentra la página
+        # http://docs.python-requests.org/en/master/user/quickstart/
+        result.status_code = 405
+
+        return result # devolvemos { "msg error": "Method not allowed" }
 
 # ---------------------------------------------------------------------------- #
 
@@ -129,12 +147,12 @@ class TwitterData:
 
 # ---------------------------------------------------------------------------- #
 
-    # Función para visualizar todos los elementos (MÉTODO GET)
+    # Función para crear un nuevo elemento
+    # PUT para crear un recurso del servidor
+    # curl -i http://127.0.0.1:5000/data_twitter
     @app.route('/data_twitter', methods=['PUT'])
     def put_data():
 
-        # PUT para crear un recurso del servidor
-        # curl -i http://127.0.0.1:5000/data_twitter
         if request.method == 'PUT':
 
             # Nos creamos un nuevo elemento
@@ -163,9 +181,10 @@ class TwitterData:
 
 # ---------------------------------------------------------------------------- #
 
-    # Función para visualizar todos los elementos (MÉTODO GET)
+    # Función para modificar elemento
     @app.route('/data_twitter', methods=['POST'])
     def post_data():
+
         # POST para actualizar un recurso del servidor
         # En este caso modificamos el valor del usuarios
         # curl -X POST http://127.0.0.1:5000/data_twitter?id=GR
@@ -188,6 +207,7 @@ class TwitterData:
                 result.status_code = 200
 
                 return result
+
             else: # Si no está el ID
                 data = {} # definimos un diccionario
                 data['msg error'] = 'URL not found'
@@ -201,11 +221,10 @@ class TwitterData:
                 result.status_code = 404
 
                 return result
+
 # ---------------------------------------------------------------------------- #
 
-
-
-    # Función para visualizar todos los elementos (MÉTODO GET)
+    # Función para eliminar un elemento
     @app.route('/data_twitter', methods=['DELETE'])
     def delete_data():
 
@@ -247,11 +266,7 @@ class TwitterData:
 
                 return result
 
-
-
-
 # ---------------------------------------------------------------------------- #
-
 
 if __name__ == '__main__':
     #port = int(os.environ.get("PORT", 5000))
