@@ -53,8 +53,8 @@ class TestTwitterData(unittest.TestCase):
 
     # Testear que se visualiza uno de los elementos
     def test_get_data(self):
-        result = requests.get('http://127.0.0.1:5000/get_data?id=GR')
-        #result = self.app.get("/get_data?id=GR")
+        #result = requests.get('http://127.0.0.1:5000/get_data?id=GR')
+        result = self.app.get("/get_data?id=GR")
         self.assertEqual(result.status_code, 200)
         #self.assertEqual(result.content_type, "application/json")
         #self.assertIsInstance(get_id_data_twitter("VLC"), list, "It's not a list")
@@ -72,8 +72,8 @@ class TestTwitterData(unittest.TestCase):
     def test_get_all_data(self):
 
         ## GET
-        result_get = requests.get('http://localhost:5000/data_twitter')
-        #result_get = self.app.get("/data_twitter")
+        #result_get = requests.get('http://localhost:5000/data_twitter')
+        result_get = self.app.get("/data_twitter")
         self.assertEqual(result_get.status_code, 200)
         #self.assertEqual(result_get.content_type, "application/json")
         self.assertTrue(get_data_twitter(), "The list is empty")
@@ -88,8 +88,8 @@ class TestTwitterData(unittest.TestCase):
                          "user_twitter":"@y"
                         }]}
 
-        result_put = requests.put('http://localhost:5000/data_twitter', data=new_data)
-        #result_put = self.app.put("/data_twitter")
+        #result_put = requests.put('http://localhost:5000/data_twitter', data=new_data)
+        result_put = self.app.put("/data_twitter")
         self.assertEqual(result_put.status_code, 200)
         #self.assertEqual(result_put.content_type, "application/json")
         add_data_twitter(new_data)
@@ -101,8 +101,8 @@ class TestTwitterData(unittest.TestCase):
     def test_post_data(self):
 
         ## POST
-        result_post = requests.post('http://127.0.0.1:5000/data_twitter?id=GR')
-        #result_post = self.app.post("/data_twitter?id=GR")
+        #result_post = requests.post('http://127.0.0.1:5000/data_twitter?id=GR')
+        result_post = self.app.post("/data_twitter?id=GR")
         #result = requests.post('http://127.0.0.1:5000/data_twitter_update?name=name&user=hola&id=GR')
         self.assertEqual(result_post.status_code, 200)
         # self.assertEqual(result_post.content_type, "application/json")
@@ -117,8 +117,8 @@ class TestTwitterData(unittest.TestCase):
 
     def test_delete_data(self):
         ## DELETE
-        result_delete = requests.delete('http://127.0.0.1:5000/data_twitter?id=VLC')
-        #result_delete = self.app.delete("/data_twitter?id=VLC")
+        #result_delete = requests.delete('http://127.0.0.1:5000/data_twitter?id=VLC')
+        result_delete = self.app.delete("/data_twitter?id=VLC")
         self.assertEqual(result_delete.status_code, 200)
         #self.assertEqual(result_delete.content_type, "application/json")
         remove_data_twitter("GR")
