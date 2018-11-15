@@ -54,7 +54,7 @@ class TestTwitterData(unittest.TestCase):
     # Testear que se visualiza uno de los elementos
     def test_get_data(self):
         #result = requests.get('http://127.0.0.1:5000/get_data?id=GR')
-        result = self.app.get("/get_data?id=GR")
+        result = self.app.get("/get_data?id=MDR")
         self.assertEqual(result.status_code, 200)
         #self.assertEqual(result.content_type, "application/json")
         #self.assertIsInstance(get_id_data_twitter("VLC"), list, "It's not a list")
