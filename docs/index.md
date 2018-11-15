@@ -64,13 +64,27 @@ Para realizar la configuración de los test correctamente, voy hacer uso de [Tra
 
 1. Lo primero que he hecho ha sido añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
   *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
-  ~~~
+  ```
   language: python
   python:
   - "3.7-dev"
-  ~~~
+  ```
+  *  El comando para instalar las dependencias.
+  ```
+  install:
+  - pip install -r requirements.txt
+  ```
+  *  El comando para ejecutar los tests.
+  ```
+  script:
+  - python3 test/main_test.py
+  ```
 
+2. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
+<p align="center">
+  <img width="600" height="200" src="images/travis.png">
+</p>
 
 ### Despliegue en la nube
 
