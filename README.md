@@ -68,21 +68,20 @@ Para testear en Python [[3][3]], puedo usar algunas de las librerías que me per
 
 Para realizar la configuración de los test correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
 
-Para saber más información sobre los [tests](https://gecofer.github.io/proyecto-CC/)
+Para saber más información sobre los [tests](https://gecofer.github.io/proyecto-CC/).
 
-### Despliegue en la nube
+### Despliegue
 
-Los microservicios serán desplegados en la nube, para el despliege del proyecto se puede utilizar una maquina virtual en Azure.
+#### PaaS
 
-#### Uso de PaaS
+Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable y que ofrece muchas opciones a la hora de elegir el lenguaje.
 
-Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay vamos a escoger entre [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com).
+Despliegue: https://glacial-castle-84194.herokuapp.com
 
 ## Licencia
 
 Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
 
-## Referencias
 
 [1]: https://stackabuse.com/accessing-the-twitter-api-with-python/
 [2]: https://github.com/JJ/CC/blob/master/documentos/temas/Arquitecturas_para_la_nube.md
@@ -95,4 +94,4 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
-___Nota__: Se debe tener en cuenta que a lo largo del desarrollo, se podrá modificar la documentación o añadir nuevas funcionalidades._
+___Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo, conlleva modificaciones en el futuro, pudiend modificar la documentación o añadiendo nuevas funcionalidades._
