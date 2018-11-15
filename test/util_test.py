@@ -27,7 +27,7 @@ class myTest(unittest.TestCase):
     #    update_data_twitter("VLC", "Valencia", user)
     #    update_data_twitter("VLC", "Madrid", user)
     #    self.assertTrue("Madrid" in get_names("VLC"), list, "No se ha añadido")
-
+    # ---------------------------------------------------------------------------- #
     def test_get_names(self):
         self.assertIsInstance(get_names("VLC"), dict, "No es un diccionario")
     # ---------------------------------------------------------------------------- #
@@ -45,8 +45,6 @@ class myTest(unittest.TestCase):
     # ---------------------------------------------------------------------------- #
     def test_get_names(self):
         self.assertIsInstance(get_names("VLC"), dict, "No es un diccionario")
-
-
 
 if __name__ == '__main__':
     unittest.main()

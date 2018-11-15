@@ -78,15 +78,15 @@ Despliegue: https://glacial-castle-84194.herokuapp.com
 - _error en la ruta_: devuelve el JSON {"msg error":"URL not found"} (https://glacial-castle-84194.herokuapp.com/get_dat)
 - _/get_data_: lista un solo un elemento del JSON mediante el método GET, el cual obtiene un recurso del servidor (https://glacial-castle-84194.herokuapp.com/get_data?id=GR)
 - _/data_twitter_ con GET: lista todos los elementos del JSON (https://glacial-castle-84194.herokuapp.com/data_twitter)
-- _/data_twitter_ con PUT: crea un nuevo elemento del recurso _(curl -i -X PUT http://127.0.0.1:5000/data_twitter)_ y para comprobar que se ha creado _(curl -i http://127.0.0.1:5000/)_
-- _/data_twitter_ con POST:
-- _/data_twitter_ con DELETE:
+- _/data_twitter_ con PUT: crea un nuevo usuario _(curl -i -X PUT https://glacial-castle-84194.herokuapp.com/data_twitter)_ y para comprobar que se ha creado _(curl -i https://glacial-castle-84194.herokuapp.com/data_twitter)_
+- _/data_twitter_ con POST: modifica un nuevo usuario_(curl -X POST https://glacial-castle-84194.herokuapp.com/get_data?id=GR)_
+- _/data_twitter_ con DELETE: elimina un usuario _(curl -X DELETE http://127.0.0.1:5000/data_twitter?id=GR)_
 
 ### Ficheros usados
 
-- _main.py_:
+- _main.py_: fichero que implementa la clase API REST haciendo uso del microframework Flask
 - _test/main_test.py_:
-- _util.py_:
+- _util.py_: fichero que contiene la información a mostrar en la clase TwitterData
 - _test/util_test.py_:
 
 ### Pasos para hacer el despliegue

@@ -69,21 +69,19 @@ def add_data_twitter(new_data):
     new_data_twitter = data_twitter
     new = new_data_twitter.update(new_data)
     return new
-
 # ---------------------------------------------------------------------------- #
-
-
 def get_names(data):
     if data in data_twitter:
         return data_twitter[data][0]
     else:
         return False
-
+# ---------------------------------------------------------------------------- #
 def get_user(data, name):
     if data in data_twitter:
         return data_twitter[data][0][name]
     else:
         return False
+# ---------------------------------------------------------------------------- #
 
 
 
