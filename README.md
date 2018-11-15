@@ -44,7 +44,7 @@ Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://ww
 Los microservicios previstos a desarrollar son los siguientes:
 
 <p align="center">
-  <img width="450" height="370" src="docs/images/estructura_microservicios.png">
+  <img width="460" height="370" src="docs/images/estructura_microservicios.png">
 </p>
 
 
