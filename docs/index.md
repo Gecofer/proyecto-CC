@@ -66,21 +66,21 @@ Para realizar la configuración de los test correctamente, voy hacer uso de [Tra
 
 1. Añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
   *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
-  ```
+  ~~~~
   language: python
   python:
   - "3.7-dev"
-  ```
+  ~~~~
   *  El comando para instalar las dependencias.
-  ``` python
+  ~~~~
   install:
   - pip install -r requirements.txt
-  ```
+  ~~~~
   *  El comando para ejecutar los tests.
-  ```
+  ~~~~
   script:
   - python3 test/main_test.py
-  ```
+  ~~~~
 
 2. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
@@ -96,14 +96,15 @@ Cuando se quiere desplegar una aplicación sobre una infraestructura ya definid
 
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
-#### Pasos para hacer el despliegue en Heroku
+#### Pasos para hacer el despliegue en Heroku [[7][7]]
 
 1. Crear cuenta en Heroku.
 2. Instalar el comando de [Heroku Command Line Interface (CLI)](https://devcenter.heroku.com/articles/getting-started-with-python#set-up). _Como anotación comentar que cada semana actualizan la versión._
-3.
+3. Nos identificamos introduciendo nuestras credenciales de la cuenta de Heroku
 
 
-A continua Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`
+3. Creación de los ficheros necesarios para el despliegue:
+  - Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`
 
 de la she tenido que crear un archivo denominado Procfile que contiene la siguiente instrucción:
 
@@ -117,6 +118,7 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 [4]: https://recursospython.com/guias-y-manuales/unit-testing-doc-testing/
 [5]: https://www.smartfile.com/blog/testing-python-with-travis-ci/
 [6]: https://github.com/softwaresaved/build_and_test_examples
+[7]: https://devcenter.heroku.com/articles/getting-started-with-python
 
 ## Enlaces de Interés  
 
