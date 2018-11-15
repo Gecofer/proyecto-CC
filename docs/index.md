@@ -72,44 +72,58 @@ Cuando se quiere desplegar una aplicación sobre una infraestructura ya definid
 
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
-### Pasos para hacer el despliegue en Heroku [[7][7]]
+#### Rutas definidas en la aplicación
 
+- _/_ devuelve el json {"status":"OK"}.
+- /listas devuelve un json con las listas existentes.
+- /lista devuelve un json con el contenido de la lista solicitada. Requiere parámetro GET (acceder a la ruta para más información).
+- /add añade una película a la lista indicada. Requiere parámetros GET (acceder a la ruta para más información).
+
+
+### Pasos para hacer el despliegue
 
 1. Identificarse en Travis mediante Github.
 
-2. Añadir un archivo _.travis.yml_ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
+2. Añadir un archivo __[.travis.yml](https://github.com/Gecofer/proyecto-CC/blob/master/.travis.yml)__ al repositorio para decirle a Travis CI qué hacer, el cual contiene :
   *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
-  ~~
-  language: python
-  python:
-  - "3.7-dev"
-  ~~
-  *  El comando para instalar las dependencias, para ello previamente deberemos habernos creado el fichero [_requirements.txt_](), el cual contiene las dependencias a instalar
-  ~~
-  install:
-  - pip install -r requirements.txt
-  ~~
+  *  El comando para instalar las dependencias, el cual contiene las dependencias a instalar.
   *  El comando para ejecutar los tests.
-  ~~~
-  script:
-  - python3 test/main_test.py
-  ~~~
 
-2. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
+3. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
 <p align="center">
   <img width="700" height="100" src="images/travis.png">
 </p>
 
-1. Crear cuenta en Heroku.
-2. Instalar el comando de [Heroku Command Line Interface (CLI)](https://devcenter.heroku.com/articles/getting-started-with-python#set-up). _Como anotación comentar que cada semana actualizan la versión._
-3. Identificarse introduciendo nuestras credenciales de la cuenta de Heroku: `heroku login`
-4. Crear los ficheros necesarios para el despliegue:
-  - Para que Heroku pueda encontrar el archivo principal del mi proyecto, debemos definirnos un archivo __Procfile__ que contendrá la siguiente instrucción `web: gunicorn main:app`, así usaremos [gunicorn](https://gunicorn.org) que nos permite administrar las peticiones simultaneas que nuestra aplicación reciba
+4. Crear cuenta en Heroku.
 
+5. Instalar el comando de [Heroku Command Line Interface (CLI)](https://devcenter.heroku.com/articles/getting-started-with-python#set-up). _Como anotación comentar que cada semana actualizan la versión._
 
+6. Identificarse introduciendo nuestras credenciales de la cuenta de Heroku: `heroku login`
 
-de la she tenido que crear un archivo denominado Procfile que contiene la siguiente instrucción:
+7. Para que Heroku pueda encontrar el archivo principal del proyecto, debemos definirnos un archivo __Procfile__ en Heroku [[7][7]] que contendrá la siguiente instrucción `web: gunicorn main:app`, usaremos [gunicorn](https://gunicorn.org) ya que nos permite administrar las peticiones simultaneas que nuestra aplicación reciba
+
+8. Creo el fichero __requirements.txt__, para instalar las dependencias. Este fichero se puede instalar de diversas formas, no es recomendable usar  `pip freeze > __requirements.txt`, ya que te mete basura [[8][8]]. Debemos recordar añadir _gunicorn_.
+
+9. Crear el fichero __runtime.txt__, en mi caso la versión de Python 3.7.0.
+
+10. Crear una aplicación en Heroku, este proceso se puede hacer de dos maneras: por terminal `heroku create` o mediante la web _Create new App_.
+
+11. Configuar el despliegue automático asociando la aplicación de Heroku con nuestra cuenta de GitHub.
+
+  * En web, accedemos a la aplicacion creada y buscamos _Deploy_
+  * Seleccionamos GitHub como _Deployment method_
+  * Conectamos la app en introduciendo nuestra datos de GitHub
+  * Indicamos el repositorio de GitHub de nuestra aplicación
+  * Activamos los despliegues automáticos
+
+  <p align="center">
+    <img width="600" height="500" src="images/deploy_heroku.png">
+  </p>
+
+11. `git pus heroku master`
+
+12. `git push`
 
 ## Licencia
 
@@ -122,6 +136,7 @@ Proyecto bajo licencia (GNU GLP V3)[https://github.com/Gecofer/proyecto-CC/blob/
 [5]: https://www.smartfile.com/blog/testing-python-with-travis-ci/
 [6]: https://github.com/softwaresaved/build_and_test_examples
 [7]: https://devcenter.heroku.com/articles/getting-started-with-python
+[8]: https://www.idiotinside.com/2015/05/10/python-auto-generate-requirements-txt/
 
 ## Enlaces de Interés  
 
