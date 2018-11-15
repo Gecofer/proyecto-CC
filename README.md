@@ -78,6 +78,8 @@ Cuando se quiere desplegar una aplicación sobre una infraestructura ya definid
 
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
+Para saber más información sobre el [despliegue](https://gecofer.github.io/proyecto-CC/).
+
 ## Licencia
 
 Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
