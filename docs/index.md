@@ -1,18 +1,19 @@
 ## Título del proyecto
 
-Análisis de las imágenes geolocalizadas en Twitter.
+Análisis de datos (geolocalizados) en Twitter.
 
 ## Descripción del proyecto
 
-Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten sus fotografías en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad de obtener información muy valiosa, cómo por ejemplo ver que ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en las imágenes geolocalizadas que suben los usuarios a Twitter. Sin embargo, debemos tener en cuenta que esas imágenes pueden estar localizadas tanto por la ubicación de Twitter como por el uso de un hashtag. Entonces, el objetivo del proyecto es poder clasificar que ciudades son las que más imágenes asociadas hay para una ubicación.
+Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten todo tipo de información en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad en la obtención de información muy valiosa, cómo por ejemplo ver qué _trending topics_ son los más comentados o qué ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en la obtención de datos geolocalizados mediante _trending topics_ que usan los usuarios en Twitter. Entonces, el objetivo del proyecto es poder clasificar las tendencias por ubicaciones, para así establecer la tendencia mayoritaria en una region determinada, la cual abarcará más de una localización.
 
 La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
 - __Tweets__: búsqueda, publicación, filtrado, etc.
-- Anuncios: gestión de campañas, análisis, etc.
-- __Contenido multimedia__: subir y acceder a fotos, videos, GIF animados, etc.
-- Tendencias: _trending topics_.
+- __Anuncios__: gestión de campañas, análisis, etc.
+- __Contenido multimedia__: subir y acceder a fotos, vídeos, GIF animados, etc.
+- __Tendencias__: _trending topics_.
 - __Geo__: información sobre lugares conocidos, lugares cerca de una ubicación, etc.
+
 
 ## Arquitectura software
 
@@ -28,7 +29,11 @@ Entonces, resulta bastante claro que de todas las comentadas anteriormente vayam
 
 ### Microservicios a desarrollar
 
-Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para  que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que al ser la primera vez para mí, me he decantado por Flask.
+Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://www.python.org), y para el desarrollo de los microservicios se puede usar cualquier microframework web para Python, en este caso existe la posibilidad de usar [Django](https://www.djangoproject.com) (más complejo o pensado para un proyecto de grandes dimensiones o que crezca) o [Flask](http://flask.pocoo.org) (más sencillo). Es por ello, que tras haber buscado documentación, hablado con usuarios de ambos microframework y ser la primera vez que uso este tipo de tecnología, me he decantado por Flask.
+
+<p align="center">
+  <img width="250" height="100" src="images/twitter+python.png">
+</p>
 
 Los microservicios previstos a desarrollar son los siguientes:
 
