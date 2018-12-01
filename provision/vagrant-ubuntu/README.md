@@ -1,12 +1,12 @@
-## Vagrant+Ansible para provisionar mv de manera local
+## Vagrant+Ansible para provisionar mv de manera local <a name="id1"></a>
 
-**Tabla de Contenido**
+**Tabla de Contenidos**
 
-1. [Vagrant](#idEncabezado1)
-2. [Configuración básica _ansible.cfg_](####idEncabezado2)
-3. [Inventariando los hosts](#visualización-del-contenido)
-4. [Provisionando en Ansible](#visualización-del-contenido)
-5. [Enlaces interesantes](#visualización-del-contenido)
+1. [Vagrant](#id1)
+2. [Configuración básica _ansible.cfg_](#id2)
+3. [Inventariando los hosts](#id3)
+4. [Provisionando en Ansible](#id4)
+5. [Enlaces interesantes](#id5)
 
 [Vagrant](http://www.conasa.es/blog/vagrant-la-herramienta-para-crear-entornos-de-desarrollo-reproducibles/) es una herramienta gratuita de línea de comandos, disponible para Windows, MacOS X y GNU/Linux, que permite generar entornos de desarrollo reproducibles y compartibles de forma muy sencilla. Vagrant crea y configura máquinas virtuales a partir de simples ficheros de configuración. Para poder usar Vagrant previamente tendremos que tener instalado una herramienta de virtualización, entre las que destaco VMware Player y VirtualBox, aunque yo voy hacer uso de VirtualBox (pincha [aquí](https://www.virtualbox.org/wiki/Downloads) para descargar VirtualBox).
 
@@ -83,7 +83,7 @@ Una vez que ya tenemos nuestra máquina virtual, vamos a provisionarla usando An
 
 _**Nota**: todos los archivos de Vagrant y Ansible tienen que estar en la misma carpeta_
 
-#### Configuración básica _ansible.cfg_
+#### Configuración básica _ansible.cfg_ <a name="id2"></a>
 
 Lo primero que tenemos que hacer es un fichero de configuración dentro de nuestro directorio. Este fichero hay que meterlo en el directorio donde estemos trabajando y básicamente le dice a Ansible que tiene que mirar en el fichero *ansible_hosts* (defino como se va a conectar Asnsible).
 
@@ -93,7 +93,7 @@ host_key_checking = False
 inventory = ./ansible_hosts
 ~~~
 
-#### Inventariando los _hosts_
+#### Inventariando los _hosts_ <a name="id3"></a>
 
 En el fichero **ansible_hosts** se le asigna un nombre a la máquina y se configura una serie de requerimientos: cuál es el puerto SSH para acceder a la máquina virtual que hemos creado, por defecto es el 2222, y al host le estamos diciendo a la máquina que vamos acceder. Además, para acceder a la máquina virtual necesitamos una clave privada que suele estar en el directorio: *.vagrant/machines/default/virtualbox/private_key*. En general, estamos haciendo que Ansible se conecte correctamente con Vagrant mediante SSH.
 
