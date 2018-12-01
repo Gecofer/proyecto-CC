@@ -72,7 +72,7 @@ _Características de Ubuntu_
 
 - Ofrece mayor soporte que Debian.
 
-Debido a que cada sistema operativo es gratuito, se puede elegir en función de las funciones y el soporte que se necesite. Sin embargo, hemos optado por hacer uso de Ubuntu 14.04.5 LTS, al ser el Ubuntu con el más familiarizado estoy (viene con python3) y el [tutorial para instalar y usar Vagrant](https://fortinux.gitbooks.io/humble_tips/content/capitulo_1_usando_aplicaciones_en_linux/tutorial_instalar_vagrant_para_usar_ambientes_virtuales_en_gnulinux.html) con el que he probado localmente, es muy sencillo de entender.
+Debido a que cada sistema operativo es gratuito, se puede elegir en función de las funciones y el soporte que se necesite. Sin embargo, hemos optado por hacer uso de Ubuntu 14.04.5 LTS, al ser el Ubuntu con el más familiarizado estoy (viene con python3) y el [tutorial para instalar y usar Vagrant](https://fortinux.gitbooks.io/humble_tips/content/capitulo_1_usando_aplicaciones_en_linux/tutorial_instalar_vagrant_para_usar_ambientes_virtuales_en_gnulinux.html) con el que he probado localmente, es muy sencillo de comprender.
 
 
 ### Despliegue localmente (Vagrant) con Ansible
