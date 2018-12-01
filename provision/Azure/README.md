@@ -4,11 +4,11 @@
 
 1. [Azure](#id1)
 2. [Ansible](#id21)
-  - [Configuración básica _ansible.cfg_](#id2)
-  - [Inventariando los hosts](#id3)
-  - [Provisionando en Ansible](#id4)
+- [Configuración básica _ansible.cfg_](#id2)
+- [Inventariando los hosts](#id3)
+- [Provisionando en Ansible](#id4)
 3. [Desplegar la aplicación usando un playbook de Ansible](#id5)
-  - [Proyecto en ejecución en Azure](#id6)
+* [Proyecto en ejecución en Azure](#id6)
 4. [Enlaces interesantes](#id7)
 
 [Microsoft Azure](https://azure.microsoft.com/es-es/) es una plataforma informática en la nube de nivel empresarial abierta y flexible. En la cual, tenemos la posibilidad crearnos máquinas virtuales en Azure Portal. Como se ha comentado antes, se va a escoger como SO Ubuntu 14.04.5 LTS. Para la creación de la máquina virtual, hemos seguido el siguiente [tutorial](https://docs.microsoft.com/es-es/azure/virtual-machines/linux/quick-create-portal?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). Obteniendo una mv con las siguientes prestaciones:
@@ -158,7 +158,7 @@ $ ansible-playbook -i ansible_hosts -b ansible_playbook.yml
 
 ![](../../docs/images/azure7.png)
 
-Con la configuración a punto en nuestra mv de Azure, ya podemos desplegar la aplicación:
+Con la configuración a punto en nuestra mv de Azure, ya podemos desplegar la aplicación, pero antes deberemos conectarnos a ella mediante:
 
 ~~~
 $ ssh gemaAzure@23.97.225.1
