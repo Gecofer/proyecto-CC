@@ -12,61 +12,69 @@ from flask import Flask     # importamos la clase Flask
 from flask import jsonify   # https://pypi.org/project/Flask-Jsonpify/
 from flask import request   # https://github.com/requests/requests
 
-from util import *          # importar el fichero util.py
+import os
+from data import *
 
 # Creación de una instancia de la clase Flask
 app = Flask(__name__)
 
 
-# Definimos nuestra clase
-class TwitterData:
+# ---------------------------------------------------------------------------- #
+
+# Obtenemos los datos
+try:
+    with open('data/data.json', encoding='utf-8') as data_file:
+        data_twitter = json.loads(data_file.read())
+except IOError as fail:
+    print("Error %d reading %s", fail.errno, fail.strerror)
 
 # ---------------------------------------------------------------------------- #
 
-    # Ruta para comprobar que se ha desplegado de forma correcta
-    @app.route('/')
-    def index():
-        return jsonify(status='OK') # devolvemos { "status": "OK" }
+# Ruta para comprobar que se ha desplegado de forma correcta
+@app.route('/')
+@app.route('/status')
+def index():
+    return jsonify(status='OK') # devolvemos { "status": "OK" }
 
 # ---------------------------------------------------------------------------- #
 
-    # Mostrar un 404, cuando se ha desplegado de forma incorrecta
-    # Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
-    @app.errorhandler(404)
-    def not_found(error):
-        data = {} # definimos un diccionario
-        data['msg error'] = 'URL not found'
+# Mostrar un 404, cuando se ha desplegado de forma incorrecta
+# Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
+@app.errorhandler(404)
+def not_found(error):
+    data = {} # definimos un diccionario
+    data['msg error'] = 'URL not found'
 
-        # jsonify: convierte la salida JSON en un objeto Response con
-        # la aplication/json mimetype
-        result = jsonify(data)
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype
+    result = jsonify(data)
 
-        # Se modifica el código de estado de la respuesta a 404
-        # 404: Recurso no encontrado, el servidor web no encuentra la página
-        # http://docs.python-requests.org/en/master/user/quickstart/
-        result.status_code = 404
+    # Se modifica el código de estado de la respuesta a 404
+    # 404: Recurso no encontrado, el servidor web no encuentra la página
+    # http://docs.python-requests.org/en/master/user/quickstart/
+    result.status_code = 404
 
-        return result # devolvemos { "msg error": "URL not found" }
+    return result # devolvemos { "msg error": "URL not found" }
 
 # ---------------------------------------------------------------------------- #
 
-    # Mostrar un 405, cuando el método es no permitido
-    # Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
-    @app.errorhandler(405)
-    def not_found(error):
-        data = {} # definimos un diccionario
-        data['msg error'] = 'Method not allowed'
+# Mostrar un 405, cuando el método es no permitido
+# Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
+@app.errorhandler(405)
+def not_found(error):
+    data = {} # definimos un diccionario
+    data['msg error'] = 'Method not allowed'
 
-        # jsonify: convierte la salida JSON en un objeto Response con
-        # la aplication/json mimetype
-        result = jsonify(data)
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype
+    result = jsonify(data)
 
-        # Se modifica el código de estado de la respuesta a 404
-        # 404: Recurso no encontrado, el servidor web no encuentra la página
-        # http://docs.python-requests.org/en/master/user/quickstart/
-        result.status_code = 405
+    # Se modifica el código de estado de la respuesta a 404
+    # 404: Recurso no encontrado, el servidor web no encuentra la página
+    # http://docs.python-requests.org/en/master/user/quickstart/
+    result.status_code = 405
 
-        return result # devolvemos { "msg error": "Method not allowed" }
+    return result # devolvemos { "msg error": "Method not allowed" }
 
 # ---------------------------------------------------------------------------- #
 
