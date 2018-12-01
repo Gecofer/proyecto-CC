@@ -190,46 +190,46 @@ def post_data(nameID):
 
 # ---------------------------------------------------------------------------- #
 
-    # Función para eliminar un elemento
-    @app.route('/data_twitter', methods=['DELETE'])
-    def delete_data():
+# Función para eliminar un elemento (MÉTODO DELETE)
+# DELETE para eliminar un recurso del servidor
+# curl -i -X DELETE http://127.0.0.1:5000/data_twitter/Bernabeu
+@app.route('/data_twitter/<nameID>', methods=['DELETE'])
+def delete_data(nameID):
 
-        # -------------------------------------------------------------------  #
-        # DELETE para eliminar un recurso del servidor
-        #  curl -X DELETE http://127.0.0.1:5000/data_twitter?id=GR
-        if request.method == 'DELETE':
-            if 'id' in request.args:
-                remove_data_twitter(request.args['id'])
+    data_delete = [ elem for elem in data_twitter if (elem['name'] == nameID) ]
 
-                data = {} # definimos un diccionario
-                # No hace falta añadir al diccionario --> data['status'] = 'OK'
-                data['ruta'] = request.url # obtener la url de la petición
-                data['valor'] = get_id_data_twitter(request.args['id'])
+    if len(data_delete) == 0:
 
-                # jsonify: convierte la salida JSON en un objeto Response con
-                # la aplication/json mimetype.
-                result = jsonify(data)
+        data = {} # definimos un diccionario
+        data['msg error'] = 'URL not found'
 
-                # Se modifica el código de estado de la respuesta a 200
-                # 200: Respuesta estándar para peticiones correctas
-                result.status_code = 200
+        # jsonify: convierte la salida JSON en un objeto Response con
+        # la aplication/json mimetype
+        result = jsonify(data)
 
-                return result
+        # Se modifica el código de estado de la respuesta a 404
+        # 404: Recurso no encontrado, el servidor web no encuentra la página
+        # http://docs.python-requests.org/en/master/user/quickstart/
+        result.status_code = 404
 
-            else: # Si no sabemos como escribirlo
-                # aqui debe devolver ERROR
-                data = {} # definimos un diccionario
-                data['msg error'] = 'URL not found'
+        return result # devolvemos { "msg error": "URL not found" }
 
-                # jsonify: convierte la salida JSON en un objeto Response con
-                # la aplication/json mimetype.
-                result = jsonify(data)
+    data_twitter.remove(data_delete[0])
 
-                # Se modifica el código de estado de la respuesta a 200
-                # 404: Recurso no encontrado, el servidor web no encuentra la página
-                result.status_code = 404
+    data = {} # definimos un diccionario
+    # No hace falta añadir al diccionario --> data['status'] = 'OK'
+    data['ruta'] = request.url # obtener la url de la petición
+    data['valor'] = "Deleted"
 
-                return result
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype
+    result = jsonify(data)
+
+    # Se modifica el código de estado de la respuesta a 200
+    # 200: Respuesta estándar para peticiones correctas
+    result.status_code = 200
+
+    return result
 
 # ---------------------------------------------------------------------------- #
 
