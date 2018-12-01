@@ -29,12 +29,12 @@
     - name: Clonar repositorio
       become: false
       git:
-        repo: https://github.com/Gecofer/CC-pruebas.git
-        dest: CC
+        repo: https://github.com/Gecofer/proyecto-CC.git
+        dest: proyecto-CC
 
     - name: Instalando dependencias del proyecto
       pip:
-        requirements: /home/gemaAzure/CC-pruebas/requirements.txt
+        requirements: /home/gemaAzure/proyecto-CC/requirements.txt
         executable: pip3
 
     - name: Redirigir puertos
