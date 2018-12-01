@@ -1,5 +1,13 @@
 ## Vagrant+Ansible para provisionar mv de manera local
 
+**Tabla de Contenido**
+
+1. [Vagrant](#idEncabezado1)
+2. [Configuración básica _ansible.cfg_](####idEncabezado2)
+3. [Inventariando los hosts](#visualización-del-contenido)
+4. [Provisionando en Ansible](#visualización-del-contenido)
+5. [Enlaces interesantes](#visualización-del-contenido)
+
 [Vagrant](http://www.conasa.es/blog/vagrant-la-herramienta-para-crear-entornos-de-desarrollo-reproducibles/) es una herramienta gratuita de línea de comandos, disponible para Windows, MacOS X y GNU/Linux, que permite generar entornos de desarrollo reproducibles y compartibles de forma muy sencilla. Vagrant crea y configura máquinas virtuales a partir de simples ficheros de configuración. Para poder usar Vagrant previamente tendremos que tener instalado una herramienta de virtualización, entre las que destaco VMware Player y VirtualBox, aunque yo voy hacer uso de VirtualBox (pincha [aquí](https://www.virtualbox.org/wiki/Downloads) para descargar VirtualBox).
 
 **¿Por qué hacer uso de VirtualBox y no de VMware?** VMware Player y VirtualBox son dos plataformas muy similares, sin embargo, la principal característica que separa a ambas herramientas de virtualización es que la plataforma VirtualBox es de código abierto, totalmente gratuita y está disponible para cualquier sistema operativo, cosa que no ocurre con VMware Player (software propietario). Es por ello, que he hecho uso de la instalación de VirtualBox [[1][1]].
