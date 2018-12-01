@@ -3,8 +3,8 @@
 - [Gestionando configuraciones con Ansible](#id1)
   - [¿Cómo instalar Ansible en MAC?](#id2)
   - [Comprobación de la instalación de Ansible](#id3)
-2. [Despliegue localmente con Vagrant](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu)
-3. [Despliegue en la máquina virtual de Azure con Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure)
+- [Despliegue localmente con Vagrant](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu)
+- [Despliegue en la máquina virtual de Azure con Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure)
 
 ## Gestionando configuraciones con [Ansible](https://www.youtube.com/watch?v=gFd9aj78_SM) <a name="id1"></a>
 
@@ -18,7 +18,7 @@ instalación de módulos `pip` (que habrá que instalar si no se tiene). El rest
 #### ¿Cómo instalar Ansible en MAC? <a name="id2"></a>
 
 - [Latest Releases via Pip](https://docs.ansible.com/ansible/2.7/installation_guide/intro_installation.html#latest-releases-via-pip)
-- [Install Ansible on Mac OSX](https://hvops.com/articles/ansible-mac-osx/()
+- [Install Ansible on Mac OSX](https://hvops.com/articles/ansible-mac-osx/)
 - [How to install Ansible on Apple MacOS X using command line](https://www.cyberciti.biz/faq/how-to-install-ansible-on-apple-macos-x-using-command-line/)
 
 ~~~
