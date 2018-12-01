@@ -3,7 +3,7 @@
 # Autora: Gema Correa Fernández
 
 '''
-Fichero que testea la clase de app.py
+Fichero que testea main.py
 '''
 
 # https://code.i-harness.com/en/q/ae54f
@@ -13,13 +13,12 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.par
 # Bibliotecas a usar
 import unittest     # https://docs.python.org/3/library/unittest.html
 # https://www.blog.pythonlibrary.org/2016/07/07/python-3-testing-an-intro-to-unittest/
-import requests     # https://www.pythonforbeginners.com/requests/using-requests-in-python
-
+#import requests     # https://www.pythonforbeginners.com/requests/using-requests-in-python
+import main
+import json
+from data import *
 
 # https://stackoverflow.com/questions/20309456/call-a-function-from-another-file-in-python
-
-import main
-from util import *
 
 
 class TestTwitterData(unittest.TestCase):
@@ -34,26 +33,56 @@ class TestTwitterData(unittest.TestCase):
         # Creamos el cliente que se va a utilizar.
         self.app = main.app.test_client()
 
+ # --------------------------------------------------------------------------
+
+    # Para comprobar Flask
+    def test0_app_run(self):
+        self.assertEqual(main.app.debug, False, "Comprobar app run")
+
+        pass
+
 # ---------------------------------------------------------------------------- #
 
     # Testear que se ha desplegado correctamente
-    def test_index(self):
+    def test1_index(self):
         # result = requests.get('http://127.0.0.1:5000/')
         result = self.app.get("/")
         self.assertEqual(result.status_code, 200)
         self.assertEqual(result.content_type, "application/json")
+
+        pass
+
+# ---------------------------------------------------------------------------- #
+
+    # Testear que se ha desplegado correctamente
+    def test2_error(self):
+        #result = requests.get('http://127.0.0.1:5000/')
+        result = self.app.get("/data")
+        self.assertEqual(result.status_code, 404)
+
+        pass
+
+# ---------------------------------------------------------------------------- #
+
+    # Testear que se visualizan todos los elementos
+    def test3_get_all_data(self):
+        #result = requests.get('http://127.0.0.1:5000/data_twitter')
+        result = self.app.get("/data_twitter")
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.content_type, "application/json")
+        self.assertTrue(result.get_json(), "The list is empty")
+
         pass
 
 # ---------------------------------------------------------------------------- #
 
     # Testear que se visualiza uno de los elementos
-    def test_get_data(self):
+    def test4_get_data(self):
         #result = requests.get('http://127.0.0.1:5000/get_data?id=GR')
-        result = self.app.get("/get_data?id=MDR")
+        result = self.app.get("/data_twitter/Rudy")
         self.assertEqual(result.status_code, 200)
         self.assertEqual(result.content_type, "application/json")
-        #self.assertIsInstance(get_id_data_twitter("VLC"), list, "It's not a list")
-
+        self.assertTrue(result.get_json(), "The list is empty")
 
         # Escribimos la ruta mal
         result_bad = self.app.get("/hola")
@@ -61,69 +90,56 @@ class TestTwitterData(unittest.TestCase):
 
         pass
 
-# ---------------------------------------------------------------------------- #
-
-    # Testear que se visualizan todos los elementos
-    def test_get_all_data(self):
-
-        ## GET
-        #result_get = requests.get('http://localhost:5000/data_twitter')
-        result_get = self.app.get("/data_twitter")
-        self.assertEqual(result_get.status_code, 200)
-        self.assertEqual(result_get.content_type, "application/json")
-        self.assertTrue(get_data_twitter(), "The list is empty")
-        pass
 
 # ---------------------------------------------------------------------------- #
-    def test_put_data(self):
 
-        ## PUT
-        new_data = {"G": [{ "name":"@hol",
-                         "url_twitter":"https://twitter.com/aytog",
-                         "user_twitter":"@y"
-                        }]}
+    # Testear que se crea un elemento
+    def test5_put_data(self):
+        new_data = {
+                    "name": "hola",
+                    "url": "hola.es",
+                    "query": "hola",
+                    "tweet_volume": "1234567"
+                    }
 
         #result_put = requests.put('http://localhost:5000/data_twitter', data=new_data)
-        result_put = self.app.put("/data_twitter")
-        self.assertEqual(result_put.status_code, 200)
-        self.assertEqual(result_put.content_type, "application/json")
-        add_data_twitter(new_data)
-        self.assertTrue(get_data_twitter(), "No se ha añadido la lista")
+        result = self.app.put("/data_twitter")
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.content_type, "application/json")
+        self.assertTrue(result.get_json(), "The list is empty")
+
         pass
 
 # ---------------------------------------------------------------------------- #
 
-    def test_post_data(self):
-
-        ## POST
+    # Testear que se modifica un elemento
+    def test6_post_data(self):
         #result_post = requests.post('http://127.0.0.1:5000/data_twitter?id=GR')
-        result_post = self.app.post("/data_twitter?id=GR")
+        result = self.app.post("/data_twitter/Bernabeu")
         #result = requests.post('http://127.0.0.1:5000/data_twitter_update?name=name&user=hola&id=GR')
-        self.assertEqual(result_post.status_code, 200)
-        self.assertEqual(result_post.content_type, "application/json")
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.content_type, "application/json")
         #add_data_twitter("Canarias")
-        update_data_twitter("MDR", "name", "Canarias")
-        get_id_data_twitter("MDR")
-        self.assertIn("MDR",get_data_twitter())
-        #self.assertTrue("GR" in get_data_twitter(), "No se ha añadido la lista")
+        self.assertTrue(result.get_json(), "The list is empty")
+
+        pass
 
 
 # ---------------------------------------------------------------------------- #
 
-    def test_delete_data(self):
-        ## DELETE
+    # Testear que se elimina un elemento
+    def test7_delete_data(self):
+
         #result_delete = requests.delete('http://127.0.0.1:5000/data_twitter?id=VLC')
-        result_delete = self.app.delete("/data_twitter?id=VLC")
+        result_delete = self.app.delete("/data_twitter/hola")
         self.assertEqual(result_delete.status_code, 200)
         self.assertEqual(result_delete.content_type, "application/json")
-        remove_data_twitter("GR")
-        #self.assertTrue("GR" not in get_data_twitter(), "No se ha eliminado la lista")
-        self.assertNotIn("GR",get_data_twitter())
+        self.assertTrue(result_delete.get_json(), "The list is empty")
 
-        result_post1 = self.app.post("/data_twitter?id=GR")
-        result_delete1 = self.app.delete("/delete_data?id=GR")
-        result_post2 = self.app.post("/data_twitter?id=GR")
-        self.assertEqual(result_post2.status_code, 200)
+        result_post1 = self.app.post("/data_twitter/#GHVIPGala12")
+        result_delete1 = self.app.delete("/delete_data/#GHVIPGala12")
+        result_post2 = self.app.post("/data_twitter/#GHVIPGala12")
+        self.assertEqual(result_post2.status_code, 404)
 
         pass
 
