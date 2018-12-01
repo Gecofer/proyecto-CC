@@ -34,7 +34,7 @@
 
     - name: Instalando dependencias del proyecto
       pip:
-        requirements: /home/vagrant/CC-pruebas/requirements.txt
+        requirements: /home/vagrant/proyecto-CC/requirements.txt
         executable: pip3
 
     - name: Redirigir puerto 5000 al 80
