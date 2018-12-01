@@ -12,6 +12,7 @@ from flask import Flask     # importamos la clase Flask
 from flask import jsonify   # https://pypi.org/project/Flask-Jsonpify/
 from flask import request   # https://github.com/requests/requests
 
+import json
 import os
 from data import *
 
