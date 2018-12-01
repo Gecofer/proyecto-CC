@@ -123,7 +123,7 @@ $ ansible all -m ping -vv
 ![](../../docs/images/vagrant6.png)
 
 
-#### Provisionando en Ansible
+#### Provisionando en Ansible <a name="id4"></a>
 
 A continuación, debemos hacer uso de un _playbook_, el cual usa un formato YAML. YAML es un formato de serialización parecido a JSON, pero este permite expresar todo tipo de estructuras de datos. Las tres líneas/rayas del principio indican que es un documento o página.
 
@@ -158,7 +158,7 @@ end
 
 
 
-### Enlaces interesantes
+### Enlaces interesantes <a name="id5"></a>
 
 - [Tutorial para instalar y usar Vagrant](https://fortinux.gitbooks.io/humble_tips/content/capitulo_1_usando_aplicaciones_en_linux/tutorial_instalar_vagrant_para_usar_ambientes_virtuales_en_gnulinux.html)
 
