@@ -3,6 +3,7 @@
 - [Gestionando configuraciones con Ansible](#id1)
   - [¿Cómo instalar Ansible en MAC?](#id2)
   - [Comprobación de la instalación de Ansible](#id3)
+- [Selección del SO](#id4)
 - [Despliegue localmente (Vagrant) con Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu)
 - [Despliegue en la máquina virtual de Azure con Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure)
 
@@ -48,4 +49,42 @@ ansible 2.7.2
 
 Ansible no requiere que haya nada instalado previamente en la máquina virtual. Primero vamos a trabajar con máquinas virtuales locales, para ello Ansible nos permite trabajar con ellas de forma simple, para acceder a las máquinas virtuales solo hace falta un acceso por SSH o por clave. Es por ello, que antes de hacer uso de Azure, vamos a trabajar con Vagrant de manera local.
 
+
+### Selección del SO <a name="id4"></a>
+
+Una vez instalado Ansible o antes de empezar con la realización del despliegue, debemos escoger que SO vamos a usar, para ello debemos ver las funcionalidades que vamos a querer en el mismo. Es por ello que vamos a ver que servidor elegir entre Debian Server vs Ubuntu Server, los SO a escoger.
+
+**¿Qué es Debian y qué es Ubuntu Server?**
+
+Ambas son versiones diferentes del sistema operativo Linux (el término para esto son distribuciones, o distribuciones para abreviar). Ubuntu Server se basa en realidad en Debian, a través de los equipos que lo ejecutan son diferentes.
+
+_Características de Debian_
+
+- No ofrece actualizaciones tradicionales (donde reiniciaría el servidor para descargar e instalar la última actualización principal), sino un flujo de versiones a las que un sistema en directo puede actualizarse. Esto se puede hacer usando el administrador de paquetes apt-get, un programa que le permite instalar actualizaciones y software.
+
+- Tiene la reputación de ser más estable.
+
+- Tiene muchos paquetes preconfigurados (lo que significa que no necesitarán ser configurados para ejecutarse en su servidor).
+
+_Características de Ubuntu_
+
+- Ubuntu tiene versiones programadas, y LTS Builds. Un LTS build es una versión de la distribución que se ofrece soporte a largo plazo (LTS). Ubuntu soporta sus versiones de LTS por un máximo de 5 años. Debian ha ofrecido normalmente sólo 3 años de soporte para sus construcciones.
+
+- Ofrece mayor soporte que Debian.
+
+Debido a que cada sistema operativo es gratuito, se puede elegir en función de las funciones y el soporte que se necesite. Sin embargo, hemos optado por hacer uso de Ubuntu 14.04.5 LTS, al ser el Ubuntu con el más familiarizado estoy (viene con python3) y el [tutorial para instalar y usar Vagrant](https://fortinux.gitbooks.io/humble_tips/content/capitulo_1_usando_aplicaciones_en_linux/tutorial_instalar_vagrant_para_usar_ambientes_virtuales_en_gnulinux.html) con el que he probado localmente, es muy sencillo de entender.
+
+
+### Despliegue localmente (Vagrant) con Ansible
+
+Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu) para ver el proceso.
+
+
+### Despliegue en la máquina virtual de Azure con Ansible
+
+Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure) para ver el proceso.
+
+
+
 [1]: https://jj.github.io/CC/documentos/temas/Provision
+[2]: http://www.servidorinfo.info/que-servidor-os-elegir-en-2018-debian-server-vs-ubuntu-server/
