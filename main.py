@@ -18,7 +18,6 @@ from data import *
 # Creación de una instancia de la clase Flask
 app = Flask(__name__)
 
-
 # ---------------------------------------------------------------------------- #
 
 # Obtenemos los datos
@@ -42,6 +41,7 @@ def index():
 # Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
 @app.errorhandler(404)
 def not_found(error):
+
     data = {} # definimos un diccionario
     data['msg error'] = 'URL not found'
 
@@ -61,6 +61,7 @@ def not_found(error):
 # Mostrar un 405, cuando el método es no permitido
 # Código de estado HTTP: https://developer.mozilla.org/es/docs/Web/HTTP/Status
 @app.errorhandler(405)
+
 def not_found(error):
     data = {} # definimos un diccionario
     data['msg error'] = 'Method not allowed'
@@ -78,58 +79,50 @@ def not_found(error):
 
 # ---------------------------------------------------------------------------- #
 
-    # Función para visualizar un solo un elemento del JSON (MÉTODO GET)
-    # GET para obtener un recurso del servidor
-    # Ejemplo: http://127.0.0.1:5000/get_data?id=GR
-    @app.route('/get_data', methods=['GET'])
-    def get_data():
-        if 'id' in request.args:
+# Función para visualizar todos los elementos (MÉTODO GET)
+# GET para obtener un recurso del servidor
+# curl -i http://127.0.0.1:5000/data_twitter
+@app.route('/data_twitter', methods=['GET'])
+def get_all_data():
 
-            # Si está el ID, muestra el elemento correspondiente
-            if request.args['id'] in data_twitter:
-                data = {} # definimos un diccionario
-                # No hace falta añadir al diccionario --> data['status'] = 'OK'
-                data['ruta'] = request.url # obtener la url de la petición
-                data['valor'] = get_id_data_twitter(request.args['id'])
+    data = {} # definimos un diccionario
+    # No hace falta añadir al diccionario --> data['status'] = 'OK'
+    data['ruta'] = request.url # obtener la url de la petición
+    data['valor'] = data_twitter
 
-                # jsonify: convierte la salida JSON en un objeto Response con
-                # la aplication/json mimetype.
-                result = jsonify(data)
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype
+    result = jsonify(data)
 
-                # Se modifica el código de estado de la respuesta a 200
-                # 200: Respuesta estándar para peticiones correctas
-                result.status_code = 200
+    # Se modifica el código de estado de la respuesta a 200
+    # 200: Respuesta estándar para peticiones correctas
+    result.status_code = 200
 
-                return result
+    return result
 
-            else: # Si no está el ID
-                data = {} # definimos un diccionario
-                data['msg error'] = 'URL not found'
+# ---------------------------------------------------------------------------- #
 
-                # jsonify: convierte la salida JSON en un objeto Response con
-                # la aplication/json mimetype.
-                result = jsonify(data)
+# Función para visualizar un solo un elemento del JSON (MÉTODO GET)
+# GET para obtener un recurso del servidor
+# curl -i http://127.0.0.1:5000/data_twitter/<name>
+@app.route('/data_twitter/<nameID>', methods=['GET'])
+def get_data(nameID):
 
-                # Se modifica el código de estado de la respuesta a 200
-                # 404: Recurso no encontrado, el servidor web no encuentra la página
-                result.status_code = 404
+    data = {} # definimos un diccionario
+    # No hace falta añadir al diccionario --> data['status'] = 'OK'
+    data['ruta'] = request.url # obtener la url de la petición
+    data['valor'] = [ elem for elem in data_twitter if (elem['name'] == nameID) ]
 
-                return result
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype
+    result = jsonify(data)
 
-        else: # Si no sabemos como escribirlo
-            data = {} # definimos un diccionario
-            data['msg error'] = 'URL not found'
+    # Se modifica el código de estado de la respuesta a 200
+    # 200: Respuesta estándar para peticiones correctas
+    result.status_code = 200
 
-            # jsonify: convierte la salida JSON en un objeto Response con
-            # la aplication/json mimetype.
-            result = jsonify(data)
-
-            # Se modifica el código de estado de la respuesta a 200
-            # 404: Recurso no encontrado, el servidor web no encuentra la página
-            result.status_code = 404
-
-            return result
-
+    return result
+    
 # ---------------------------------------------------------------------------- #
 
     # Función para visualizar todos los elementos (MÉTODO GET)
