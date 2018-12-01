@@ -47,3 +47,10 @@ Una vez que ya tenemos acceso a la API, se realiza la función `API.trends_place
 [2]: https://geekandtechgirls.github.io/The-Spyder-Girl/project/2017/03/11/extrayendo-datos-twitter.html
 [3]: https://github.com/lauramayol/laura_python_core/blob/b0f62fb70ecef0e8f3d5e8476665a48519dfc44e/week_05/mini_projects/api_from_other_apis/tweet.py
 [4]: http://docs.tweepy.org/en/v3.5.0/api.html
+
+### Enlaces Interesantes
+
+- [Acceso a la Twitter de API con Python](https://stackabuse.com/accessing-the-twitter-api-with-python/)
+- [API Reference Tweepy](http://docs.tweepy.org/en/v3.5.0/api.html)
+- [API REST de Twitter y Tweepy](https://geekandtechgirls.github.io/The-Spyder-Girl/project/2017/03/11/extrayendo-datos-twitter.html)
+- [Ejemplo para obtener las tendencias de una localización con Tweepy](https://github.com/lauramayol/laura_python_core/blob/b0f62fb70ecef0e8f3d5e8476665a48519dfc44e/week_05/mini_projects/api_from_other_apis/tweet.py)
