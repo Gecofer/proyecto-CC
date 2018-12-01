@@ -1,0 +1,45 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: False
+
+  pre_tasks:
+    - name: Instalar Python 2 para Ansible
+      raw: test -e /usr/local/bin/python || (apt -y update && apt install -y python)
+      changed_when: False
+
+    - name: Instalar Python 3 para Ansible
+      raw: test -e /usr/local/bin/python3 || (apt -y update && apt install -y python3)
+      changed_when: False
+
+  tasks:
+    - name: Instala git
+      apt: pkg=git state=present
+
+    - name: Instalar pip3
+      apt:
+        package: python3-pip
+        state: latest
+
+    - name: Instalar pip
+      apt:
+        package: python-pip
+        state: latest
+
+    - name: Clonar repositorio
+      become: false
+      git:
+        repo: https://github.com/Gecofer/proyecto-CC.git
+        dest: proyecto-CC
+
+    - name: Instalando dependencias del proyecto
+      pip:
+        requirements: /home/gemaAzure/CC-pruebas/requirements.txt
+        executable: pip3
+
+    - name: Redireccionamiento de puerto 5000 a 80
+      become: true
+      lineinfile:
+        path=/etc/rc.local
+        insertbefore='exit 0'
+        line="sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 5000"
