@@ -1,14 +1,15 @@
-## Ansible+Azure para provisionar <a name="id1"></a>
+## Ansible+Azure para provisionar máquinas virtuales <a name="id1"></a>
 
 **Tabla de Contenidos**
 
 1. [Azure](#id1)
-2. [Configuración básica _ansible.cfg_](#id2)
-3. [Inventariando los hosts](#id3)
-4. [Provisionando en Ansible](#id4)
-5. [Desplegar la aplicación usando un playbook de Ansible](#id5)
-7. [Proyecto en ejecución en Azure](#id6)
-6. [Enlaces interesantes](#id7)
+2. [Ansible](#id21)
+  - [Configuración básica _ansible.cfg_](#id2)
+  - [Inventariando los hosts](#id3)
+  - [Provisionando en Ansible](#id4)
+3. [Desplegar la aplicación usando un playbook de Ansible](#id5)
+  - [Proyecto en ejecución en Azure](#id6)
+4. [Enlaces interesantes](#id7)
 
 [Microsoft Azure](https://azure.microsoft.com/es-es/) es una plataforma informática en la nube de nivel empresarial abierta y flexible. En la cual, tenemos la posibilidad crearnos máquinas virtuales en Azure Portal. Como se ha comentado antes, se va a escoger como SO Ubuntu 14.04.5 LTS. Para la creación de la máquina virtual, hemos seguido el siguiente [tutorial](https://docs.microsoft.com/es-es/azure/virtual-machines/linux/quick-create-portal?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). Obteniendo una mv con las siguientes prestaciones:
 
@@ -17,6 +18,8 @@
 Debemos tener en cuenta, que la dirección IP pública por defecto es dinámica, es decir que cada vez que arranquemos la máquina virtual variará, es por eso que debemos poner la IP estática.
 
 Una vez que ya tenemos nuestra máquina virtual, vamos a provisionarla usando Ansible, cuando veamos que funciona correctamente, ya podremos pasar a realizar el provisionamiento con Azure.
+
+### Ansible <a name="id21"></a>
 
 #### Configuración básica _ansible.cfg_ <a name="id2"></a>
 
@@ -140,7 +143,7 @@ Finalmente, el concepto similar a las recetas de Chef en Ansible son los [playbo
 iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 5000"
 ~~~
 
-- `name: Redirigir puerto 5000 al 80` sentencia que nos permite redirigir el puerto 5000 (Flask) al 80, a recomendación del profesor [1][1].
+- `name: Redirigir puerto 5000 al 80` sentencia que nos permite redirigir el puerto 5000 (Flask) al 80, a recomendación del profesor. Para comprender esta sentencia [ver cómo redireccionar tráfico de una IP y puerto hacia otra IP y puerto](https://blog.desdelinux.net/redireccionar-trafico-iptables/).
 
 Una vez nuestro fichero esté creado, debemos pasar a instalar dichos paquetes en nuestra máquina virtual.
 
@@ -194,15 +197,14 @@ $ curl http://23.97.225.1:80/status
 
 #### Proyecto en ejecución en Azure <a name="id6"></a>
 
+Para comprobar que el proyecto está en ejecución, basta con acceder a [http://23.97.225.1/](http://23.97.225.1/) o [http://23.97.225.1/status](http://23.97.225.1/status) y comprobar que el resultado es parecido a las siguientes imágenes.
 
+![](../../docs/images/azure8.png)
+
+![](../../docs/images/azure9.png)
 
 ### Enlaces interesantes <a name="id7"></a>
 
 - [Redireccionar tráfico de una IP y puerto hacia otra IP y puerto](https://blog.desdelinux.net/redireccionar-trafico-iptables/)
 
-
 <a name="myfootnote1">1</a>: Debemos hacer uso de un _playbook_, el cual usa un formato YAML. YAML es un formato de serialización parecido a JSON, pero este permite expresar todo tipo de estructuras de datos.
-
-
-
-[1]: Redireccionar tráfico de una IP y puerto hacia otra IP y puerto
