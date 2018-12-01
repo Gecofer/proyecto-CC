@@ -130,9 +130,12 @@ A continuación, debemos hacer uso de un _playbook_, el cual usa un formato YAML
 - `-` con el menos se indica que va a comenzar un array.
 - `hosts: all` se indica que el hosts es para todas las máquinas virtuales que encuentre ansible, en este caso solo tenemos una.
 - `become: yes` sirve para indicar si vamos a necesitar privilegios de superusuario para trabajar, y así poder instalar desde sudo.
-- `gather_facts: False`
+- `gather_facts: False` para desactivar la recopilación de datos [[4][4]].
 - `tasks` define las tareas que vamos hacer, es decir, el estado que tiene que alcanzar la máquina sobre la que vamos a trabajar.
 - `name: Instala git` comprueba si está instalado git, en caso de no estarlo lo hace (alcanza el estado present si no lo está).
+- `name: Instalar pip3` instala pip3 para python3.
+- `name: Instalando dependencias del proyecto` instala las dependencias necesarias para que el servicio arrance, en mi caso Flask.
+- `name: Redirigir puerto 5000 al 80` sentencia que nos permite redirigir el puerto 5000 (Flask) al 80.
 
 
 Una vez nuestro fichero creado, debemos pasar a instalar dichos paquetes en nuestra máquina virtual. Para ello, tenemos dos posibilidades. La primera es instalar una vez que está arrancada la máquina virtual [[3][3]]:
@@ -156,6 +159,8 @@ Vagrant.configure("2") do |config|
 end
 ~~~
 
+Y al iniciar la máquina virtual debemos provisionarla con `vagrant provision`.
+
 
 
 ### Enlaces interesantes <a name="id5"></a>
@@ -166,3 +171,4 @@ end
 [1]: https://www.softzone.es/2017/03/14/comparativa-vmware-virtualbox/
 [2]: https://www.vagrantup.com/docs/provisioning/ansible.html
 [3]: https://medium.com/@perwagnernielsen/ansible-tutorial-part-2-installing-packages-41d3ab28337d
+[4]: https://docs.ansible.com/ansible/2.5/user_guide/playbooks_variables.html#turning-off-facts
