@@ -75,17 +75,17 @@ Una vez que ya tenemos nuestra máquina virtual, vamos a provisionarla usando An
 
 _**Nota**: todos los archivos de Vagrant y Ansible tienen que estar en la misma carpeta_
 
-**Configuración básica _ansible.cfg_**
+#### Configuración básica _ansible.cfg_
 
 Lo primero que tenemos que hacer es un fichero de configuración dentro de nuestro directorio. Este fichero hay que meterlo en el directorio donde estemos trabajando y básicamente le dice a Ansible que tiene que mirar en el fichero *ansible_hosts* (defino como se va a conectar Asnsible).
 
-```
+~~~
 [defaults]
 host_key_checking = False
 inventory = ./ansible_hosts
-```
+~~~
 
-**Inventariando los _hosts_**
+#### Inventariando los _hosts_
 
 En el fichero **ansible_hosts** se le asigna un nombre a la máquina y se configura una serie de requerimientos: cuál es el puerto SSH para acceder a la máquina virtual que hemos creado, por defecto es el 2222, y al host le estamos diciendo a la máquina que vamos acceder. Además, para acceder a la máquina virtual necesitamos una clave privada que suele estar en el directorio: *.vagrant/machines/default/virtualbox/private_key*. En general, estamos haciendo que Ansible se conecte correctamente con Vagrant mediante SSH.
 
@@ -100,22 +100,53 @@ ansible_ssh_private_key_file=.vagrant/machines/default/virtualbox/private_key
 
 Ahora vamos hacer una comprobación básica (debe estar arrancada la máquina virtual), para ello hacemos un ping y vemos que tenemos acceso a ella:
 
-```
+~~~
 $ ansible all -m ping
-```
+~~~
 
 ![](../../docs/images/vagrant5.png)
 
 Si añadimos _-v_, _-vv_ o _-vvv_ obtendremos más información, en la conexión de Ansible con Vagrant por SSH.
 
-```
+~~~
 $ ansible all -m ping -vv
-```
+~~~
 
 ![](../../docs/images/vagrant6.png)
 
 
-**Provisionando en Ansible**
+#### Provisionando en Ansible
+
+A continuación, debemos hacer uso de un _playbook_, el cual usa un formato YAML. YAML es un formato de serialización parecido a JSON, pero este permite expresar todo tipo de estructuras de datos. Las tres líneas/rayas del principio indican que es un documento o página.
+
+- `-` con el menos se indica que va a comenzar un array.
+- `hosts: all` se indica que el hosts es para todas las máquinas virtuales que encuentre ansible, en este caso solo tenemos una.
+- `become: yes` sirve para indicar si vamos a necesitar privilegios de superusuario para trabajar, y así poder instalar desde sudo.
+- `gather_facts: False`
+- `tasks` define las tareas que vamos hacer, es decir, el estado que tiene que alcanzar la máquina sobre la que vamos a trabajar.
+- `name: Instala git` comprueba si está instalado git, en caso de no estarlo lo hace (alcanza el estado present si no lo está).
+
+
+Una vez nuestro fichero creado, debemos pasar a instalar dichos paquetes en nuestra máquina virtual. Para ello, tenemos dos posibilidades. La primera es instalar una vez que está arrancada la máquina virtual [[3][3]]:
+
+~~~
+$ ansible-playbook ansible_playbook.yml
+~~~
+
+La segunda es instalar dichos paquetes al arrancar la máquina virtual, para ello nos vamos al fichero de configuración Vagrantfile y añadimos la siguiente línea [[2][2]]:
+
+~~~
+Vagrant.configure("2") do |config|
+
+  #
+  # Run Ansible from the Vagrant Host
+  #
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible_playbook.yml"
+  end
+
+end
+~~~
 
 
 
@@ -125,3 +156,5 @@ $ ansible all -m ping -vv
 
 
 [1]: https://www.softzone.es/2017/03/14/comparativa-vmware-virtualbox/
+[2]: https://www.vagrantup.com/docs/provisioning/ansible.html
+[3]: https://medium.com/@perwagnernielsen/ansible-tutorial-part-2-installing-packages-41d3ab28337d
