@@ -7,7 +7,7 @@
   - [Configuración básica _ansible.cfg_](#id2)
   - [Inventariando los hosts](#id3)
   - [Provisionando en Ansible](#id4)
--  [Desplegar la aplicación usando un playbook de Ansible](#id5)
+- [Desplegar la aplicación usando un playbook de Ansible](#id5)
   - [Proyecto en ejecución en Azure](#id6)
 - [Enlaces interesantes](#id7)
 
