@@ -122,106 +122,71 @@ def get_data(nameID):
     result.status_code = 200
 
     return result
-    
-# ---------------------------------------------------------------------------- #
-
-    # Función para visualizar todos los elementos (MÉTODO GET)
-    @app.route('/data_twitter', methods=['GET'])
-    def get_all_data():
-
-        # GET para obtener un recurso del servidor
-        if request.method == 'GET':
-            data = {} # definimos un diccionario
-            # No hace falta añadir al diccionario --> data['status'] = 'OK'
-            data['ruta'] = request.url # obtener la url de la petición
-            data['valor'] = get_data_twitter()
-
-            # jsonify: convierte la salida JSON en un objeto Response con
-            # la aplication/json mimetype
-            result = jsonify(data)
-
-            # Se modifica el código de estado de la respuesta a 200
-            # 200: Respuesta estándar para peticiones correctas
-            result.status_code = 200
-
-            return result
 
 # ---------------------------------------------------------------------------- #
 
-    # Función para crear un nuevo elemento
-    # PUT para crear un recurso del servidor
-    # curl -i http://127.0.0.1:5000/data_twitter
-    @app.route('/data_twitter', methods=['PUT'])
-    def put_data():
+# Función para crear un nuevo elemento (MÉTODO PUT)
+# PUT para crear un recurso del servidor
+# curl -i -X PUT http://127.0.0.1:5000/data_twitter
+@app.route('/data_twitter', methods=['PUT'])
+def put_data():
 
-        if request.method == 'PUT':
+    # Nos creamos un nuevo elemento
+    new_data = {
+                "name": "hola",
+                "url": "hola.es",
+                "query": "hola",
+                "tweet_volume": "1234567"
+                }
 
-            # Nos creamos un nuevo elemento
-            new_data = {"ML": [{ "name":"Malaga",
-                         "url_twitter":"https://twitter.com/malaga",
-                         "user_twitter":"@malaga"
-                        }]}
+    # Añadimos el nuevo elemento al conjunto de elementos
+    data_twitter.append(new_data)
 
-            # Añadimos el nuevo elemento al conjunto de elementos
-            new_data_twitter = add_data_twitter(new_data)
+    data = {} # definimos un diccionario
+    # No hace falta añadir al diccionario --> data['status'] = 'OK'
+    data['ruta'] = request.url # obtener la url de la petición
+    data['valor'] = new_data
 
-            data = {} # definimos un diccionario
-            # No hace falta añadir al diccionario --> data['status'] = 'OK'
-            data['ruta'] = request.url # obtener la url de la petición
-            data['valor'] = new_data
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype.
+    result = jsonify(data)
 
-            # jsonify: convierte la salida JSON en un objeto Response con
-            # la aplication/json mimetype.
-            result = jsonify(data)
+    # Se modifica el código de estado de la respuesta a 200
+    # 200: Respuesta estándar para peticiones correctas
+    result.status_code = 200
 
-            # Se modifica el código de estado de la respuesta a 200
-            # 200: Respuesta estándar para peticiones correctas
-            result.status_code = 200
-
-            return result
+    return result
 
 # ---------------------------------------------------------------------------- #
 
-    # Función para modificar elemento
-    @app.route('/data_twitter', methods=['POST'])
-    def post_data():
+# Función para modificar elemento
+# POST para actualizar un recurso del servidor
+# curl -i -X POST http://127.0.0.1:5000/data_twitter/Bernabeu
+@app.route('/data_twitter/<nameID>', methods=['POST'])
+def post_data(nameID):
 
-        # POST para actualizar un recurso del servidor
-        # En este caso modificamos el valor del usuarios
-        # curl -X POST http://127.0.0.1:5000/data_twitter?id=GR
-        if request.method == 'POST':
+    data_json = [ elem for elem in data_twitter if (elem['name'] == nameID) ]
 
-            if 'id' in request.args:
-                update_data_twitter(request.args['id'], "name", "SEVILLA")
+    if "name" in request.args:
+        data_json[0]['name'] = request.args['name']
 
-                data = {} # definimos un diccionario
-                # No hace falta añadir al diccionario --> data['status'] = 'OK'
-                data['ruta'] = request.url # obtener la url de la petición
-                data['valor'] = get_id_data_twitter(request.args['id'])
+    if "tweet_volume" in request.args:
+        data_json[0]['tweet_volume'] = request.args['tweet_volume']
 
-                # jsonify: convierte la salida JSON en un objeto Response con
-                # la aplication/json mimetype.
-                result = jsonify(data)
+    data = {} # definimos un diccionario
+    # No hace falta añadir al diccionario --> data['status'] = 'OK'
+    data['ruta'] = request.url # obtener la url de la petición
+    data['valor'] = data_json[0]
 
-                # Se modifica el código de estado de la respuesta a 200
-                # 200: Respuesta estándar para peticiones correctas
-                result.status_code = 200
+    # jsonify: convierte la salida JSON en un objeto Response con
+    # la aplication/json mimetype.
+    result = jsonify(data)
 
-                return result
+    # Se modifica el código de estado de la respuesta a 200
+    # 200: Respuesta estándar para peticiones correctas
+    result.status_code = 200
 
-            else: # Si no está el ID
-                data = {} # definimos un diccionario
-                data['msg error'] = 'URL not found'
-
-                # jsonify: convierte la salida JSON en un objeto Response con
-                # la aplication/json mimetype.
-                result = jsonify(data)
-
-                # Se modifica el código de estado de la respuesta a 200
-                # 404: Recurso no encontrado, el servidor web no encuentra la página
-                result.status_code = 404
-
-                return result
+    return result
 
 # ---------------------------------------------------------------------------- #
 
