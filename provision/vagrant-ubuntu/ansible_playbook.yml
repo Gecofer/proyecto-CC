@@ -34,12 +34,10 @@
 
     - name: Instalando dependencias del proyecto
       pip:
-        requirements: /home/gemaAzure/CC-pruebas/requirements.txt
+        requirements: /home/vagrant/CC-pruebas/requirements.txt
         executable: pip3
 
-    - name: Redireccionamiento de puerto 5000 a 80
+    - name: Redirigir puerto 5000 al 80
       become: true
-      lineinfile:
-        path=/etc/rc.local
-        insertbefore='exit 0'
-        line="sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 5000"
+      become_method: sudo
+      command: iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
