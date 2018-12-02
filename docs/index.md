@@ -215,9 +215,9 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 
 2. Añadir un archivo __[.travis.yml](https://github.com/Gecofer/proyecto-CC/blob/master/.travis.yml)__ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
 
-  * El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
-  * El comando para instalar las dependencias, el cual contiene las dependencias a instalar.
-  * El comando para ejecutar los tests.
+  - El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
+  - El comando para instalar las dependencias, el cual contiene las dependencias a instalar.
+  - El comando para ejecutar los tests.
 
     ~~~
     language: python
@@ -247,7 +247,7 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   web: gunicorn main:app
   ~~~
 
-8. Creo el fichero __requirements.txt__, para instalar las dependencias. Este fichero se puede instalar de diversas formas, no es recomendable usar  `pip freeze > requirements.txt`, ya que te mete basura [[8][8]]. Debemos recordar añadir _gunicorn_.
+8. Creo el fichero __requirements.txt__, para instalar las dependencias. Este fichero se puede instalar de diversas formas, no es recomendable usar  `pip freeze > requirements.txt`, ya que te mete basura [[8][8]]. Debemos recordar añadir _gunicorn_. Para ello hacer uso de [pyenv](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md).
 
   ~~~
   Flask==1.0.2
