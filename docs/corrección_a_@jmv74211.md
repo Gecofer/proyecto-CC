@@ -9,9 +9,7 @@
 <!-- END doctoc -->
 
 - [Proceso de comprobación en máquina local con vagrant](#id1)
-- [Comprobación de la aplicación en azure.](#comprobaci%C3%B3n-de-la-aplicaci%C3%B3n-en-azure)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+- [Comprobación de la aplicación en azure](#id2)
 
 ---
 
@@ -65,7 +63,7 @@ Podemos comprobar que la aplicación se ha lanzado correctamente sin ningún pro
 
 ---
 
-# Comprobación de la aplicación en Azure
+# Comprobación de la aplicación en Azure <a name="id2"></a>
 
 [@jmv74211](https://github.com/jmv74211/) ha desplegado dicha aplicación en el sistema cloud Azure. Dicho usuario ha ejecutado el mismo playbook de ansible que el que he comprobado en la máquina virtual de vagrant, por lo que podemos afirmar que se ha realizado el mismo proceso de aprovisionamiento y se puede decir que **EL APROVISIONAMIENTO SE HA REALIZADO CON ÉXITO**.
 
