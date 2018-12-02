@@ -22,6 +22,7 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
+
 ## Novedades <a name="id0"></a>
 
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
@@ -31,7 +32,7 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - Pincha [aquí](#id14) para ver las comprobaciones de provisionamiento del hito 3 entre [@jmv74211](https://github.com/jmv74211/) y [@gecofer](https://github.com/Gecofer).
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/Charla%20logs/logs.md) para ver el resumen realizado de la charla impartida sobre `logs`.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md) para ver como se ha puesto un _environment_ a la carpeta del proyecto de la asignatura.
-- Pincha [aquí]() para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al 80.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure#id4) para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
 
 ## Descripción del proyecto <a name="id1"></a>
 
