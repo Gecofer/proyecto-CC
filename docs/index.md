@@ -171,8 +171,8 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   - [https://glacial-castle-84194.herokuapp.com/data_twitter](https://glacial-castle-84194.herokuapp.com/data_twitter)
 
 
-  - `/data_twitter/Rudy`: lista todos los elementos del JSON
-    - [https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy](https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy)
+- `/data_twitter/Rudy`: lista todos los elementos del JSON
+  - [https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy](https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy)
 
 
 - `/data_twitter` con PUT: crea un nuevo usuario del JSON
