@@ -159,7 +159,7 @@ Vagrant.configure("2") do |config|
 end
 ~~~
 
-Y al iniciar la máquina virtual debemos provisionarla con `vagrant provision`.
+<!--Y al iniciar la máquina virtual debemos provisionarla con `vagrant provision`.-->
 
 
 
