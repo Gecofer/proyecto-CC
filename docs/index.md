@@ -213,10 +213,21 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 
 1. Identificarse en Travis mediante Github.
 
-2. Añadir un archivo __[.travis.yml](https://github.com/Gecofer/proyecto-CC/blob/master/.travis.yml)__ al repositorio para decirle a Travis CI qué hacer, el cual contiene :
-  *  El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
-  *  El comando para instalar las dependencias, el cual contiene las dependencias a instalar.
-  *  El comando para ejecutar los tests.
+2. Añadir un archivo __[.travis.yml](https://github.com/Gecofer/proyecto-CC/blob/master/.travis.yml)__ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
+
+  * El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
+  * El comando para instalar las dependencias, el cual contiene las dependencias a instalar.
+  * El comando para ejecutar los tests.
+
+    ~~~
+    language: python
+    python:
+    - "3.7-dev"
+    install:
+    - pip install -r requirements.txt
+    script:
+    - python3 test/main_test.py
+    ~~~
 
 3. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
@@ -230,11 +241,25 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 
 6. Identificarse introduciendo nuestras credenciales de la cuenta de Heroku: `heroku login`
 
-7. Para que Heroku pueda encontrar el archivo principal del proyecto, debemos definirnos un archivo __Procfile__ en Heroku [[7][7]] que contendrá la siguiente instrucción `web: gunicorn main:app`, usaremos [gunicorn](https://gunicorn.org) ya que nos permite administrar las peticiones simultaneas que nuestra aplicación reciba
+7. Para que Heroku pueda encontrar el archivo principal del proyecto, debemos definirnos un archivo __Procfile__ en Heroku [[7][7]], el cual especifica los comandos que son ejecutados por la aplicación al inicio, que contendrá la siguiente instrucción `web: gunicorn main:app`, usaremos [gunicorn](https://gunicorn.org) ya que nos permite administrar las peticiones simultaneas que nuestra aplicación reciba. El archivo debe estar en el directorio raíz de tu app.
 
-8. Creo el fichero __requirements.txt__, para instalar las dependencias. Este fichero se puede instalar de diversas formas, no es recomendable usar  `pip freeze > __requirements.txt`, ya que te mete basura [[8][8]]. Debemos recordar añadir _gunicorn_.
+  ~~~
+  web: gunicorn main:app
+  ~~~
+
+8. Creo el fichero __requirements.txt__, para instalar las dependencias. Este fichero se puede instalar de diversas formas, no es recomendable usar  `pip freeze > requirements.txt`, ya que te mete basura [[8][8]]. Debemos recordar añadir _gunicorn_.
+
+  ~~~
+  Flask==1.0.2
+  requests==2.20.1
+  gunicorn==19.9.0
+  ~~~
 
 9. Crear el fichero __runtime.txt__, en mi caso la versión de Python 3.7.0.
+
+  ~~~
+  python-3.7.0
+  ~~~
 
 10. Crear una aplicación en Heroku, este proceso se puede hacer de dos maneras: por terminal `heroku create` o mediante la web _Create new App_.
 
