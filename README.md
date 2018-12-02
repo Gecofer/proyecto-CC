@@ -83,6 +83,8 @@ Para saber más información sobre el [despliegue](https://gecofer.github.io/pro
 
 - Corrección de @jmv74211 al aprovisionamiento de @gecofer disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md)
 
+- Comprobación de [@jmv74211](https://github.com/jmv74211/) al provisionamiento en este [enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure)
+
 ## Licencia
 
 Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
