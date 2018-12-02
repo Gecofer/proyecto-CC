@@ -4,7 +4,6 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 
 **Tabla de Contenidos**
 
-- [Novedades](#id0)
 - [Descripción del proyecto](#id1)
 - [Descripción de arquitecturas software](#id2)
   - [Arquitectura seleccionada](#id3)
@@ -18,12 +17,9 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
     - [Vagrant](#id11)
     - [Ansible](#id12)
   - [Despliegue de la infraestructura en Azure](#id13)
-- [Comprobaciones de provisionamiento del Hito 3](#id14)
-- [Enlaces de Interés](#id15)
-- [Licencia](#id16)
 
 
-## Novedades <a name="id0"></a>
+## Novedades
 
 
 
@@ -139,25 +135,20 @@ Lanzamos nuestra aplicación con [_gunicorn_](https://gunicorn.org) y efectivame
 
 ![](/docs/images/azure8.png)
 
-La dirección IP: 23.97.225.1
+La dirección IP del servidor web: 23.97.225.1
 
 MV: [http://23.97.225.1](http://23.97.225.1)
 
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
 
 
-## Comprobaciones de provisionamiento del Hito 3 <a name="id14"></a>
+## Correcciones de aprovisionamiento del hito3
 
-- Comprobación de [@jmv74211](https://github.com/jmv74211/) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md).
+- Corrección de @jmv74211 al aprovisionamiento de @gecofer disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md)
 
-- Comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211/) disponible en este [enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure).
+- Comprobación de [@jmv74211](https://github.com/jmv74211/) al provisionamiento en este [enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure)
 
-## Enlaces de Interés <a name="id15"></a>
-
-- [Publics APIs](https://github.com/toddmotto/public-apis#books)
-
-
-## Licencia <a name="id16"></a>
+## Licencia
 
 Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
 
@@ -169,6 +160,8 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 [5]: https://www.smartfile.com/blog/testing-python-with-travis-ci/
 [6]: https://github.com/softwaresaved/build_and_test_examples
 
+## Enlaces de Interés
 
+- [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
 ___Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades._
