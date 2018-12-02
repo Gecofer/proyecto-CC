@@ -5,10 +5,19 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 **Tabla de Contenidos**
 
 - [Descripción del proyecto](#id1)
-- [Arquitecturas software](#id2)
+- [Descripción de arquitecturas software](#id2)
   - [Arquitectura seleccionada](#id3)
-- [Microservicios a desarrollar](#id4)
+- [Descripción de los microservicios a desarrollar](#id4)
   - [Comunicación entre los microservicios](#id5)
+  - [Bibliotecas de Python para la API de Twitter](#id6)
+- [Descipción de los tests en Python (código sin test código roto)](#id7)
+- [Descripción del despliegue](#id8)
+  - [Despliegue en PaaS](#id9)
+  - [Despliegue de la infraestructura en máquina virtual local](#id10)
+    - [Vagrant](#id11)
+    - [Ansible](#id12)
+  - [Despliegue de la infraestructura en Azure](#id13)
+
 
 ## Novedades
 
@@ -19,7 +28,7 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten todo tipo de información en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad en la obtención de información muy valiosa, cómo por ejemplo ver qué tendencias o _trending topics_ son los más comentados o qué ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en la obtención de datos geolocalizados, es decir,  en la extracción de _trending topics_ o tendencias de los usuarios en Twitter para una región determinada. Para así, poder clasificar las tendencias y establecer la tendencia mayoritaria para una region determinada.
 
 
-## Arquitecturas software <a name="id2"></a>
+## Descripción de arquitecturas software <a name="id2"></a>
 
 Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [[2][2]]:
 
@@ -33,7 +42,7 @@ Actualmente, las arquitecturas software modernas buscan la consistencia en la ve
 
 Entonces, resulta bastante claro que de todas las arquitecturas comentadas anteriormente vayamos a hacer uso de la __arquitectura basada en microservicios__, ya que es la que más actual y la que menos problemas presenta, además de que nos permite tener diferentes servicios trabajando de forma totalmente independiente unos de otros.
 
-## Microservicios a desarrollar <a name="id4"></a>
+## Descripción de los microservicios a desarrollar <a name="id4"></a>
 
 <p align="center">
   <img width="210" height="90" src="docs/images/twitter+python.png">
@@ -55,9 +64,9 @@ Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://ww
 
 La comunicación entre servicios será realizada por _brokers_, en concreto con [RabbitMQ](https://www.rabbitmq.com), que es un sistema de manejo de colas.
 
-## Bibliotecas de Python para la API de Twitter
+### Bibliotecas de Python para la API de Twitter <a name="id6"></a>
 
-Actualmente, La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
+Actualmente, la API de Twitter nos permite acceder a todo tipo de información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
 - __Tweets__: búsqueda, publicación, filtrado, etc.
 - __Anuncios__: gestión de campañas, análisis, etc.
@@ -65,28 +74,73 @@ Actualmente, La API de Twitter nos permite acceder a toda esa información de fo
 - __Tendencias__: _trending topics_.
 - __Geo__: información sobre lugares conocidos, lugares cerca de una ubicación, etc.
 
-
 Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de [tweepy](https://github.com/tweepy/tweepy) ya que he oído hablar de ella bastante bien y tiene bastante documetación en la web. De todas maneras, existen otras librerías cómo [twython](https://github.com/ryanmcgrath/twython), [python-twitter](https://github.com/bear/python-twitter) o [TwitterAPI](https://github.com/geduldig/TwitterAPI).
 
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/data), para más información acerca de la extracción de datos de Twitter realizada para el proyecto**_
 
 
-### Tests en Python (código sin test código roto)
+## Descipción de los tests en Python (código sin test código roto) <a name="id7"></a>
 
 Para testear en Python [[3][3]], puedo usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como [unittest](https://docs.python.org/3.5/library/unittest.html), [doctest](https://docs.python.org/3.5/library/doctest.html) o [pytest](https://docs.pytest.org/en/latest/) [[4][4]]. En este caso yo voy hacer uso de la biblioteca [unittest](https://docs.python.org/3.5/library/unittest.html), ya que nos ofrece toda la potencia del lenguaje para probar nuestros programas, lo que significa que ayuda a determinar rápidamente el impacto de cualquier modificación en el resto del código.
 
-Para realizar la configuración de los test correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
+Para realizar la configuración de los tests correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
 
-Para saber más información sobre los [tests](https://gecofer.github.io/proyecto-CC/).
+_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/), para saber más información sobre los tests.**_
 
-### Despliegue
+## Descripción del despliegue <a name="id8"></a>
 
-#### PaaS
+### Despliegue en PaaS <a name="id9"></a>
 
 Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
 
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
-Para saber más información sobre el [despliegue](https://gecofer.github.io/proyecto-CC/).
+_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/), para saber más información sobre el despliegue en PaaS.**_
+
+### Despliegue de la infraestructura en máquina virtual local <a name="id10"></a>
+
+Para el despliegue de la aplicación en una máquina virtual local, se ha hecho uso de Ansible junto con Vagrant. Previamente a la realización de un `clone` a mi repositorio, se debe instalar [Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision),  [Vagrant](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu) y [VirtualBox](https://www.virtualbox.org), herramientas necesarias para ejecutar la aplicación. Una vez realizados estos procesos, debemos dirigirnos al directorio `provision > vagrant_ubuntu` y ejecutar la sentencia `vagrant up`, la cual creará una máquina virtual en VirtualBox y ejecutará el _playbook_ con lo indispensable para el despliegue.
+
+#### Vagrant <a name="id11"></a>
+
+Se ha utilizado la herramienta Vagrant para generar entornos de desarrollo reproducibles y compartibles de forma muy sencilla, ya que crea y configura máquinas virtuales a partir de simples ficheros de configuración. El fichero donde se describe la infraestructura se llama `Vagrantfile` y es utilizado para el despliegue ([enlace](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/Vagrantfile)).
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu), para saber más información sobre el despliegue en máquina virtual local con Vagrant.**_
+
+#### Ansible <a name="id12"></a>
+
+Para el provisionamiento se ha hecho uso de Ansible (versión 2.7.2)
+Como software para automatizar el proceso de aprovisionamiento se ha utilizado Ansible, creando previamente los siguientes ficheros:
+
+- [**ansible.cfg**](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/ansible.cfg): fichero de configuración básica, que básicamente le dice a Ansible que tiene que mirar en el fichero ansible_hosts.
+- [**ansible_hosts**](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/ansible_hosts): fichero para definir una serie de requerimentos (nombre de la máquina, puerto SSH para acceder a la máquina virtua, host).
+- [**ansible_playbook.yml**](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/ansible_playbook.yml): fichero para definir las intrucciones a ejecutar (python, git, pip, flask, clonar repositorio).
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision), para saber más información sobre la gestión de configuraciones con Ansible.**_
+
+Si no se utiliza Vagrant, también se puede realizar el provisionamiento utilizando órdenes de ansible, es decir, haciendo uso de la orden `ansible-playbook ansible_playbook.yml`.
+
+
+### Despliegue de la infraestructura en Azure  <a name="id13"></a>
+
+Se ha creado una máquina virtual en Azure con Ubuntu 14.04 LTS, la misma usada para el despliegue en la máquina virtua local. Para lanzar la aplicación, debemos conectar a la mv `ssh gemaAzure@23.97.225.1` y ejecutar el provisionamiento que con todos los módulos necesarios se uso de `ansible-playbook -i ansible_hosts -b ansible_playbook.yml`.
+
+![](/docs/images/azure7.png)
+
+![](/docs/images/azure3.png)
+
+Lanzamos nuestra aplicación con [_gunicorn_](https://gunicorn.org) y efectivamente comprobamos que podemos aceder:
+
+![](/docs/images/azure5.png)
+
+![](/docs/images/azure8.png)
+
+La dirección IP del servidor web: 23.97.225.1
+
+MV: [http://23.97.225.1](http://23.97.225.1)
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
+
 
 ## Correcciones de aprovisionamiento del hito3
 
