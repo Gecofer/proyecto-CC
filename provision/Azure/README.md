@@ -21,6 +21,7 @@ Una vez que ya tenemos nuestra máquina virtual, vamos a provisionarla usando An
 
 ### Ansible <a name="id21"></a>
 
+
 #### Configuración básica _ansible.cfg_ <a name="id2"></a>
 
 Lo primero que tenemos que hacer es un fichero de configuración dentro de nuestro directorio. Este fichero hay que meterlo en el directorio donde estemos trabajando y básicamente le dice a Ansible que tiene que mirar en el fichero *ansible_hosts*.
