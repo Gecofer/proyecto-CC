@@ -74,8 +74,15 @@ Por tanto, para establecer un testeo cada vez que haga `git push`, he seguido el
 
 Para testear el archivo `main.py`, me he creado un archivo `main_test.py`, en el cual me he creado 8 funciones que comprueban el código, haciéndolo robusto:
 
+~~~
+# Testear que se ha desplegado correctamente
+def test1_index(self):
+  result = self.app.get("/")
+  self.assertEqual(result.status_code, 200)
+  self.assertEqual(result.content_type, "application/json")
 
-
+  pass
+~~~
 
 ### Despliegue
 
