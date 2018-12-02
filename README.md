@@ -22,7 +22,9 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
+Despliegue: https://glacial-castle-84194.herokuapp.com
 
+MV: [http://23.97.225.1](http://23.97.225.1)
 
 ## Novedades <a name="id0"></a>
 
