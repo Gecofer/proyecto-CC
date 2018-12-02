@@ -1,36 +1,28 @@
-# Proyecto Cloud Computing 2018-2019
+# Análisis de tendencias (geolocalizadas) en Twitter
 
-#### Autora: Gema Correa Fernández
-#### Máster en Ingeniría Informática
-#### Enlace de la documentación: https://gecofer.github.io/proyecto-CC/
+Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en Ingeniería Informática, realizado por Gema Correa Fernández. Pincha [aquí](https://gecofer.github.io/proyecto-CC/) para acceder al enlace de la documentación.
 
-## Título del proyecto
+** Tabla de Contenidos **
 
-Análisis de datos (geolocalizados) en Twitter.
+- [Descripción del proyecto](#id1)
+- [Arquitecturas software](#id1)
 
-## Descripción del proyecto
+## Descripción del proyecto <a name="id1"></a>
 
-Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten todo tipo de información en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad en la obtención de información muy valiosa, cómo por ejemplo ver qué _trending topics_ son los más comentados o qué ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en la obtención de datos geolocalizados mediante _trending topics_ que usan los usuarios en Twitter. Entonces, el objetivo del proyecto es poder clasificar las tendencias por ubicaciones, para así establecer la tendencia mayoritaria en una region determinada, la cual abarcará más de una localización.
+Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten todo tipo de información en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad en la obtención de información muy valiosa, cómo por ejemplo ver qué tendencias o _trending topics_ son los más comentados o qué ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en la obtención de datos geolocalizados, es decir,  en la extracción de _trending topics_ o tendencias de los usuarios en Twitter para una región determinada. Para así, poder clasificar las tendencias y establecer la tendencia mayoritaria para una region determinada.
 
-La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
-- __Tweets__: búsqueda, publicación, filtrado, etc.
-- __Anuncios__: gestión de campañas, análisis, etc.
-- __Contenido multimedia__: subir y acceder a fotos, vídeos, GIF animados, etc.
-- __Tendencias__: _trending topics_.
-- __Geo__: información sobre lugares conocidos, lugares cerca de una ubicación, etc.
-
-## Arquitectura software
+## Arquitecturas software <a name="id1"></a>
 
 Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [[2][2]]:
 
 - __Arquitectura en capas__: arquitectura cliente-servidor, tiene 3 o más capas, normalmente se suelen incluir la capa de presentación, la de aplicación, la de lógica de negocio y la de acceso a datos. El problema principal es que solo permite escalado dentro de cada una de las capas, siendo al final alguna de ellas un cuello de botella.
 - __Arquitectura dirigida por eventos__: tiene una cola de eventos que se originan en el usuario, pero también de una parte a otra de la arquitectura. Es difícil de testear y su desarrollo es más complicado que la anterior.
 - __Arquitectura microkernel__: arquitectura casi monolítica, con un núcleo central al que se pueden añadir funcionalidades mediante _plugins_, siendo su problema principal la escalabilidad, ya que el núcleo puede representar un cuello de botella.
-- __Arquitectura basada en microservicios__: arquitectura muy popular hoy en día, se caracteriza por poder usar unidades que se van a desplegar de forma independiente y por poder usar tecnologías subyacentes que van desde la virtualización completa en la nube hasta el uso de contenedores _Docker_ en una sola máquina virtual.
+- __Arquitectura basada en microservicios__: arquitectura popular, se caracteriza por usar unidades que se van a desplegar de forma independiente y por poder usar tecnologías subyacentes que van desde la virtualización completa en la nube hasta el uso de contenedores _Docker_ en una sola máquina virtual.
 - __Arquitectura basada en espacios__: arquitectura antigua, de la década de los 90.
 
-Entonces, resulta bastante claro que de todas las comentadas anteriormente vayamos a hacer uso de la __arquitectura basada en microservicios__, ya que es la que más actual y la que menos problemas presenta, además de que nos permite tener diferentes servicios trabajando de forma totalmente independiente unos de otros.
+Entonces, resulta bastante claro que de todas las arquitecturas comentadas anteriormente vayamos a hacer uso de la __arquitectura basada en microservicios__, ya que es la que más actual y la que menos problemas presenta, además de que nos permite tener diferentes servicios trabajando de forma totalmente independiente unos de otros.
 
 ### Microservicios a desarrollar
 
@@ -59,7 +51,18 @@ La comunicación entre servicios será realizada por _brokers_, en concreto con 
 
 ### Bibliotecas de Python para la API de Twitter
 
+Actualmente, La API de Twitter nos permite acceder a toda esa información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
+
+- __Tweets__: búsqueda, publicación, filtrado, etc.
+- __Anuncios__: gestión de campañas, análisis, etc.
+- __Contenido multimedia__: subir y acceder a fotos, vídeos, GIF animados, etc.
+- __Tendencias__: _trending topics_.
+- __Geo__: información sobre lugares conocidos, lugares cerca de una ubicación, etc.
+
+
 Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de [tweepy](https://github.com/tweepy/tweepy) ya que he oído hablar de ella bastante bien y tiene bastante documetación en la web. De todas maneras, existen otras librerías cómo [twython](https://github.com/ryanmcgrath/twython), [python-twitter](https://github.com/bear/python-twitter) o [TwitterAPI](https://github.com/geduldig/TwitterAPI).
+
+
 
 ### Tests en Python (código sin test código roto)
 
