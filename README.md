@@ -25,7 +25,8 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 
 ## Novedades <a name="id0"></a>
 
-
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 3.
 
 ## Descripción del proyecto <a name="id1"></a>
 
