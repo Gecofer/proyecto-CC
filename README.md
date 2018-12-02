@@ -29,6 +29,8 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC) para acceder a los ejercicios de la asignatura (resúmenes de charlas, ejercicios, enlaces de interés...).
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para ver el despliegue realizado en una máquina local y en Azure.
 - Pincha [aquí](#id14) para ver las comprobaciones de provisionamiento del hito 3 entre [@jmv74211](https://github.com/jmv74211/) y [@gecofer](https://github.com/Gecofer).
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/Charla%20logs/logs.md) para ver el resumen realizado de la charla impartida sobre `logs`.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md) para ver como se ha puesto un _environment_ a la carpeta del proyecto de la asignatura.
 
 ## Descripción del proyecto <a name="id1"></a>
 
