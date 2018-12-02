@@ -22,11 +22,13 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
-
 ## Novedades <a name="id0"></a>
 
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 3.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC) para acceder a los ejercicios de la asignatura (resúmenes de charlas, ejercicios, enlaces de interés...)
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para ver el despliegue realizado en una máquina local con Vagrant y en Azure.
+- Pincha [aquí](#id14) para ver las comprobaciones de provisionamiento del Hito 3 entre [@jmv74211](https://github.com/jmv74211/) y [@gecofer](https://github.com/Gecofer).
 
 ## Descripción del proyecto <a name="id1"></a>
 
