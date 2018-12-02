@@ -2,10 +2,35 @@
 
 **Tabla de Contenidos**
 
+- [Novedades](#id0)
 - [Descripción del proyecto](#id1)
 - [Descripción de arquitecturas software](#id2)
   - [Arquitectura seleccionada](#id3)
 - [Descripción de los microservicios a desarrollar](#id4)
+  - [Comunicación entre los microservicios](#id5)
+- [Bibliotecas de Python para la API de Twitter](#id6)
+  - [Descipción de los tests en Python (código sin test código roto)](#id7)
+- [Descripción del despliegue](#id8)
+  - [Despliegue en PaaS](#id9)
+    - [Rutas utilizadas en la aplicación](#id10)
+    - [Descripción de los ficheros usados](#id11)
+    - [Pasos para hacer el despliegue (Github+Travis+Heroku)](#id12)
+  - [Despliegue de la infraestructura en máquina virtual local](#id13)
+    - [Vagrant](#id14)
+    - [Ansible](#id15)
+  - [Despliegue de la infraestructura en Azure](#id16)
+- [Enlaces de Interés](#id17)
+- [Licencia](#id18)
+
+## Novedades <a name="id0"></a>
+
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 3.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC) para acceder a los ejercicios de la asignatura (resúmenes de charlas, ejercicios, enlaces de interés...).
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para ver el despliegue realizado en una máquina local y en Azure.
+- Pincha [aquí](#id14) para ver las comprobaciones de provisionamiento del hito 3 entre [@jmv74211](https://github.com/jmv74211/) y [@gecofer](https://github.com/Gecofer).
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/Charla%20logs/logs.md) para ver el resumen realizado de la charla impartida sobre `logs`.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md) para ver como se ha puesto un _environment_ a la carpeta del proyecto de la asignatura.
 
 ## Descripción del proyecto <a name="id1"></a>
 
@@ -44,11 +69,11 @@ Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://ww
   <img width="460" height="350" src="images/estructura_microservicios.png">
 </p>
 
-### Comunicación entre los microservicios
+### Comunicación entre los microservicios <a name="id5"></a>
 
 La comunicación entre servicios será realizada por _brokers_, en concreto con [RabbitMQ](https://www.rabbitmq.com), que es un sistema de manejo de colas.
 
-### Bibliotecas de Python para la API de Twitter
+## Bibliotecas de Python para la API de Twitter <a name="id6"></a>
 
 Actualmente, la API de Twitter nos permite acceder a todo tipo de información de forma más simple que la de Instagram, es por eso que me he decantado por esta red social. A continuación, se muestran algunos datos a los que podemos acceder [[1][1]]:
 
@@ -60,7 +85,7 @@ Actualmente, la API de Twitter nos permite acceder a todo tipo de información d
 
 Python cuenta muchas bibliotecas desarrolladas para la API de Twitter. Sin embargo, al no haber usado nunca ninguna me es dífil elegir que biblioteca es la mejor. Es por ello, que voy hacer uso de [tweepy](https://github.com/tweepy/tweepy) ya que he oído hablar de ella bastante bien y tiene bastante documetación en la web. De todas maneras, existen otras librerías cómo [twython](https://github.com/ryanmcgrath/twython), [python-twitter](https://github.com/bear/python-twitter) o [TwitterAPI](https://github.com/geduldig/TwitterAPI).
 
-### Descipción de los tests en Python (código sin test código roto)
+### Descipción de los tests en Python (código sin test código roto) <a name="id7"></a>
 
 Para testear en Python [[3][3]], puedo usar algunas de las librerías que me permiten implementar pruebas unitarias en dicho lenguaje como [unittest](https://docs.python.org/3.5/library/unittest.html), [doctest](https://docs.python.org/3.5/library/doctest.html) o [pytest](https://docs.pytest.org/en/latest/) [[4][4]]. En este caso yo voy hacer uso de la biblioteca [unittest](https://docs.python.org/3.5/library/unittest.html), ya que nos ofrece toda la potencia del lenguaje para probar nuestros programas, lo que significa que ayuda a determinar rápidamente el impacto de cualquier modificación en el resto del código.
 
@@ -123,15 +148,15 @@ Para testear el archivo `main.py`, me he creado un archivo `main_test.py`, en el
   ~~~
 
 
-## Descripción del despliegue
+## Descripción del despliegue <a name="id8"></a>
 
-#### Despliegue en PaaS
+### Despliegue en PaaS <a name="id9"></a>
 
 Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
 
 Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-84194.herokuapp.com)
 
-#### Rutas utilizadas en la aplicación
+#### Rutas utilizadas en la aplicación <a name="id10"></a>
 
 - `/` y `/status`: devuelve el JSON {"status":"OK"}
   - [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-84194.herokuapp.com)
@@ -169,7 +194,7 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   ~~~
 
 
-### Descripción de los ficheros usados
+#### Descripción de los ficheros usados <a name="id11"></a>
 
 - `main.py`: fichero que implementa la clase API REST haciendo uso del microframework Flask
 
@@ -184,7 +209,7 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   - *tweet_volume*: volumen de tweets dedicados a esa tendencia
 
 
-### Pasos para hacer el despliegue (Github+Travis+Heroku)
+#### Pasos para hacer el despliegue (Github+Travis+Heroku) <a name="id12"></a>
 
 1. Identificarse en Travis mediante Github.
 
@@ -228,17 +253,17 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 
 12. `git push`: para Github+Travis+Heroku.
 
-### Despliegue de la infraestructura en máquina virtual local <a name="id10"></a>
+### Despliegue de la infraestructura en máquina virtual local <a name="id13"></a>
 
 Para el despliegue de la aplicación en una máquina virtual local, se ha hecho uso de Ansible junto con Vagrant. Previamente a la realización de un `clone` a mi repositorio, se debe instalar [Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision),  [Vagrant](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu) y [VirtualBox](https://www.virtualbox.org), herramientas necesarias para ejecutar la aplicación. Una vez realizados estos procesos, debemos dirigirnos al directorio `provision > vagrant_ubuntu` y ejecutar la sentencia `vagrant up`, la cual creará una máquina virtual en VirtualBox y ejecutará el _playbook_ con lo indispensable para el despliegue.
 
-#### Vagrant <a name="id11"></a>
+#### Vagrant <a name="id14"></a>
 
 Se ha utilizado la herramienta Vagrant para generar entornos de desarrollo reproducibles y compartibles de forma muy sencilla, ya que crea y configura máquinas virtuales a partir de simples ficheros de configuración. El fichero donde se describe la infraestructura se llama `Vagrantfile` y es utilizado para el despliegue ([enlace](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/Vagrantfile)).
 
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu), para saber más información sobre el despliegue en máquina virtual local con Vagrant.**_
 
-#### Ansible <a name="id12"></a>
+#### Ansible <a name="id15"></a>
 
 Para el provisionamiento se ha hecho uso de Ansible (versión 2.7.2)
 Como software para automatizar el proceso de aprovisionamiento se ha utilizado Ansible, creando previamente los siguientes ficheros:
@@ -251,19 +276,19 @@ _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision),
 
 Si no se utiliza Vagrant, también se puede realizar el provisionamiento utilizando órdenes de ansible, es decir, haciendo uso de la orden `ansible-playbook ansible_playbook.yml`.
 
-### Despliegue de la infraestructura en Azure  <a name="id13"></a>
+### Despliegue de la infraestructura en Azure  <a name="id16"></a>
 
 Se ha creado una máquina virtual en Azure con Ubuntu 14.04 LTS, la misma usada para el despliegue en la máquina virtua local. Para lanzar la aplicación, debemos conectar a la mv `ssh gemaAzure@23.97.225.1` y ejecutar el provisionamiento que con todos los módulos necesarios se uso de `ansible-playbook -i ansible_hosts -b ansible_playbook.yml`.
 
-![](/docs/images/azure7.png)
+![](images/azure7.png)
 
-![](/docs/images/azure3.png)
+![](images/azure3.png)
 
 Lanzamos nuestra aplicación con [_gunicorn_](https://gunicorn.org) y efectivamente comprobamos que podemos aceder:
 
-![](/docs/images/azure5.png)
+![](images/azure5.png)
 
-![](/docs/images/azure8.png)
+![](images/azure8.png)
 
 La dirección IP: 23.97.225.1
 
@@ -272,12 +297,12 @@ MV: [http://23.97.225.1](http://23.97.225.1)
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
 
 
-## Enlaces de Interés  
+## Enlaces de Interés  <a name="id17"></a>
 
 - [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
 
-## Licencia
+## Licencia <a name="id18"></a>
 
 Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/master/LICENSE).
 
