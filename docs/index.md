@@ -74,19 +74,58 @@ Por tanto, para establecer un testeo cada vez que haga `git push`, he seguido el
 
 Para testear el archivo `main.py`, me he creado un archivo `main_test.py`, en el cual me he creado 8 funciones que comprueban el código, haciéndolo robusto:
 
-~~~
-# Testear que se ha desplegado correctamente
-def test1_index(self):
-  result = self.app.get("/")
-  self.assertEqual(result.status_code, 200)
-  self.assertEqual(result.content_type, "application/json")
+1. Testear ejecución de Flask lanzada.
+2. Testear que se ha desplegado correctamente.
+  ~~~
+  # Testear que se ha desplegado correctamente
+  def test1_index(self):
+    # result = requests.get('http://127.0.0.1:5000/')
+    result = self.app.get("/")
+    self.assertEqual(result.status_code, 200)
+    self.assertEqual(result.content_type, "application/json")
 
-  pass
-~~~
+    pass
+  ~~~
+3. Testear que se ha desplegado incorrectamente.
+4. Testear que se visualizan todos los elementos.
+5. Testear que se visualiza uno de los elementos.
+  ~~~
+  # Testear que se visualiza uno de los elementos
+  def test4_get_data(self):
+    result = self.app.get("/data_twitter/Rudy")
+    self.assertEqual(result.status_code, 200)
+    self.assertEqual(result.content_type, "application/json")
+    self.assertTrue(result.get_json(), "The list is empty")
 
-### Despliegue
+    # Escribimos la ruta mal
+    result_bad = self.app.get("/hola")
+    self.assertEqual(result_bad.status_code, 404)
 
-#### PaaS
+    pass
+  ~~~
+6. Testear que se crea un elemento.
+7. Testear que se modifica un elemento.
+8. Testear que se elimina un elemento.
+  ~~~
+  # Testear que se elimina un elemento
+  def test7_delete_data(self):
+    result_delete = self.app.delete("/data_twitter/hola")
+    self.assertEqual(result_delete.status_code, 200)
+    self.assertEqual(result_delete.content_type, "application/json")
+    self.assertTrue(result_delete.get_json(), "The list is empty")
+
+    result_post1 = self.app.post("/data_twitter/#GHVIPGala12")
+    result_delete1 = self.app.delete("/delete_data/#GHVIPGala12")
+    result_post2 = self.app.post("/data_twitter/#GHVIPGala12")
+    self.assertEqual(result_post2.status_code, 404)
+
+    pass
+  ~~~
+
+
+## Descripción del despliegue
+
+#### Despliegue en PaaS
 
 Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
 
@@ -94,27 +133,58 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 
 #### Rutas utilizadas en la aplicación
 
-- _/_: devuelve el JSON {"status":"OK"} (https://glacial-castle-84194.herokuapp.com).
-- _error en la ruta_: devuelve el JSON {"msg error":"URL not found"} (https://glacial-castle-84194.herokuapp.com/get_dat)
-- _/get_data_: lista un solo un elemento del JSON mediante el método GET, el cual obtiene un recurso del servidor (https://glacial-castle-84194.herokuapp.com/get_data?id=GR)
-- _/data_twitter_ con GET: lista todos los elementos del JSON (https://glacial-castle-84194.herokuapp.com/data_twitter)
-- _/data_twitter_ con PUT: crea un nuevo usuario _(curl -i -X PUT https://glacial-castle-84194.herokuapp.com/data_twitter)_ y para comprobar que se ha creado _(curl -i https://glacial-castle-84194.herokuapp.com/data_twitter)_
-- _/data_twitter_ con POST: modifica un nuevo usuario_(curl -X POST https://glacial-castle-84194.herokuapp.com/get_data?id=GR)_
-- _/data_twitter_ con DELETE: elimina un usuario _(curl -X DELETE http://127.0.0.1:5000/data_twitter?id=GR)_
-
-### Ficheros usados
-
-- _main.py_: fichero que implementa la clase API REST haciendo uso del microframework Flask
-- _test/main_test.py_: fichero que testea la clase del _main.py_
-- _util.py_: fichero que contiene la información a mostrar en la clase TwitterData, para ello nos hemos creado una estructura en la que distinguimos:
-  - ID: identficador
-  - name: nombre del ID
-  - url_twitter: link del twitter para el name
-  - user_twitter: usuario del name
-- _test/util_test.py_: fichero que testea _util.py_
+- `/` y `/status`: devuelve el JSON {"status":"OK"}
+  - [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-84194.herokuapp.com)
+  - [https://glacial-castle-84194.herokuapp.com/status](https://glacial-castle-84194.herokuapp.com/status)
 
 
-### Pasos para hacer el despliegue
+- `error en la ruta`: devuelve el JSON {"msg error":"URL not found"}
+  - [https://glacial-castle-84194.herokuapp.com/get](https://glacial-castle-84194.herokuapp.com/get)
+
+
+- `/data_twitter`: lista todos los elementos del JSON
+  - [https://glacial-castle-84194.herokuapp.com/data_twitter](https://glacial-castle-84194.herokuapp.com/data_twitter)
+
+
+  - `/data_twitter/Rudy`: lista todos los elementos del JSON
+    - [https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy](https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy)
+
+
+- `/data_twitter` con PUT: crea un nuevo usuario del JSON
+  ~~~
+  curl -i -X PUT https://glacial-castle-84194.herokuapp.com/data_twitter
+  # para comprobar que se ha creado
+  curl -i https://glacial-castle-84194.herokuapp.com/data_twitter/newID
+  ~~~
+
+
+- `/data_twitter` con POST: modifica un nuevo usuario del JSON
+  ~~~
+  curl -X POST https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy
+  ~~~
+
+- `/data_twitter` con DELETE: elimina un usuario del JSON
+  ~~~
+  curl -X DELETE https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy
+  ~~~
+
+
+### Descripción de los ficheros usados
+
+- `main.py`: fichero que implementa la clase API REST haciendo uso del microframework Flask
+
+- `test/main_test.py`: fichero que testea la clase del _main.py_
+
+- `data/twitterAPI.py`: fichero que se conecta a la API de Twitter y extrae información
+
+- `data/data_json`: fichero que contiene la estructura de datos
+  - *name*: nombre de la tendencia
+  - *url*: link del enlace de la tendencia
+  - *query*: nombre de la consultas
+  - *tweet_volume*: volumen de tweets dedicados a esa tendencia
+
+
+### Pasos para hacer el despliegue (Github+Travis+Heroku)
 
 1. Identificarse en Travis mediante Github.
 
@@ -126,7 +196,7 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 3. Habilitar el repositorio en Travis, para así cada vez que se haga `git push` se compilen en Travis. Para ello, una vez iniciado sesión en Travis mediante Github, tengo que seleccionar la pestaña del repositorio que quiero ejecutar.
 
 <p align="center">
-  <img width="700" height="100" src="images/travis.png">
+  <img width="500" height="100" src="images/travis.png">
 </p>
 
 4. Crear cuenta en Heroku.
@@ -144,7 +214,6 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 10. Crear una aplicación en Heroku, este proceso se puede hacer de dos maneras: por terminal `heroku create` o mediante la web _Create new App_.
 
 11. Configuar el despliegue automático asociando la aplicación de Heroku con nuestra cuenta de GitHub.
-
   * En web, accedemos a la aplicacion creada y buscamos _Deploy_
   * Seleccionamos GitHub como _Deployment method_
   * Conectamos la app en introduciendo nuestra datos de GitHub
@@ -152,12 +221,61 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   * Activamos los despliegues automáticos y que Travis ejecute antes de desplegar.
 
   <p align="center">
-    <img width="700" height="500" src="images/deploy_heroku.png">
+    <img width="700" height="400" src="images/deploy_heroku.png">
   </p>
 
 11. `git push heroku master`: solo para Heroku.
 
-12. `git push`: para Heroku+Travis+Github.
+12. `git push`: para Github+Travis+Heroku.
+
+### Despliegue de la infraestructura en máquina virtual local <a name="id10"></a>
+
+Para el despliegue de la aplicación en una máquina virtual local, se ha hecho uso de Ansible junto con Vagrant. Previamente a la realización de un `clone` a mi repositorio, se debe instalar [Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision),  [Vagrant](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu) y [VirtualBox](https://www.virtualbox.org), herramientas necesarias para ejecutar la aplicación. Una vez realizados estos procesos, debemos dirigirnos al directorio `provision > vagrant_ubuntu` y ejecutar la sentencia `vagrant up`, la cual creará una máquina virtual en VirtualBox y ejecutará el _playbook_ con lo indispensable para el despliegue.
+
+#### Vagrant <a name="id11"></a>
+
+Se ha utilizado la herramienta Vagrant para generar entornos de desarrollo reproducibles y compartibles de forma muy sencilla, ya que crea y configura máquinas virtuales a partir de simples ficheros de configuración. El fichero donde se describe la infraestructura se llama `Vagrantfile` y es utilizado para el despliegue ([enlace](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/Vagrantfile)).
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu), para saber más información sobre el despliegue en máquina virtual local con Vagrant.**_
+
+#### Ansible <a name="id12"></a>
+
+Para el provisionamiento se ha hecho uso de Ansible (versión 2.7.2)
+Como software para automatizar el proceso de aprovisionamiento se ha utilizado Ansible, creando previamente los siguientes ficheros:
+
+- [**ansible.cfg**](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/ansible.cfg): fichero de configuración básica, que básicamente le dice a Ansible que tiene que mirar en el fichero ansible_hosts.
+- [**ansible_hosts**](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/ansible_hosts): fichero para definir una serie de requerimentos (nombre de la máquina, puerto SSH para acceder a la máquina virtua, host).
+- [**ansible_playbook.yml**](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/ansible_playbook.yml): fichero para definir las intrucciones a ejecutar (python, git, pip, flask, clonar repositorio).
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision), para saber más información sobre la gestión de configuraciones con Ansible.**_
+
+Si no se utiliza Vagrant, también se puede realizar el provisionamiento utilizando órdenes de ansible, es decir, haciendo uso de la orden `ansible-playbook ansible_playbook.yml`.
+
+### Despliegue de la infraestructura en Azure  <a name="id13"></a>
+
+Se ha creado una máquina virtual en Azure con Ubuntu 14.04 LTS, la misma usada para el despliegue en la máquina virtua local. Para lanzar la aplicación, debemos conectar a la mv `ssh gemaAzure@23.97.225.1` y ejecutar el provisionamiento que con todos los módulos necesarios se uso de `ansible-playbook -i ansible_hosts -b ansible_playbook.yml`.
+
+![](/docs/images/azure7.png)
+
+![](/docs/images/azure3.png)
+
+Lanzamos nuestra aplicación con [_gunicorn_](https://gunicorn.org) y efectivamente comprobamos que podemos aceder:
+
+![](/docs/images/azure5.png)
+
+![](/docs/images/azure8.png)
+
+La dirección IP: 23.97.225.1
+
+MV: [http://23.97.225.1](http://23.97.225.1)
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
+
+
+## Enlaces de Interés  
+
+- [Publics APIs](https://github.com/toddmotto/public-apis#books)
+
 
 ## Licencia
 
@@ -172,8 +290,6 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 [7]: https://devcenter.heroku.com/articles/getting-started-with-python
 [8]: https://www.idiotinside.com/2015/05/10/python-auto-generate-requirements-txt/
 
-## Enlaces de Interés  
 
-- [Publics APIs](https://github.com/toddmotto/public-apis#books)
 
 __Nota__: _Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades._
