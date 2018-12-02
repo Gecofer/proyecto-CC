@@ -31,6 +31,7 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - Pincha [aquí](#id14) para ver las comprobaciones de provisionamiento del hito 3 entre [@jmv74211](https://github.com/jmv74211/) y [@gecofer](https://github.com/Gecofer).
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/Charla%20logs/logs.md) para ver el resumen realizado de la charla impartida sobre `logs`.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md) para ver como se ha puesto un _environment_ a la carpeta del proyecto de la asignatura.
+- Pincha [aquí]() para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al 80.
 
 ## Descripción del proyecto <a name="id1"></a>
 
@@ -41,11 +42,13 @@ Twitter junto con Instagram son dos de las plataformas sociales más usadas actu
 
 Actualmente, las arquitecturas software modernas buscan la consistencia en la velocidad de respuesta al usuario. Sin embargo, en el mercado existen muchos tipos de arquitecturas, es por ello que a veces se hace difícil concretar qué arquitectura se va a utilizar [[2][2]]:
 
-- __Arquitectura en capas__: arquitectura cliente-servidor, tiene 3 o más capas, normalmente se suelen incluir la capa de presentación, la de aplicación, la de lógica de negocio y la de acceso a datos. El problema principal es que solo permite escalado dentro de cada una de las capas, siendo al final alguna de ellas un cuello de botella.
-- __Arquitectura dirigida por eventos__: tiene una cola de eventos que se originan en el usuario, pero también de una parte a otra de la arquitectura. Es difícil de testear y su desarrollo es más complicado que la anterior.
-- __Arquitectura microkernel__: arquitectura casi monolítica, con un núcleo central al que se pueden añadir funcionalidades mediante _plugins_, siendo su problema principal la escalabilidad, ya que el núcleo puede representar un cuello de botella.
-- __Arquitectura basada en microservicios__: arquitectura muy popular, se caracteriza por usar unidades que se van a desplegar de forma independiente y por poder usar tecnologías subyacentes que van desde la virtualización completa en la nube hasta el uso de contenedores _Docker_ en una sola máquina virtual.
-- __Arquitectura basada en espacios__: arquitectura antigua, de la década de los 90.
+- __Arquitectura en capas__.
+- __Arquitectura dirigida por eventos__.
+- __Arquitectura microkernel__.
+- __Arquitectura basada en microservicios__.
+- __Arquitectura basada en espacios__.
+
+_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/#id2) para saber más acerca de las arquitecturas anteriores.**_
 
 ### Arquitectura seleccionada <a name="id3"></a>
 
@@ -94,7 +97,7 @@ Para testear en Python [[3][3]], puedo usar algunas de las librerías que me per
 
 Para realizar la configuración de los tests correctamente, voy hacer uso de [Travis CL](https://www.travis-ci.org), que es un sistema distribuido de generación e integración continua libre, que me permite conectar mi repositorio de Github y testear después de cada push que haga [[5][5]] [[6][6]].
 
-_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/), para saber más información sobre los tests.**_
+_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/#id6), para saber más información sobre los tests.**_
 
 ## Descripción del despliegue <a name="id8"></a>
 
@@ -104,7 +107,7 @@ Cuando se quiere desplegar una aplicación sobre una infraestructura ya definid
 
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
-_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/), para saber más información sobre el despliegue en PaaS.**_
+_**Pincha [aquí](https://gecofer.github.io/proyecto-CC/#id9), para saber más información sobre el despliegue en PaaS.**_
 
 ### Despliegue de la infraestructura en máquina virtual local <a name="id10"></a>
 
