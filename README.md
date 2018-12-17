@@ -22,14 +22,17 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
+<!----
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
 MV: 23.97.225.1
 
 (http://23.97.225.1)[http://23.97.225.1]
+--->
 
 ## Novedades <a name="id0"></a>
 
+<!----
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 3.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC) para acceder a los ejercicios de la asignatura (resúmenes de charlas, ejercicios, enlaces de interés...).
@@ -38,6 +41,7 @@ MV: 23.97.225.1
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/Charla%20logs/logs.md) para ver el resumen realizado de la charla impartida sobre `logs`.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md) para ver como se ha puesto un _environment_ a la carpeta del proyecto de la asignatura.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure#id4) para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
+--->
 
 ## Descripción del proyecto <a name="id1"></a>
 
@@ -111,8 +115,9 @@ _**Pincha [aquí](https://gecofer.github.io/proyecto-CC/#id6), para saber más i
 
 Cuando se quiere desplegar una aplicación sobre una infraestructura ya definida y que no va a cambiar se necesita un _Platform as a Service_ o PaaS. Entre los posibles servicios que hay [Heroku](https://www.heroku.com) o [OpenShift](https://www.openshift.com), vamos a escoger [Heroku](https://www.heroku.com), ya que es un servicio fiable, gratuito, ofrece muchas opciones a la hora de elegir el lenguaje y permite integrar Github con Travis.
 
+<!----
 Despliegue: https://glacial-castle-84194.herokuapp.com
-
+--->
 _**Pincha [aquí](https://gecofer.github.io/proyecto-CC/#id9), para saber más información sobre el despliegue en PaaS.**_
 
 ### Despliegue de la infraestructura en máquina virtual local <a name="id10"></a>
@@ -136,6 +141,9 @@ Como software para automatizar el proceso de aprovisionamiento se ha utilizado A
 
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision), para saber más información sobre la gestión de configuraciones con Ansible.**_
 
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
+
+<!----
 Si no se utiliza Vagrant, también se puede realizar el provisionamiento utilizando órdenes de ansible, es decir, haciendo uso de la orden `ansible-playbook ansible_playbook.yml`.
 
 
@@ -156,15 +164,22 @@ Lanzamos nuestra aplicación con [_gunicorn_](https://gunicorn.org) y efectivame
 La dirección IP: 23.97.225.1
 
 MV: [http://23.97.225.1](http://23.97.225.1)
+--->
 
-_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
+*__Pincha [aquí](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md) para ver la comprobación de [@jmv74211](https://github.com/jmv74211/) al aprovisionamiento de [@gecofer](https://github.com/Gecofer).__*
+
+*__Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure) para ver la comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211/).*__
 
 
-## Comprobaciones de provisionamiento del Hito 3 <a name="id14"></a>
 
-- Comprobación de [@jmv74211](https://github.com/jmv74211/) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md).
+## Automatización de tareas en la nube
 
-- Comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211/) disponible en este [enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure).
+El objetivo de las plataformas de virtualización es, eventualmente, crear y gestionar una máquina virtual completa que funcione de forma aislada del resto del sistema y que permita trabajar con sistemas virtualizados de forma flexible, escalable y adaptada a cualquier objetivo.
+
+Para ello, usaremos los clientes de línea de órdenes de los servicios en la nube para crear instancias de máquinas virtuales en la nube y otros recursos necesarios para las mismas. Estas instancias, posteriormente, se provisionarán y se instalará en ella la aplicación que se ha venido usando hasta ahora.
+
+En este caso vamos hacer uso de
+
 
 ## Enlaces de Interés <a name="id15"></a>
 
@@ -185,4 +200,4 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 
 
 
-___Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades._
+*__Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades.*
