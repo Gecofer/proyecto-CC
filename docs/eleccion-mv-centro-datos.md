@@ -4,22 +4,41 @@
 - [Elección del sistema operativo](#id0)
 - [Elección del centro de datos](#id1)
 
-
-
 ## Elección del sistema operativo <a name="id0"></a>
 
-Antes de empezar con la creación de las máquinas virtuales en distintos centros de datos, vamos a detenernos un momento y pensar que tipo de SO nos conviene para nuestro proyecto, en el cual se hace uso [Python](https://www.python.org) y del [Flask](http://flask.pocoo.org). Afortunadamente, la comunidad de código abierto provee Linux al mundo Python como un sistema operativo libre y sólido para ejecutar nuestras aplicaciones [[2][2]]. Los únicos sistemas operativos recomendados para la producción de implementaciones en Python son Linux y FreeBSD: las versiones de Ubuntu Long Term Support (LTS), Red Hat Enterprise Linux y CentOS son opciones viables. Veamos que características nos aporta cada una de ellas:
+Antes de empezar con la creación de las máquinas virtuales en distintos centros de datos, vamos a detenernos un momento y pensar que tipo de SO nos conviene usar para nuestro proyecto, en el cual se hace uso de [Python](https://www.python.org) y de [Flask](http://flask.pocoo.org), indistintamente.
 
-- **Ubuntu Long Term Support (LTS)**: son las versiones recomendadas para las implementaciones, ya que reciben cinco años de actualizaciones posteriores a su publicación. Además, de que cada dos años, Canonical crea una nueva versión de LTS, lo que permite una fácil ruta de actualización, así como flexibilidad para saltarse cualquier otra versión de LTS si es necesario. A partir de mayo de 2018, 18.04 Bionic Beaver es la última versión de Ubuntu LTS. Xenial Xerus incluye Python 3.6 como su versión predeterminada de Python, que es una actualización importante en comparación con la 2.7 en Ubuntu 14.04 LTS y una sólida mejora sobre Python 3.5 incluida en Ubuntu 16.04 LTS. A continuación, enumeramos las últimas tres versiones LTS:
+La comunidad de código abierto provee Linux al mundo Python como un sistema operativo libre y sólido para ejecutar dichas aplicaciones. Es por eso, que los únicos sistemas operativos recomendados para la producción de implementaciones en Python son Linux y FreeBSD, es decir, las versiones de Ubuntu Long Term Support (LTS), Red Hat Enterprise Linux y CentOS son las opciones viables [[2][2]]. Veamos en que difieren cada una de ellas:
+
+- **Ubuntu Long Term Support (LTS)**: son las versiones recomendadas para las implementaciones, ya que reciben cinco años de actualizaciones posteriores a su publicación. Además, de que cada dos años, Canonical crea una nueva versión de LTS, lo que permite una fácil ruta de actualización, así como flexibilidad para saltarse cualquier otra versión de LTS si es necesario. La última versión de Ubuntu LTS es 18.04 Bionic Beaver, en la cual se incluye Python 3.6 como su versión predeterminada de Python, que es una actualización importante en comparación con la 2.7 en Ubuntu 14.04 LTS y una sólida mejora sobre Python 3.5 incluida en Ubuntu 16.04 LTS. Veamos las versiones de Python de las últimas versiones LTS:
 
   - Ubuntu 14.04 LTS trae por defecto la versión de Python 2.7.6 y 3.4.0 [[2][2]]
   - Ubuntu 16.04 LTS trae por defecto la versión de Python 2.7 y 3.5 [[3][3]]
   - Ubuntu 18.04 LTS trae por defecto la versión de Python 2.7 y 3.6 [[4][4]]
 
 
-- **Red Hat Enterprise Linux (RHEL)** y **Community ENTerprise Operating System (CentOS)** son la misma distribución. La principal diferencia entre los dos es que CentOS es un derivado libre de RHEL de código abierto y con licencias liberales. Además, utilizan un gestor de paquetes y una interfaz de línea de comandos diferentes de las distribuciones de Linux basadas en Debian: RPM Package Manager (RPM) y el Yellowdog Updater, Modified (YUM).
+- **Red Hat Enterprise Linux (RHEL)** y **Community ENTerprise Operating System (CentOS)** son la misma distribución. La principal diferencia entre los dos, reside en que CentOS es un derivado libre de RHEL de código abierto y con licencias gratuitas. RHEL y CentOS utilizan un gestor de paquetes y una interfaz de línea de comandos diferentes de las distribuciones de Linux basadas en Debian: RPM Package Manager (RPM) y el Yellowdog Updater, Modified (YUM).
 
-Es por ello que voy hacer uso de una versión LTS de Ubuntu para mi proyecto, debido a la estabilidad, y la instalación predefinida de Python tanto para la versión 2 como 3. Ya que CentOS 7 incluye python 2.7 pero sólo se actualiza con versiones de puntos que pueden causar problemas con algunos módulos de Python, y es necesario para los servicios del sistema, por lo que el procedimiento estándar es instalar una segunda versión en _/opt_ para usar en aplicaciones [[5][5]]. Además, en el hito anterior, se llevó a cabo el provisionamiento tanto en Ubuntu como en CentOS, lo que sirvió para comprender los problemas de las versiones de Python en CentOS, explicados anteriormente. Además, en el siguiente [enlace](https://www.quora.com/What-is-best-production-server-for-Flask-apps-Ubuntu-or-CentOS) se nos recomienda que usemos Ubuntu LTS en aplicaciones a usar Flask.
+### Entonces, ¿CentOS o Ubuntu?
+
+- [CentOS vs Ubuntu: ¿Cuál elegir para tu servidor web?](https://www.hostinger.es/tutoriales/centos-vs-ubuntu-elegir-servidor-web/#gref)
+- [What is best production server for Flask apps: Ubuntu or CentOS?](https://www.quora.com/What-is-best-production-server-for-Flask-apps-Ubuntu-or-CentOS)
+
+| Ubuntu | CentOS |
+|-------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Basado en Debian | Basado en RHEL |
+| Actualizado frecuentemente | Actualizado con poca frecuencia |
+| No admite cPanel (tiene alternativas) | Admite cPanel/WHM |
+| Comunidad más grande de usuarios y desarrolladores  | Comunidad más pequeña de usuarios y desarrolladores |
+| Mayor cantidad de ayuda disponible en forma de tutoriales y guías gratuitas | Menor cantidad de ayuda disponible |
+| Más fácil de aprender para los principiantes que han usado el escritorio de Ubuntu en el pasado | Más difícil de aprender para los principiantes ya que no hay muchas distribuciones de escritorio famosas lanzadas por RHEL |
+| Los paquetes .deb se instalan usando el administrador de paquetes apt-get | Los paquetes .rpm se instalan usando el administrador de paquetes yum |
+
+Por otro lado, podemos considerar diferencias en cuanto a velocidad, sin embargo, casi no hay al tratarse de Ubuntu contra CentOS. Ya que el hardware físico en el que se ejecuta la aplicación será más importante en términos de velocidad que el sistema operativo. Además, según varias encuestas, Ubuntu es el sistema operativo más popular del mundo para ejecutar servidores web, funcionando en un 34% de todos los servidores web [[10][10]].
+
+Por otra parte, algunos usuarios sugieren que han tenido problemas con YUM y RPM para la instalación de ciertos paquetes en RHEL, en donde dichos problemas se han solucionado migrando a Ubuntu, ya que los repositorios de código fuente _apt_ resuelven muchas dependencias. Además, se aconseja que Ubuntu es muy adecuado para trabajar con contenedores (_dockers_) [[11][11]].
+
+Es por ello que voy hacer uso de una versión LTS de Ubuntu para mi proyecto, debido a la estabilidad, y la instalación predefinida de Python tanto para la versión 2 como 3. Ya que CentOS sólo se actualiza con versiones de puntos que pueden causar problemas con algunos módulos de Python, y es necesario para los servicios del sistema, por lo que el procedimiento estándar es instalar una segunda versión en _/opt_ para usar en aplicaciones [[5][5]]. Además, en el hito anterior, se llevó a cabo el provisionamiento tanto en Ubuntu como en CentOS, lo que sirvió para detectar fallos en cuanto a la instalación de los requerimientos del proyecto. Además, en el siguiente [enlace](https://www.quora.com/What-is-best-production-server-for-Flask-apps-Ubuntu-or-CentOS) se nos recomienda que usemos Ubuntu LTS en aplicaciones a usar Flask.
 
 Sin embargo, una vez elegido el Ubuntu Server LTS como sistema operativo, vamos a ver que versión escoger de dicho SO. A continuación, se ven los ciclos de vida de las versiones de Ubuntu [[6][6]]:
 
@@ -308,3 +327,5 @@ $ ab -n 100 -c 10 http://51.140.226.194/
 [7]: https://www.dagorret.com.ar/actualizar-ubuntu-16-04-lts-server-ubuntu-18-04-lts-beta/
 [8]: https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations
 [9]: https://www.tutiempo.net/calcular-distancias.html
+[10]: https://www.internetya.co/servidores-dedicados-linux-centos-o-ubuntu/
+[11]: https://www.digitalocean.com/community/questions/whats-is-better-and-why-linux-centos-or-ubuntu
