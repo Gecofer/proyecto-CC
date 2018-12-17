@@ -36,6 +36,7 @@ MV: 23.97.225.1
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id3) para aprender a instalar la CLI de Azure e iniciar sesión y autenticarse.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver la justificación de la elección de la imagen del sistema operativo.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver la justificación de la elección del centro de datos.
 
 
 <!----
