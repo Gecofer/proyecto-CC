@@ -7,11 +7,7 @@
   - [CLI de Azure](#id2)
   - [Instalación de CLI de Azure](#id3)
   - [Inicio de sesión con la CLI de Azure](#id4)
-    - [Listado de las imágenes de máquinas virtuales disponibles de Azure](#id5)
-    - [Creación de una misma máquina virtual en distintos centros de datos](#id6)
-      - [Elección del sistema operativo](#id7)
-      - [Elección del centro de datos](#id8)
-
+  - [Listado de las imágenes de máquinas virtuales disponibles de Azure](#id5)
 
 El objetivo de las plataformas de virtualización es, eventualmente, crear y gestionar una máquina virtual completa que funcione de forma aislada del resto del sistema y que permita trabajar con sistemas virtualizados de forma flexible, escalable y adaptada a cualquier objetivo.
 
@@ -54,7 +50,7 @@ $ brew install azure-cli
 ~~~
 
 <p align="center">
-  <img width="650" height="460" src="images/hito 4/instalarCLIAzure0.png">
+  <img width="650" height="500" src="images/hito 4/instalarCLIAzure0.png">
 </p>
 
 ~~~
@@ -77,3 +73,55 @@ En nuestra consola nos aparecerá la siguiente información sobre la cuenta y la
 </p>
 
 _**Pincha [aquí](https://docs.microsoft.com/es-es/cli/azure/authenticate-azure-cli?view=azure-cli-latest) para ver varias formas de iniciar sesión en la CLI de Azure.**_
+
+### Listado de las imágenes de máquinas virtuales disponibles de Azure <a name="id5"></a>
+
+A continuación, vamos a listar las imágenes de máquinas virtuales disponibles [[1][1]], para ello se debe de usar el comando `az vm image list`, en donde, nos aparecerá una lista con detalles sobre la imagen: _nombre_, _versión_, _donde está disponible_, entre otros.
+
+~~~
+# Información sobre las imágenes disponibles de máquinas virtuales
+$ az vm image list
+~~~
+
+<p align="center">
+  <img width="600" height="400" src="images/hito 4/CLIAzure0.png">
+</p>
+
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-az-vm%20image-list.txt) para ver la salida completa que devuelve. Si se añade `-all` se listan todas las imágenes disponibles.**_
+
+Dicho comando devuelve el grupo de máquinas virtuales disponibles en formato JSON, es por eso que al ser tan grande la salida es conveniente filtrarla. Para ello usaremos el tremendamente útil `jq`, [un lenguaje de peticiones para JSON](https://stedolan.github.io/jq/manual/) con cierta similitud con los selectores CSS. Previamente, se deberá tener [instalado *jq*](https://stedolan.github.io/jq/download/):
+
+~~~
+# Descarga e instalación de jq en macOS
+$ brew install jq
+~~~
+
+<p align="center">
+  <img width="650" height="210" src="images/hito 4/instalarjq0.png">
+</p>
+
+Hecho esto, ya podremos pasar a filtrar la búsqueda. La búsueda siguiente filtra solo aquellas imágenes que contengan `buntu` (no sabemos si va a estar en mayúsculas o en minúsculas):
+
+~~~
+# Filtrar solo aquellas imágenes que contengan `buntu`
+$ az vm image list | jq '.[] | select( .offer | contains("buntu"))'
+~~~
+
+<p align="center">
+  <img width="550" height="120" src="images/hito 4/CLIAzure1.png">
+</p>
+
+También se pueden buscar todos los proveedores de una imagen determinada, como por ejemplo listar todas las imágenes de _UbuntuServer_ que incluyan una `location` indicada, como es el caso para el sur de Reino Unido.
+
+~~~
+$ az vm image list --offer UbuntuServer --all --location uksouth --output table
+~~~
+
+<p align="center">
+  <img width="600" height="150" src="images/hito 4/CLIAzure2.png">
+</p>
+
+Con este tipo de técnicas y herramientas, podemos reducir considerablemente el tiempo de búsqueda de imágenes para máquinas virtuales.
+
+
+[1]: https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest
