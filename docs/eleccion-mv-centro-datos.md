@@ -5,6 +5,7 @@
 - [Elección del centro de datos](#id1)
 
 
+
 ## Elección del sistema operativo <a name="id0"></a>
 
 Antes de empezar con la creación de las máquinas virtuales en distintos centros de datos, vamos a detenernos un momento y pensar que tipo de SO nos conviene para nuestro proyecto, en el cual se hace uso [Python](https://www.python.org) y del [Flask](http://flask.pocoo.org). Afortunadamente, la comunidad de código abierto provee Linux al mundo Python como un sistema operativo libre y sólido para ejecutar nuestras aplicaciones [[2][2]]. Los únicos sistemas operativos recomendados para la producción de implementaciones en Python son Linux y FreeBSD: las versiones de Ubuntu Long Term Support (LTS), Red Hat Enterprise Linux y CentOS son opciones viables. Veamos que características nos aporta cada una de ellas:
