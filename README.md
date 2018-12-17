@@ -17,8 +17,7 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
   - [Despliegue de la infraestructura en máquina virtual local](#id10)
     - [Vagrant](#id11)
     - [Ansible](#id12)
-  - [Despliegue de la infraestructura en Azure](#id13)
-- [Comprobaciones de provisionamiento del Hito 3](#id14)
+- [Automatización de tareas en la nube](#id13)
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
@@ -31,6 +30,13 @@ MV: 23.97.225.1
 --->
 
 ## Novedades <a name="id0"></a>
+
+- Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente con el hito 4.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id0) para ver los pasos para la creación de una instancia en la nube.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id3) para aprender a instalar la CLI de Azure e iniciar sesión y autenticarse.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver la justificación de la elección de la imagen del sistema operativo.
+
 
 <!----
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
@@ -168,17 +174,16 @@ MV: [http://23.97.225.1](http://23.97.225.1)
 
 *__Pincha [aquí](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md) para ver la comprobación de [@jmv74211](https://github.com/jmv74211/) al aprovisionamiento de [@gecofer](https://github.com/Gecofer).__*
 
-*__Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure) para ver la comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211/).*__
+__*Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure) para ver la comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211/).*__
 
 
+## Automatización de tareas en la nube <a name="id13"></a>
 
-## Automatización de tareas en la nube
+El objetivo de las plataformas de virtualización es, eventualmente, crear y gestionar una máquina virtual que funcione de forma aislada del resto del sistema y que permita trabajar con sistemas virtualizados de forma flexible, escalable y adaptada a cualquier objetivo. Para ello, usaremos los clientes de línea de órdenes de los servicios en la nube para crear instancias de máquinas virtuales y otros recursos necesarios para las mismas. Estas instancias, posteriormente, se provisionarán y se instalará en ella la aplicación que se ha venido usando hasta ahora.
 
-El objetivo de las plataformas de virtualización es, eventualmente, crear y gestionar una máquina virtual completa que funcione de forma aislada del resto del sistema y que permita trabajar con sistemas virtualizados de forma flexible, escalable y adaptada a cualquier objetivo.
+1. En este caso vamos hacer uso de la **CLI de Azure**, para ello primero deberemos instalarla, y una vez instalada iniciar sesión y autenticarse en el mismo, además de unos pequeños comandos para ver el listado de imágenes de máquinas virtuales disponibles (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md) para ver la documentación**_).
 
-Para ello, usaremos los clientes de línea de órdenes de los servicios en la nube para crear instancias de máquinas virtuales en la nube y otros recursos necesarios para las mismas. Estas instancias, posteriormente, se provisionarán y se instalará en ella la aplicación que se ha venido usando hasta ahora.
-
-En este caso vamos hacer uso de
+2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a **razonar la justificación de la elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_).
 
 
 ## Enlaces de Interés <a name="id15"></a>
