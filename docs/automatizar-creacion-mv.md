@@ -54,7 +54,7 @@ $ brew install azure-cli
 ~~~
 
 <p align="center">
-  <img width="650" height="460" src="images/instalarCLIAzure0.png">
+  <img width="650" height="460" src="images/hito 4/instalarCLIAzure0.png">
 </p>
 
 ~~~
@@ -67,13 +67,13 @@ $ brew uninstall azure-cli
 Una vez instalada, se debe usar el comando `az` para ejecutar la CLI de Azure. Sin embargo, antes de ponernos a trabajar con ella, deberemos de estar autenticados usando el comando `az login`. El método de autenticación predeterminado de la CLI de Azure usa un explorador web y un token de acceso para iniciar sesión y al ejecutar el comando se abre una pestaña del navegador diciendo que nos hemos _loggeado_ con éxito:
 
 <p align="center">
-  <img width="600" height="90" src="images/instalarCLIAzure1.png">
+  <img width="600" height="90" src="images/hito 4/instalarCLIAzure1.png">
 </p>
 
 En nuestra consola nos aparecerá la siguiente información sobre la cuenta y la suscripción, devuelto en un JSON:
 
 <p align="center">
-  <img width="590" height="180" src="images/instalarCLIAzure2.png">
+  <img width="590" height="180" src="images/hito 4/instalarCLIAzure2.png">
 </p>
 
 _**Pincha [aquí](https://docs.microsoft.com/es-es/cli/azure/authenticate-azure-cli?view=azure-cli-latest) para ver varias formas de iniciar sesión en la CLI de Azure.**_
