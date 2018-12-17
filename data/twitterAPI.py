@@ -63,6 +63,7 @@ class Trends:
 
         return top_trends[:5]
 
+
 if __name__ == '__main__':
 
     # Para añadir los logs al archivo de la raíz 'debug.log'
