@@ -2,6 +2,7 @@
 
 **Tabla de Contenidos**
 - [Elección del sistema operativo](#id0)
+- [Elección del centro de datos](#id1)
 
 
 ## Elección del sistema operativo <a name="id0"></a>
@@ -29,11 +30,12 @@ Como podemos comprobar, la versión 14.04 LTS termina su mantenimiento en 2019, 
 
 **Por tanto, podemos confirmar que el mejor SO para nuestro proyecto es la versión de Ubuntu Server 18.04 LTS.**
 
-<!---
-##### Elección del centro de datos <a name="id8"></a>
+
+## Elección del centro de datos <a name="id1"></a>
 
 Para escoger el centro de datos, en el cual desplegar nuestra aplicación, vamos a obtener las mediciones de velocidad de las máquinas virtuales creadas con las mismas prestaciones, haciendo uso de herramientas como `ab` o `httperf`. Lo primero que tenemos que saber son los [centros de datos de los que dispone Azure](https://azure.microsoft.com/es-es/global-infrastructure/regions/) [[8][8]].
 
+<!---
 ![](capturas/regiones-azure.png)
 
 ~~~
