@@ -183,7 +183,9 @@ El objetivo de las plataformas de virtualización es, eventualmente, crear y ges
 
 1. En este caso vamos hacer uso de la **CLI de Azure**, para ello primero deberemos instalarla, y una vez instalada iniciar sesión y autenticarse en el mismo, además de unos pequeños comandos para ver el listado de imágenes de máquinas virtuales disponibles (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md) para ver la documentación**_).
 
-2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a **razonar la justificación de la elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_).
+2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a razonar la justificación de la **elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_).
+
+3. Una vez escogido el sistema operativo, se va a justificar la **elección del centro de datos** en el cual se creará la máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver dicha justificación**_).
 
 
 ## Enlaces de Interés <a name="id15"></a>
