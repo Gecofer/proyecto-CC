@@ -242,6 +242,9 @@ def delete_data(nameID):
         # http://docs.python-requests.org/en/master/user/quickstart/
         result.status_code = 404
 
+        # Añadimos mensaje para comprobar que se ha desplegado de forma incorrecta
+        log.error("404 Not Found: The requested URL was not found on the server.")
+
         return result # devolvemos { "msg error": "URL not found" }
 
     data_twitter.remove(data_delete[0])
