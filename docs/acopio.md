@@ -14,7 +14,7 @@ El script de aprovisionamiento debe llamarse `acopio.sh` y estará situado en el
   IP=$(az vm create --resource-group myResourceGroup-francecentre --admin-username gemazure-francecentre --name ubuntuGemaFranceCentre --location francecentral --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060 --generate-ssh-keys --public-ip-address-allocation static| jq -r '.publicIpAddress')
   ~~~
 
-3. Se modifica el tamaño de la máquina virtual por defecto, con el fin de gastar menos dinero durante el mes, y de obtener una máquina de acuerdo a nuestras necesidades:
+3. Se modifica el tamaño de la máquina virtual por defecto, con el fin de gastar menos dinero durante el mes, y de obtener una máquina de acuerdo a nuestras necesidades. Dicha modificación del tamaño, se puede realizar tanto en una nueva línea, o especificando en la creación de la máquina virtual el tamaño con `--size`.
 
   ~~~
   az vm resize --resource-group myResourceGroup-francecentre --name ubuntuGemaFranceCentre --size Standard_B1ms
