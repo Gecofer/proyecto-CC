@@ -59,7 +59,7 @@ Sin embargo, una vez elegido el Ubuntu Server LTS como sistema operativo, vamos 
   <img width="550" height="260" src="images/hito 4/ciclo-ubuntu.png">
 </p>
 
-Como podemos comprobar, la versión 14.04 LTS termina su mantenimiento en 2019, esto puede suponer un problema si la asignatura se alarga durante ese año. Es por eso que descartamos la versión 14.04. Por otro lado, tanto las versiones 16.04 como 18.04, disponen de más años de mantenimiento. Sin embargo, el tiempo de soporte de Ubuntu 18.04 se ha aumentado de 5 a 10 años, punto a favor sobre esa versión [[7][7]]. Además, la última versión de Python estable es la 3.6 y dicha versión viene instalada por defecto en la 18.04 LTS.
+Como podemos comprobar, la versión 14.04 LTS termina su mantenimiento en 2019, esto puede suponer un problema si la asignatura se alarga durante ese año. Es por eso que descartamos la versión 14.04. Por otro lado, tanto las versiones 16.04 como 18.04, disponen de más años de mantenimiento. Sin embargo, el tiempo de soporte de Ubuntu 18.04 se ha aumentado de 5 a 10 años, punto a favor sobre esa versión [[7][7]]. Además, la última versión de Python estable es la 3.6 y dicha versión viene instalada por defecto en la 18.04 LTS y es la versión con la que estoy ejecutando mi ordenador en local.
 
 **Por tanto, podemos confirmar que el mejor SO para nuestro proyecto es la versión de Ubuntu Server 18.04 LTS.**
 
