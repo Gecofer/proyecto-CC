@@ -19,18 +19,26 @@
     - [Vagrant](#id14)
     - [Ansible](#id15)
   - [Despliegue de la infraestructura en Azure](#id16)
+- [Automatización de tareas en la nube](#id165)
 - [Enlaces de Interés](#id17)
 - [Licencia](#id18)
 
 ## Novedades <a name="id0"></a>
 
-- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
-- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 3.
-- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC) para acceder a los ejercicios de la asignatura (resúmenes de charlas, ejercicios, enlaces de interés...).
-- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para ver el despliegue realizado en una máquina local y en Azure.
-- Pincha [aquí](#id14) para ver las comprobaciones de provisionamiento del hito 3 entre [@jmv74211](https://github.com/jmv74211/) y [@gecofer](https://github.com/Gecofer).
-- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/Charla%20logs/logs.md) para ver el resumen realizado de la charla impartida sobre `logs`.
-- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito3/pyenv.md) para ver como se ha puesto un _environment_ a la carpeta del proyecto de la asignatura.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Chef) para ver el resumen realizado sobre el seminario de Chef.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Nube%20desde%20linea%20de%20ordenes) para ver el resumen realizado sobre el seminario de la nube desde línea de órdenes.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para acceder a la documentación trasladada del hito 3.
+- Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente al hito 4.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id0) para ver los pasos para la creación de una instancia en la nube.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id3) para aprender a instalar la CLI de Azure e iniciar sesión y autenticarse.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver la justificación de la elección de la imagen del sistema operativo.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id11) para ver la justificación de la elección del tamaño de la imagen de la máquina virtual.
+- Pincha [aquí](https://www.danielstechblog.io/azure-vm-sizes/) para ver que tamaños de imágenes están disponibles en cada ubicación.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id2) para ver la justificación de la elección del centro de datos.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 4.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el script de aprovisionamiento, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito4/objetivosHito4.md) para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
 
 ## Descripción del proyecto <a name="id1"></a>
 
@@ -321,6 +329,22 @@ MV: [http://23.97.225.1](http://23.97.225.1)
 
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
 
+
+## Automatización de tareas en la nube <a name="id165"></a>
+
+El objetivo de las plataformas de virtualización es, eventualmente, crear y gestionar una máquina virtual que funcione de forma aislada del resto del sistema y que permita trabajar con sistemas virtualizados de forma flexible, escalable y adaptada a cualquier objetivo. Para ello, usaremos los clientes de línea de órdenes de los servicios en la nube para crear instancias de máquinas virtuales y otros recursos necesarios para las mismas. Estas instancias, posteriormente, se provisionarán y se instalará en ella la aplicación que se ha venido usando hasta ahora.
+
+1. En este caso vamos hacer uso de la **CLI de Azure**, para ello primero deberemos instalarla, y una vez instalada iniciar sesión y autenticarse en el mismo, además de unos pequeños comandos para ver el listado de imágenes de máquinas virtuales disponibles (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md) para ver la documentación**_).
+
+2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a razonar la justificación de la **elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_). En nuestro caso, hemos seleccionado el sistema Ubuntu Server 18.04 LTS.
+
+3. Una vez escogido el sistema operativo, pasamos a la elección del tamaño de la imagen para dicha máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id11) para ver dicha justificación**_).
+
+4. Una vez escogido el sistema operativo, se va a justificar la **elección del centro de datos** en el cual se creará la máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver dicha justificación**_). En este caso, se ha hecho uso del centro de datos del centro de Francia.
+
+5. Por último, ya solo nos hace falta crear el script de aprovisionamiento, para eso pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el código, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
+
+MV2: 40.89.158.208
 
 ## Enlaces de Interés  <a name="id17"></a>
 
