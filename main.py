@@ -16,13 +16,14 @@ import os
 from data import *
 
 # Para la creación del log
-from log import logger      # https://ricveal.com/blog/curso-python-5/
-log = logger("app")
+import logging
+logger = logging.getLogger("app")
+logging.basicConfig(filename= "debug.log", filemode='a', format= '%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
 # Creación de una instancia de la clase Flask
 app = Flask(__name__)
 
-log.info("Successfully run Flask application.")
+logger.info("Successfully run Flask application.")
 
 # ---------------------------------------------------------------------------- #
 
@@ -30,9 +31,9 @@ log.info("Successfully run Flask application.")
 try:
     with open('data/data.json', encoding='utf-8') as data_file:
         data_twitter = json.loads(data_file.read())
-        log.info("Successfully read file JSON.")
+        logger.info("Successfully read file JSON.")
 except IOError as fail:
-    log.error("Unsuccessfully read file JSON.")
+    logger.error("Unsuccessfully read file JSON.")
     print("Error %d reading %s", fail.errno, fail.strerror)
 
 # ---------------------------------------------------------------------------- #
@@ -43,7 +44,7 @@ except IOError as fail:
 def index():
 
     # Añadimos mensaje para comprobar que se ha desplegado de forma correcta
-    log.info("Successfully status application in '/' or '/status'")
+    logger.info("Successfully status application in '/' or '/status' - Status 200")
 
     return jsonify(status='OK') # devolvemos { "status": "OK" }
 
@@ -67,7 +68,7 @@ def not_found(error):
     result.status_code = 404
 
     # Añadimos mensaje para comprobar que se ha desplegado de forma incorrecta
-    log.error("404 Not Found: The requested URL was not found on the server.")
+    logger.error("404 Not Found: The requested URL was not found on the server - Status 404")
 
     return result # devolvemos { "msg error": "URL not found" }
 
@@ -91,7 +92,7 @@ def not_found(error):
     result.status_code = 405
 
     # Añadimos mensaje para comprobar que se ha producido un 'method not allowed'
-    log.error("405 Method not allowed.")
+    logger.error("405 Method not allowed - Status 405")
 
     return result # devolvemos { "msg error": "Method not allowed" }
 
@@ -117,7 +118,7 @@ def get_all_data():
     result.status_code = 200
 
     # Añadimos mensaje cuando se visualicen todos los items
-    log.info("Successfully method GET: The URL shows all the items in '/data_twitter'")
+    logger.info("Successfully method GET: The URL shows all the items in '/data_twitter' - Status 200")
 
     return result
 
@@ -143,7 +144,7 @@ def get_data(nameID):
     result.status_code = 200
 
     # Añadimos mensaje cuando se visualice un item
-    log.info("Successfully method GET: The URL shows only one item in '/data_twitter/%s'", nameID)
+    logger.info("Successfully method GET: The URL shows only one item in '/data_twitter/%s' - Status 200", nameID)
 
     return result
 
@@ -180,7 +181,7 @@ def put_data():
     result.status_code = 200
 
     # Añadimos mensaje cuando se cree un nuevo item
-    log.info("Successfully method PUT: The URL shows the creation of the new item in '/data_twitter'")
+    logger.info("Successfully method PUT: The URL shows the creation of the new item in '/data_twitter' - Status 200")
 
     return result
 
@@ -214,7 +215,7 @@ def post_data(nameID):
     result.status_code = 200
 
     # Añadimos mensaje cuando se modifique item
-    log.info("Successfully method POST: The URL shows the modification of the item in '/data_twitter/%s'", nameID)
+    logger.info("Successfully method POST: The URL shows the modification of the item in '/data_twitter/%s' - Status 200", nameID)
 
     return result
 
@@ -263,7 +264,7 @@ def delete_data(nameID):
     result.status_code = 200
 
     # Añadimos mensaje cuando se elimine un item
-    log.warning("Successfully method DELETE: The URL shows the deletion of an item in '/data_twitter/%s'", nameID)
+    logger.warning("Successfully method DELETE: The URL shows the deletion of an item in '/data_twitter/%s' - Status 200", nameID)
 
     return result
 
