@@ -7,6 +7,9 @@
   - [Avance 2](#id2)
   - [Avance 3](#id3)
   - [Avance 4](#id4)
+- [Hito 4](#id5)
+  - [Avance 1](#id6)
+  - [Avance 2](#id7)
 
 ### Hito 3 <a name="id0"></a>
 
@@ -131,3 +134,93 @@ El fichero `main.py` ha sufrido diversas modificaciones (pincha [aquí](https://
 #### Avance 4 <a name="id4"></a>
 
 La modificación del fichero `main.py`, ha supuesto realizar algunos cambios en su fichero de testeo `main_test.py`. Además, se han realizado dos funciones nuevas de test, una de ellas comprueba que Flask ha arrancado bien y la otra comprueba que nos hemos equivocado al escribir la URL. Con ello, lo que estamos haciendo es tener cada vez un código más robusto.
+
+### Hito 3 <a name="id5"></a>
+
+#### Avance 1 <a name="id6"></a>
+
+Se ha incorporado a nuestro proyecto, un sistema centralizado de logs, que tendremos que tener en cuenta cada vez que creemos o mdodifiquemos un fichero. Un log ("registro", en español) es un archivo de texto en el que constan cronológicamente los acontecimientos que han ido afectando a un sistema informático (programa, aplicación, servidor, etc.), así como el conjunto de cambios que estos han generado [[1][1]]. Básicamente los logs, nos van a permitir tener un mayor control del de la información, con el fin de detectar más rápidamente posibles fallos.
+
+Para este servicio que estamos implementando, utilizaremos la biblioteca de generación de logs de Python ([logging](https://docs.python.org/3.6/library/logging.html)). Este módulo define funciones y clases que implementan un sistema flexible de registro de eventos para aplicaciones y bibliotecas. La ventaja clave de tener la API de registro proporcionada por un módulo de biblioteca estándar es que todos los módulos de Python pueden participar en el registro, de modo que el registro de su aplicación puede incluir sus propios mensajes integrados con mensajes de módulos de terceros.
+
+Dicho registro se registrará en un fichero llamado `debug.log`. Por tanto, vamos a ver las modificaciones hechas en nuestro código:
+
+1. Importamos el módulo.
+
+  ~~~
+  import logging
+  ~~~
+
+2. Devolvemos un _logger_ con el nombre especificado o, si el nombre es ninguno, devuelve un logger que sea el logger raíz de la jerarquía. Si se especifica, el nombre es típicamente un nombre jerárquico separado por puntos como
+
+  ~~~
+  logger = logging.getLogger("app")
+  ~~~
+
+3. Se realiza la configuración básica del sistema de registro creando un _StreamHandler_ con un formato predeterminado y añadiéndolo al registrador raíz. Las funciones debug(), info(), warning(), error() y critical() llamarán a basicConfig() automáticamente si no se definen handlers para el registrador raíz. Además, establecemos que nos muestre la traza del nivel de debug() o superior.
+
+  ~~~
+  logging.basicConfig(filename= "debug.log", filemode='a', format= '%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+  ~~~
+
+  Vamos a entender que significan cada uno de los niveles disponibles para identificación de logs [[2][2]]:
+
+  - DEBUG: Información que es diagnósticamente útil para la gente más allá de los desarrolladores (IT, administradores de sistemas, etc.).
+  - INFO: Información general útil para registrar (inicio/parada de servicio, supuestos de configuración, etc.). Información que quiero tener siempre disponible, pero que por lo general no me importa en circunstancias normales.
+  - WARNING: Cualquier cosa que potencialmente pueda causar rarezas de aplicación, pero para la cual me estoy recuperando automáticamente. (Por ejemplo, cambiar de un servidor primario a un servidor de copia de seguridad, volver a intentar una operación, falta de datos secundarios, etc.).
+  - ERROR: Cualquier error que sea fatal para la operación, pero no para el servicio o la aplicación (no se puede abrir un archivo requerido, falta de datos, etc.). Estos errores obligarán al usuario (administrador o usuario directo) a intervenir. Estos son usualmente reservados (en mis aplicaciones) para cadenas de conexión incorrectas, servicios faltantes, etc.
+  - FATAL: Cualquier error que obligue a cerrar el servicio o la aplicación para evitar la pérdida de datos (o una mayor pérdida de datos). Me reservo estos sólo para los errores más atroces y las situaciones en las que se garantiza que ha habido corrupción o pérdida de datos.
+
+
+4. Añadiremos el log con la información que deseemos, como por ejemplo:
+
+  ~~~
+  logger.error("404 Not Found: The requested URL was not found on the server - Status 404")
+  ~~~
+
+Se debe tener en cuenta, que la creación de un registro conlleva una consistencia, por lo que se deberá siempe seguir la misma estructura para dicho registro. Por tanto, hemos hecho las anteriores modificaciones en los siguientes microservicios:  
+
+- Se han añadido logs a la conexión y descarga de datos procedentes de la API de Twitter como viemos [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/data), con el fin de saber cuando nos conectamos a la API de Twitter y cuando obtenemos los datos. a continuación, se ve una salida:
+
+
+~~~
+2018-12-18 02:19:10,761 - data - INFO - Successfully connected API Twitter.
+2018-12-18 02:19:10,761 - tweepy.binder - DEBUG - PARAMS: {'lat': b'37.1833', 'long': b'-3.6'}
+2018-12-18 02:19:10,762 - requests_oauthlib.oauth1_auth - DEBUG - Signing request <PreparedRequest [GET]> using client
+2018-12-18 02:19:10,762 - requests_oauthlib.oauth1_auth - DEBUG - Including body in call to sign: False
+2018-12-18 02:19:11,123 - requests_oauthlib.oauth1_auth - DEBUG - Updated body: None
+2018-12-18 02:19:11,124 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.twitter.com:443
+2018-12-18 02:19:11,463 - urllib3.connectionpool - DEBUG - https://api.twitter.com:443 "GET /1.1/trends/place.json?id=766356 HTTP/1.1" 200 5268
+2018-12-18 02:19:11,466 - data - INFO - Successfully obtain location trends.
+~~~
+
+- Se ha añadido un sistema de logs a nuestro microservicio de Flask, con el fin de saber nos conectamos, que salidas recibimos. Hay que tener en cuenta que Flask cuenta con su propio sistema de logs, por lo que veremos la salida de los logs creados por nosotros mismos y por Flask:
+
+~~~
+2018-12-18 02:23:00,324 - werkzeug - WARNING -  * Debugger is active!
+2018-12-18 02:23:00,340 - werkzeug - INFO -  * Debugger PIN: 103-029-300
+2018-12-18 02:23:05,350 - app - INFO - Successfully status application in '/' or '/status'
+2018-12-18 02:23:05,350 - werkzeug - INFO - 127.0.0.1 - - [18/Dec/2018 02:23:05] "GET / HTTP/1.1" 200 -
+2018-12-18 02:23:21,900 - app - INFO - Successfully method GET: The URL shows all the items in '/data_twitter' - Status 200
+2018-12-18 02:25:17,907 - app - ERROR - 404 Not Found: The requested URL was not found on the server - Status 404
+2018-12-18 02:25:17,908 - werkzeug - INFO - 127.0.0.1 - - [18/Dec/2018 02:25:17] "GET /data_twitt HTTP/1.1" 404 -
+~~~
+
+Esta mejora supone un avance sustancial en nuestro servicio, debido a que ahora tenemos un registro de todo nuestro proyecto, con el fin de detectar errores que antes no eran más difíciles de encontrar. Además, la incorporación de un sistema de logs, se puede realizar de muchas maneras, aquí muestro una serie de tutoriales bastantes interesantes:
+
+- [logging — Logging facility for Python](https://docs.python.org/3/library/logging.html)
+- [Logging in Python](https://realpython.com/python-logging/)
+- [Good logging practice in Python](https://fangpenlin.com/posts/2012/08/26/good-logging-practice-in-python/)
+- [Logging en Python (un tutorial frustrado)](https://moduslaborandi.net/post/python-logging/)
+- [Logging in Flask](http://flask.pocoo.org/docs/1.0/logging/)
+- [Aprende Python en 5 días](https://ricveal.com/blog/curso-python-5/)
+- [Logs en Flask](http://lineadecodigo.com/python/logs-en-flask/)
+
+
+#### Avance 2 <a name="id7"></a>
+
+La incorporación de un sistema centralizado de logs, ha llevado a cabo una revisión del código que testea nuestro proyecto. Asimismo como una reestructuración de la documentación disponible en Github.
+
+
+[1]: https://dbi.io/es/blog/que-son-los-logs/
+[2]: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
