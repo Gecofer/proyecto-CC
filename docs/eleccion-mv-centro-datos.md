@@ -81,19 +81,22 @@ Como se aprecia en la imagen, disponible desde el panel de control de Azure, es 
 En nuestro caso, la máquina que estamos creando nos está costado alrededor de 55€ al mes, precio que vemos exagerado para el uso que hacemos de ella, es por eso, que vamos a bajar a una máquina más sencilla, en donde el coste sea menor y el almacenamiento también, ya que solamente disponemos en nuestra máquina virtual de una carpeta. Para cambiar el tamaño de la máquina, podemos o modificarlo en el panel de control (con lo que cada vez que lanzáramos el script de aprovisionamiento deberíamos hacerlo) o por línea de comandos, como muestra la [documentación](https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-resize):
 
 ~~~
-$az vm resize -g MyResourceGroup -n MyVm --size Standard_DS3_v2
+$az vm resize --resource-group <resource-groupMV> --name <nameMV> --size <sizeMV>
 ~~~
 
 Como simplemente queremos lanzar una aplicación, no nos hace falta obtener una máquina virtual con muchas prestaciones. Es por eso, que escogemos la gama más básica:
 
 <p align="center">
-  <img width="850" height="50" src="images/hito 4/tam-mv3.png">
+  <img width="850" height="50" src="images/hito 4/tam-mv4.png">
 </p>
 
 ~~~
-$az vm resize -g MyResourceGroup -n MyVm --size Standard_DS3_v2
+$ az vm resize --resource-group myResourceGroup-francecentre --name ubuntuGemaFranceCentre --size Standard_B1s
 ~~~
 
+![](images/hito 4/tam-mv5.png)
+
+Y con la sentencia de antes, podemos modificar el tamaño de la máquina virtual, de acorde a nuestras necesidades. Y lo importante, es que la aplicación sigue funcionando igual, pero hemos reducido el precio más de la mitad.
 
 
 ## Elección del centro de datos <a name="id2"></a>
