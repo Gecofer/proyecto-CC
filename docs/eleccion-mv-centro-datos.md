@@ -313,7 +313,7 @@ Para el centro de datos del centro de Francia, en donde el test para 100 peticio
 | Time per request (mean) [ms] | 77.615 | 104.371 | 116.899 |
 | Time per request (mean, across all concurrent requests) [ms] | 7.761 | 10.437 | 11.690 |
 
-**Por tanto, podemos concluir que el centro de datos ubicado en el centro de Francia es el mejor según nuestras condiciones.**
+**Por tanto, podemos concluir que el centro de datos ubicado en el centro de Francia es el mejor según nuestras condiciones.** Y con ello, podemos dar paso a la creación del script de aprovisionamiento ([enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md)).
 
 
 [2]: https://www.fullstackpython.com/operating-systems.html
