@@ -1,8 +1,21 @@
-# Creación de una misma máquina virtual en distintos centros de datos <a name="id6"></a>
+# Creación de la misma máquina virtual en distintos centros de datos <a name="id6"></a>
 
 **Tabla de Contenidos**
 - [Elección del sistema operativo](#id0)
-- [Elección del centro de datos](#id1)
+  - [Entonces, ¿CentOS o Ubuntu?](#id1)
+- [Elección del centro de datos](#id2)
+  - [Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del centro de Francia](#id3)
+    - [Medición de prestaciones con httperf](#id4)
+    - [Medición de prestaciones con ab](#id5)
+  - [Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del sur de Francia](#id6)
+  - [Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del oeste de Reino Unido](#id7)
+    - [Medición de prestaciones con httperf](#id8)
+    - [Medición de prestaciones con ab](#id9)
+  - [Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del norte de Europa](#id10)
+    - [Medición de prestaciones con httperf](#id11)
+    - [Medición de prestaciones con ab](#id12)
+  - [Tabla comparativa de mediciones con httperf](#id13)
+  - [Tabla comparativa de mediciones con ab](#id14)
 
 ## Elección del sistema operativo <a name="id0"></a>
 
@@ -19,7 +32,7 @@ La comunidad de código abierto provee Linux al mundo Python como un sistema ope
 
 - **Red Hat Enterprise Linux (RHEL)** y **Community ENTerprise Operating System (CentOS)** son la misma distribución. La principal diferencia entre los dos, reside en que CentOS es un derivado libre de RHEL de código abierto y con licencias gratuitas. RHEL y CentOS utilizan un gestor de paquetes y una interfaz de línea de comandos diferentes de las distribuciones de Linux basadas en Debian: RPM Package Manager (RPM) y el Yellowdog Updater, Modified (YUM).
 
-### Entonces, ¿CentOS o Ubuntu?
+### Entonces, ¿CentOS o Ubuntu? <a name="id1"></a>
 
 - [CentOS vs Ubuntu: ¿Cuál elegir para tu servidor web?](https://www.hostinger.es/tutoriales/centos-vs-ubuntu-elegir-servidor-web/#gref)
 - [What is best production server for Flask apps: Ubuntu or CentOS?](https://www.quora.com/What-is-best-production-server-for-Flask-apps-Ubuntu-or-CentOS)
@@ -51,21 +64,22 @@ Como podemos comprobar, la versión 14.04 LTS termina su mantenimiento en 2019, 
 **Por tanto, podemos confirmar que el mejor SO para nuestro proyecto es la versión de Ubuntu Server 18.04 LTS.**
 
 
-## Elección del centro de datos <a name="id1"></a>
+## Elección del centro de datos <a name="id2"></a>
 
-Para escoger el centro de datos, en el cual desplegar nuestra aplicación, vamos a obtener las mediciones de velocidad de las máquinas virtuales creadas con las mismas prestaciones, haciendo uso de herramientas como `ab` o `httperf`. Lo primero que tenemos que saber son los [centros de datos de los que dispone Azure](https://azure.microsoft.com/es-es/global-infrastructure/regions/) [[8][8]].
-
-<!---
-![](capturas/regiones-azure.png)
+Para escoger el centro de datos, en el cual desplegar nuestra aplicación, vamos a obtener las mediciones de velocidad de las máquinas virtuales creadas con las mismas características (Ubuntu Server 18.04 LTS), haciendo uso de herramientas como `ab` o `httperf`. Lo primero que tenemos que saber son los [centros de datos de los que dispone Azure](https://azure.microsoft.com/es-es/global-infrastructure/regions/) [[8][8]].
 
 ~~~
 # Listar las regiones admitidas para la suscripción actual
 $ az account list-locations
 ~~~
 
-_**Pincha [aquí]() para ver la lista completa.**_
+<p align="center">
+  <img width="650" height="450" src="images/hito 4/regiones-azure.png">
+</p>
 
-Por lógica, debemos buscar un centro de datos cercano a nuestra ubicación actual, es por ello, que nos quedamos con los centros de datos disponibles en Europa:
+_**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-centros-datos.txt) para ver la lista completa.**_
+
+Es lógico, que el centro de datos a usar sea cercano a nuestra ubicación actual, con el fin de obtener unas buenas prestaciones. Es por ello, que nos quedamos con los centros de datos disponibles en Europa:
 
 - **Centro de Francia** (_francecentral_), ubicado en latitud 46.3772 y longitud 2.3730
 - **Sur de Francia** (_francesouth_), ubicado en latitud 43.8345 y longitud 2.1972
@@ -74,7 +88,7 @@ Por lógica, debemos buscar un centro de datos cercano a nuestra ubicación actu
 - **Norte de Europa** (_northeurope_), ubicado en latitud 53.3478 y longitud -6.2597
 - **Oeste de Europa** (_westeurope_), ubicado en latitud 52.3667 y longitud 4.9
 
-Debido a que la creación de recursos como de máquinas virtuales, consumen dinero, solo nos vamos a quedar con las tres localizaciones más cercanas a Granada (latitud: 37.1886273, longitud: -3.5907775) [[9][9]].
+Debido a que la creación de recursos como de máquinas virtuales consumen dinero en Azure, se ha optado por hacer una comparación entre las tres localizaciones más cercanas a Granada (latitud: 37.1886273, longitud: -3.5907775) [[9][9]].
 
 - Distancia de Granada al Centro de Francia: 1135.36 km
 - Distancia de Granada al Sur de Francia: 886.62 km
@@ -85,28 +99,40 @@ Debido a que la creación de recursos como de máquinas virtuales, consumen dine
 
 Por tanto, se van a comprobar los centros de datos del **Centro de Francia**, **Sur de Francia** y **Sur de Reino Unido**, para nuestra aplicación.
 
-###### Creación de una máquina virtual con Ubuntu Server 18.06 LTS en el centro de datos del centro de Francia
+### Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del centro de Francia <a name="id3"></a>
+
+Antes de la creación de la máquina virtual, vamos a listar las disponibles en dicha región que contienen como sistema operativo Ubuntu Server.
 
 ~~~
-# Listar las máquinas virtuales con localización en el centro de Francia con Ubuntu Server
+# Listar mv con localización en el centro de Francia con Ubuntu Server
 $ az vm image list-skus --location francecentral --publisher Canonical --offer UbuntuServer --output table
 ~~~
 
-![](capturas/lista-Ubuntu-francecentral.png)
+<p align="center">
+  <img width="650" height="230" src="images/hito 4/lista-Ubuntu-francecentral.png">
+</p>
+
+A continuación, se listan las versiones de Ubuntu Server 18.04 LTS:
 
 ~~~
-# Listar las máquinas virtuales con localización en el centro de Francia con Ubuntu Server 18.04 LTS
+# Listar mv con localización en el centro de Francia con Ubuntu Server 18.04 LTS
 $ az vm image list --location francecentral --publisher Canonical --offer UbuntuServer --sku 18.04-LTS --all --output table
 ~~~
 
-![](capturas/lista-Ubuntu1804-francecentral.png)
+<p align="center">
+  <img width="650" height="230" src="images/hito 4/lista-Ubuntu1804-francecentral.png">
+</p>
+
+Por último, se visualiza la información sobre la última máquina de dicha versión:
 
 ~~~
 # Visualizar la información sobre una máquina virtual en concreto
 $ az vm image show --location francecentral --urn Canonical:UbuntuServer:18.04-LTS:18.04.201812060
 ~~~
 
-![](capturas/informacion-Ubuntu-concreta.png)
+<p align="center">
+  <img width="650" height="160" src="images/hito 4/informacion-Ubuntu-concreta.png">
+</p>
 
 Una vez, que tenemos decidida nuestra máquina virtual, vamos a proceder a crearla. Para ello, lo primero que haremos será crear el grupo de recursos para indicar el centro de datos en el que se va a alojar, en este caso en el centro de Francia.
 
@@ -122,9 +148,11 @@ A continuación, creamos la máquina virtual especificando el grupo de recursos,
 $ az vm create --resource-group myResourceGroup-francecentral --admin-username gemazure-francecentral --name ubuntuFranceCentral --location francecentral --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060 --generate-ssh-keys
 ~~~
 
-![](capturas/mv-francecentral.png)
+<p align="center">
+  <img width="550" height="230" src="images/hito 4/mv-francecentral.png">
+</p>
 
-Para poder hacer uso del puerto 80, debemos ejecutar la siguiente línea:
+Para poder abrir y hacer uso del puerto 80, debemos ejecutar la siguiente línea:
 
 ~~~
 $ az vm open-port --port 80 --resource-group myResourceGroup-francecentral --name ubuntuFranceCentral
@@ -132,7 +160,7 @@ $ az vm open-port --port 80 --resource-group myResourceGroup-francecentral --nam
 
 Por último, debemos poner que la IP sea estática, para que no varíe cada vez que se inicie la máquina. Y con esto, ya podemos medir las prestaciones de la máquina. Para ello, provisionamos la máquina virtual con los requerimientos de nuestra aplicación, accedemos mediante SSH a la máquina virtual, lanzamos la aplicación y desde nuestra consola local ejecutamos algunas de las herramientas de medición de prestaciones como `httperf` o `ab`.
 
-_**Medición de prestaciones con httperf**_
+#### Medición de prestaciones con httperf <a name="id4"></a>
 
 Para hacer uso de la [herramienta httperf](http://www.mervine.net/performance-testing-with-httperf), usamos la siguiente ejecución:
 
@@ -140,185 +168,154 @@ Para hacer uso de la [herramienta httperf](http://www.mervine.net/performance-te
 $ httperf --server 40.89.154.66 --port 80 --num-conns 10 --rate 1
 ~~~
 
-![](capturas/httperf-francecentral.png)
+<p align="center">
+  <img width="600" height="240" src="images/hito 4/httperf-francecentral.png">
+</p>
 
-En este ejemplo, se están ejecutando diez conexiones[`--num-conns 10`] a través de mervine.net[`--server 40.89.154.66`] a una velocidad de una conexión por segundo[`--rate 1`]. Y me centro en las siguientes salidas:
+En este ejemplo, se están ejecutando diez conexiones [`--num-conns 10`] a través de 40.89.154.66 [`--server 40.89.154.66`] a una velocidad de una conexión por segundo [`--rate 1`]. Me centro en las siguientes salidas:
 
 - _Connection rate_: es la tasa de conexión.
 - _Connection time [ms]_: es el tiempo de conexión.
 - _Reply size_: es el tamaño de la respuesta.
 - _Reply status_: es el estado de la respuesta, asegurarse que está orientado al 200.
 
-_**Medición de prestaciones con ab**_
+#### Medición de prestaciones con ab <a name="id5"></a>
 
-
-Para hacer uso de la [herramienta ab](https://www.petefreitag.com/item/689.cfm), usamos la siguiente ejecución:
+Para hacer uso de la [herramienta ab](https://www.petefreitag.com/item/689.cfm), usamos la siguiente ejecución, en la cual se indica con `-n` el número de peticiones a ejecutar en el benchmarck y con `-c` el número máximo de peticiones que se podrán ejecutar simultáneamente. En nuestro caso serán 10 peticiones múltiples al mismo tiempo hechas a nuestro servidor y 100 peticiones a ejecutar:
 
 ~~~
 $ ab -n 100 -c 10 http://40.89.154.66/
 ~~~
 
-![](capturas/ab-francecentral.png)
+<p align="center">
+  <img width="650" height="450" src="images/hito 4/ab-francecentral.png">
+</p>
 
 
+### Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del sur de Francia <a name="id6"></a>
 
-###### Creación de una máquina virtual con Ubuntu Server 18.06 LTS en el centro de datos del sur de Francia
+Para la creación de la misma máquina máquina virtual en el centro de datos del sur de Francia, realizamos el mismo procedimiento que para el anterior centro de datos. Sin embargo, cuando intentamos crearnos dicho recurso, nos dice que dicha localización no está disponible.
 
-Una vez, que tenemos decidida nuestra máquina virtual, vamos a proceder a crearla. Para ello, lo primero que haremos será crear el grupo de recursos para indicar el centro de datos en el que se va a alojar, en este caso en el sur de Francia.
+<p align="center">
+  <img width="850" height="40" src="images/hito 4/error-francesouth.png">
+</p>
 
-~~~
-# Crear el grupo de recursos
-$ az group create --name myResourceGroup-francesouth --location francesouth
-~~~
+Como no es posible crearse un recurso en ese centro de datos, pasamos al siguiente centro de datos más cercano, correspondiente con el oeste de Reino Unido.
 
-A continuación, creamos la máquina virtual especificando el grupo de recursos, el usuario de dicha máquina, la imagen de SO que queremos y la utilización de clave SSH.
+### Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del oeste de Reino Unido <a name="id7"></a>
 
-
-![](capturas/error-francesouth.png)
-
-Como no es posible crearse un recurso en ese centro de datos, pasamos al siguiente centro de datos más cercano, que es el sur de Reino Unido.
-
-###### Creación de una máquina virtual con Ubuntu Server 18.06 LTS en el centro de datos del sur de Reino Unido
-
-~~~
-# Listar las máquinas virtuales con localización en el sur de Reino Unido con Ubuntu Server
-$ az vm image list-skus --location uksouth --publisher Canonical --offer UbuntuServer --output table
-~~~
-
-![](capturas/lista-Ubuntu-uksouth.png)
-
-~~~
-# Listar las máquinas virtuales con localización en el sur de Reino Unido con Ubuntu Server 18.04 LTS
-$ az vm image list --location uksouth --publisher Canonical --offer UbuntuServer --sku 18.04-LTS --all --output table
-~~~
-
-![](capturas/lista-Ubuntu1804-uksouth.png)
-
-- **Centro de Francia** (_francecentral_), ubicado en latitud 46.3772 y longitud 2.3730
-- **Sur de Francia** (_francesouth_), ubicado en latitud 43.8345 y longitud 2.1972
-- **Sur de Reino Unido** (_uksouth_), ubicado en latitud 50.941 y longitud -0.799
-- **Oeste de Reino Unido** (_ukwest_), ubicado en latitud 53.427 y longitud -3.084
-- **Norte de Europa** (_northeurope_), ubicado en latitud 53.3478 y longitud -6.2597
-- **Oeste de Europa** (_westeurope_), ubicado en latitud 52.3667 y longitud 4.9
-
-
-~~~
-# Visualizar la información sobre una máquina virtual en concreto
-$ az vm image show --location uksouth --urn Canonical:UbuntuServer:18.04-LTS:18.04.201812060
-~~~
-
------
-
-Una vez, que tenemos decidida nuestra máquina virtual, vamos a proceder a crearla. Para ello, lo primero que haremos será crear el grupo de recursos para indicar el centro de datos en el que se va a alojar, en este caso en el sur de Reino Unido.
+Para la creación de la misma máquina máquina virtual en el centro de datos del oeste de Reino Unido, realizamos el mismo procedimiento que para el anterior centro de datos.
 
 ~~~
 # Crear el grupo de recursos
 $ az group create --name myResourceGroup-ukwest --location ukwest
-~~~
 
-A continuación, creamos la máquina virtual especificando el grupo de recursos, el usuario de dicha máquina, la imagen de SO que queremos y la utilización de clave SSH.
-
-~~~
 # Crear la máquina virtual
 $ az vm create --resource-group myResourceGroup-ukwest --admin-username gemazure-ukwest --name ubuntuUKWest --location ukwest --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060
-~~~
 
-![](capturas/mv-ukwest.png)
-
-Para poder hacer uso del puerto 80, debemos ejecutar la siguiente línea:
-
-~~~
+# Abrir y usar el puerto 80
 $ az vm open-port --port 80 --resource-group myResourceGroup-ukwest --name ubuntuUKWest
 ~~~
 
-Por último, debemos poner que la IP sea estática, para que no varíe cada vez que se inicie la máquina. Y con esto, ya podemos medir las prestaciones de la máquina. Para ello, provisionamos la máquina virtual con los requerimientos de nuestra aplicación, accedemos mediante SSH a la máquina virtual, lanzamos la aplicación y desde nuestra consola local ejecutamos algunas de las herramientas de medición de prestaciones como `httperf` o `ab`.
+<p align="center">
+  <img width="550" height="230" src="images/hito 4/mv-ukwest.png">
+</p>
 
-_**Medición de prestaciones con httperf**_
+#### Medición de prestaciones con httperf <a name="id8"></a>
 
-Para hacer uso de la [herramienta httperf](http://www.mervine.net/performance-testing-with-httperf), usamos la siguiente ejecución:
+Para hacer uso de la [herramienta httperf](http://www.mervine.net/performance-testing-with-httperf), usamos la siguiente ejecución, centrándonos en los mismos valores comentados anteriormente:
 
 ~~~
 $ httperf --server 51.140.226.194 --port 80 --num-conns 10 --rate 1
 ~~~
 
-![](capturas/httperf-ukwest.png)
-
-En este ejemplo, se están ejecutando diez conexiones[`--num-conns 10`] a través de 51.140.226.194[`--server 51.140.226.194`] a una velocidad de una conexión por segundo[`--rate 1`]. Y me centro en las siguientes salidas:
-
-- _Connection rate_: es la tasa de conexión.
-- _Connection time [ms]_: es el tiempo de conexión.
-- _Reply size_: es el tamaño de la respuesta.
-- _Reply status_: es el estado de la respuesta, asegurarse que está orientado al 200.
-
-_**Medición de prestaciones con ab**_
+<p align="center">
+  <img width="600" height="240" src="images/hito 4/httperf-ukwest.png">
+</p>
 
 
-Para hacer uso de la [herramienta ab](https://www.petefreitag.com/item/689.cfm), usamos la siguiente ejecución:
+#### Medición de prestaciones con ab <a name="id9"></a>
+
+Para hacer uso de la [herramienta ab](https://www.petefreitag.com/item/689.cfm), usamos la siguiente ejecución, expplicada anteriormente:
 
 ~~~
 $ ab -n 100 -c 10 http://51.140.226.194/
 ~~~
 
-![](capturas/ab-ukwest.png)
+<p align="center">
+  <img width="650" height="450" src="images/hito 4/ab-ukwest.png">
+</p>
 
 
-###### Creación de una máquina virtual con Ubuntu Server 18.06 LTS en el centro de datos del sur de Reino Unido
 
- **Norte de Europa** (_northeurope_), ubicado en latitud 53.3478 y longitud -6.2597
+### Crear máquina virtual con Ubuntu Server 18.04 LTS en el centro de datos del norte de Europa <a name="id10"></a>
 
- Una vez, que tenemos decidida nuestra máquina virtual, vamos a proceder a crearla. Para ello, lo primero que haremos será crear el grupo de recursos para indicar el centro de datos en el que se va a alojar, en este caso en el sur de Reino Unido.
+Para la creación de la misma máquina máquina virtual en el centro de datos del oeste de Reino Unido, realizamos el mismo procedimiento que para el anterior centro de datos.
 
- ~~~
- # Crear el grupo de recursos
- $ az group create --name myResourceGroup-northeurope --location northeurope
- ~~~
+~~~
+# Crear el grupo de recursos
+$ az group create --name myResourceGroup-northeurope --location northeurope
 
- A continuación, creamos la máquina virtual especificando el grupo de recursos, el usuario de dicha máquina, la imagen de SO que queremos y la utilización de clave SSH.
+# Crear la máquina virtual
+$ az vm create --resource-group myResourceGroup-northeurope --admin-username gemazure-northeurope --name ubuntuNorthEurope --location northeurope --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060
 
- ~~~
- # Crear la máquina virtual
- $ az vm create --resource-group myResourceGroup-northeurope --admin-username gemazure-northeurope --name ubuntuNorthEurope --location northeurope --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060
- ~~~
+# Abrir y usar el puerto 80
+$ az vm open-port --port 80 --resource-group myResourceGroup-northeurope --name ubuntuNorthEurope
+~~~
 
- ![](capturas/mv-northeurope.png)
+<p align="center">
+  <img width="550" height="230" src="images/hito 4/mv-northeurope.png">
+</p>
 
- Para poder hacer uso del puerto 80, debemos ejecutar la siguiente línea:
+#### Medición de prestaciones con httperf <a name="id11"></a>
 
- ~~~
- $ az vm open-port --port 80 --resource-group myResourceGroup-northeurope --name ubuntuNorthEurope
- ~~~
+Para hacer uso de la [herramienta httperf](http://www.mervine.net/performance-testing-with-httperf), usamos la siguiente ejecución, centrándonos en los mismos valores comentados anteriormente:
 
- Por último, debemos poner que la IP sea estática, para que no varíe cada vez que se inicie la máquina. Y con esto, ya podemos medir las prestaciones de la máquina. Para ello, provisionamos la máquina virtual con los requerimientos de nuestra aplicación, accedemos mediante SSH a la máquina virtual, lanzamos la aplicación y desde nuestra consola local ejecutamos algunas de las herramientas de medición de prestaciones como `httperf` o `ab`.
+~~~
+$ httperf --server 104.41.221.120 --port 80 --num-conns 10 --rate 1
+~~~
 
- _**Medición de prestaciones con httperf**_
+<p align="center">
+  <img width="600" height="240" src="images/hito 4/httperf-northeurope.png">
+</p>
 
- Para hacer uso de la [herramienta httperf](http://www.mervine.net/performance-testing-with-httperf), usamos la siguiente ejecución:
+#### Medición de prestaciones con ab <a name="id12"></a>
 
- ~~~
- $ httperf --server 104.41.221.120 --port 80 --num-conns 10 --rate 1
- ~~~
+Para hacer uso de la [herramienta ab](https://www.petefreitag.com/item/689.cfm), usamos la siguiente ejecución, expplicada anteriormente:
 
- ![](capturas/httperf-northeurope.png)
+~~~
+$ ab -n 100 -c 10 http://104.41.221.120/
+~~~
 
- En este ejemplo, se están ejecutando diez conexiones[`--num-conns 10`] a través de 51.140.226.194[`--server 51.140.226.194`] a una velocidad de una conexión por segundo[`--rate 1`]. Y me centro en las siguientes salidas:
-
- - _Connection rate_: es la tasa de conexión.
- - _Connection time [ms]_: es el tiempo de conexión.
- - _Reply size_: es el tamaño de la respuesta.
- - _Reply status_: es el estado de la respuesta, asegurarse que está orientado al 200.
-
- _**Medición de prestaciones con ab**_
+<p align="center">
+  <img width="650" height="450" src="images/hito 4/ab-northeurope.png">
+</p>
 
 
- Para hacer uso de la [herramienta ab](https://www.petefreitag.com/item/689.cfm), usamos la siguiente ejecución:
+### Tabla comparativa de mediciones con httperf <a name="id13"></a>
 
- ~~~
- $ ab -n 100 -c 10 http://104.41.221.120/
- ~~~
+Como se aprecia en la tabla, obtenemos una respuesta más rápida (menos tiempo) con el centro de datos ubicado en el centro de Francia. Esto es lógico, porque de los tres centros de datos, ese es el más cercano a mi ubicación.
 
-![](capturas/ab-northeurope.png)
+|  | Centro de Francia | Oeste de Reino Unido | Norte de Europa |
+|-----------------------------|-------------------|----------------------|-----------------|
+| Connection rate [ms/conn] | 907.7 | 910.8 | 911.9 |
+| Connection time [ms] | 36.2 | 50.5 | 55.5 |
+| Reply time in response [ms] | 35.7 | 51.0 | 55.2 |
+| Reply time in transfer [ms] | 0.4 | 0.4 | 0.4 |
 
----->
+### Tabla comparativa de mediciones con ab <a name="id14"></a>
+
+Para el centro de datos del centro de Francia, en donde el test para 100 peticiones con una concurrencia de 10, ha terminado correctamente en un tiempo de 0.776 segundos (menor que para el resto de centro de datos). Se ha tardado 77.615  milisegundos para cada petición y una media de 7.761 si tenemos en cuenta la concurrencia. Obteniendo los mejores resultados.
+
+|  | Centro de Francia | Oeste de Reino Unido | Norte de Europa |
+|--------------------------------------------------------------|-------------------|----------------------|-----------------|
+| Time taken for tests [seconds] | 0.776 | 1.044 | 1.169 |
+| Time per request (mean) [ms] | 77.615 | 104.371 | 116.899 |
+| Time per request (mean, across all concurrent requests) [ms] | 7.761 | 10.437 | 11.690 |
+
+**Por tanto, podemos concluir que el centro de datos ubicado en el centro de Francia es el mejor según nuestras condiciones.**
+
+
 [2]: https://www.fullstackpython.com/operating-systems.html
 [3]: https://www.stackscale.es/ubuntu-16-04-lts/
 [4]: https://maslinux.es/ya-tenemos-ubuntu-18-04-lts-te-presentamos-todas-las-novedades/
