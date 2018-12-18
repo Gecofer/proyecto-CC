@@ -19,6 +19,8 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
+MV2: 40.89.158.208
+
 <!----
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
@@ -35,8 +37,11 @@ MV: 23.97.225.1
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id3) para aprender a instalar la CLI de Azure e iniciar sesión y autenticarse.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver la justificación de la elección de la imagen del sistema operativo.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id11) para ver la justificación de la elección del tamaño de la imagen del sistema operativo.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver la justificación de la elección del centro de datos.
-
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 4.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el script de aprovisionamiento, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
+- Pincha [aquí]() para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
 
 <!----
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
@@ -185,8 +190,11 @@ El objetivo de las plataformas de virtualización es, eventualmente, crear y ges
 
 2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a razonar la justificación de la **elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_). En nuestro caso, hemos seleccionado el sistema Ubuntu Server 18.04 LTS.
 
-3. Una vez escogido el sistema operativo, se va a justificar la **elección del centro de datos** en el cual se creará la máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver dicha justificación**_). En este caso, se ha hecho uso del centro de datos del centro de Francia.
+3. Una vez escogido el sistema operativo, pasamos a la elección del tamaño de la imagen para dicha máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id11) para ver dicha justificación**_).
 
+4. Una vez escogido el sistema operativo, se va a justificar la **elección del centro de datos** en el cual se creará la máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver dicha justificación**_). En este caso, se ha hecho uso del centro de datos del centro de Francia.
+
+5. Por último, ya solo nos hace falta crear el script de aprovisionamiento, para eso pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el código, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
 
 
 
