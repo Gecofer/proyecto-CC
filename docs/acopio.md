@@ -40,4 +40,12 @@ El script de aprovisionamiento debe llamarse `acopio.sh` y estará situado en el
   ssh gemazure-francecentre@$IP
   ~~~
 
-Y para ejecutar el script, solo nos hace falta hacer `sh acopio.sh`. A continuación, se muestra una salida de dicho script, pincha [aquí]() para ver la salida.
+Y para ejecutar el script, solo nos hace falta hacer `sh acopio.sh`. A continuación, se muestra una salida de dicho script, pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver la salida.
+
+Entonces, ya solo nos queda acceder a la aplicación, y comprobar que funciona:
+
+![](images/hito 4/salida1.png)
+
+![](images/hito 4/salida2.png)
+
+![](images/hito 4/salida3.png)
