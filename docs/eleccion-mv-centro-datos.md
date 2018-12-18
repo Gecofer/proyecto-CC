@@ -305,7 +305,7 @@ Como se aprecia en la tabla, obtenemos una respuesta más rápida (menos tiempo)
 
 ### Tabla comparativa de mediciones con ab <a name="id14"></a>
 
-Para el centro de datos del centro de Francia, en donde el test para 100 peticiones con una concurrencia de 10, ha terminado correctamente en un tiempo de 0.776 segundos (menor que para el resto de centro de datos). Se ha tardado 77.615  milisegundos para cada petición y una media de 7.761 si tenemos en cuenta la concurrencia. Obteniendo los mejores resultados.
+Para el centro de datos del centro de Francia, en donde el test para 100 peticiones con una concurrencia de 10, ha terminado correctamente en un tiempo de 0.776 segundos (menor que para el resto de centro de datos). Se ha tardado 77.615  milisegundos para cada petición y una media de 7.761 si tenemos en cuenta la concurrencia. Obteniendo los mejores resultados. Esto es lógico, porque de los tres centros de datos, ese es el más cercano a mi ubicación.
 
 |  | Centro de Francia | Oeste de Reino Unido | Norte de Europa |
 |--------------------------------------------------------------|-------------------|----------------------|-----------------|
