@@ -1,36 +1,43 @@
 # Script de aprovisionamiento
 
-Para ejecutar el script haremos sh acopio.md
+El script de aprovisionamiento debe llamarse `acopio.sh` y estará situado en el directorio principal. Básicamente, las líneas que hemos visto para la creación de máquina virtuales desde la consola, las juntamos todas y las ponemos en un script, con el fin de automatizar el proceso. A continuación, se explica el [código](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh):
 
-#!/bin/bash
+1. Creamos el grupo de recursos con la localización en el centro de Francia:
 
-# Creación del grupo de recursos con localización en el centro de Francia
-#echo " ------ Creación del grupo de recursos ------ "
-az group create --name myResourceGroup-francecentre --location francecentral
+  ~~~
+  az group create --name myResourceGroup-francecentre --location francecentral
+  ~~~
 
-# Creación de la máquina virtual con Ubuntu Server 18.04 LTS, indicando el grupo
-# de recursos, el usuario de dicha máquina y la generación de las clases SSH
-# Además, se extrae la IP pública de la máquina y se guarda en la variable $IP
-echo " ------ Creación de la máquina virtual ------ "
-IP=$(az vm create --resource-group myResourceGroup-francecentre --admin-username gemazure-francecentre --name ubuntuGemaFranceCentre --location francecentral --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060 --generate-ssh-keys --public-ip-address-allocation static| jq -r '.publicIpAddress')
-echo " ------ Máquina virtual creada ------ "
+2. Creamosla máquina virtual con Ubuntu Server 18.04 LTS, indicando el grupo de recursos, el usuario de dicha máquina, la generación de las clases SSH y ponemos la IP a estática. Además, se extrae la IP pública de la máquina y se guarda en la variable.
 
-# Una vez creada la máquina virtual, mostramos su nombre y su dirección IP
-echo " ------ Datos de la máquina virtual creada ------ "
-echo -name: ubuntuGemaFranceCentre
-echo -ip: $IP
+  ~~~
+  IP=$(az vm create --resource-group myResourceGroup-francecentre --admin-username gemazure-francecentre --name ubuntuGemaFranceCentre --location francecentral --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060 --generate-ssh-keys --public-ip-address-allocation static| jq -r '.publicIpAddress')
+  ~~~
 
-# Abrimos el puerto 80
-echo " ------ Abrir el puerto 80 ------ "
-az vm open-port --port 80 --resource-group myResourceGroup-francecentre --name ubuntuGemaFranceCentre
+3. Se modifica el tamaño de la máquina virtual por defecto, con el fin de gastar menos dinero durante el mes, y de obtener una máquina de acuerdo a nuestras necesidades:
 
-# Realizar provisionamiento con ansible
-echo " ------ Provisionando con Ansible ------ "
-ansible-playbook -i "$IP," -b provision/acopio/ansible_playbook.yml --user gemazure-francecentre -v
+  ~~~
+  az vm resize --resource-group myResourceGroup-francecentre --name ubuntuGemaFranceCentre --size Standard_B1ms
+  ~~~
 
-# Conectarnos a la máquina virtual
-echo " ------ Accediendo mediante SSH a la máquina virtual ------ "
-ssh gemazure-francecentre@$IP
+4. Una vez creada la máquina virtual, mostramos su nombre y su dirección IP.
 
+5. Creamos y abrimos el puerto 80, ya que por defecto no viene.
 
-Salida del Script
+  ~~~
+  az vm open-port --port 80 --resource-group myResourceGroup-francecentre --name ubuntuGemaFranceCentre
+  ~~~
+
+6. Realizamos el [provisionamiento con Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision/acopio), como vimos en el hito 3. En este caso, solo nos hace falta instalar `pip`, clonar nuestro proyecto y los requerimientos del mismo, ya que lo demás viene instalado por defecto en la máquina.
+
+  ~~~
+  ansible-playbook -i "$IP," -b provision/acopio/ansible_playbook.yml --user gemazure-francecentre -v
+  ~~~
+
+7. Y por último, nos conectamos a la máquina virtual mediante SSH.
+
+  ~~~
+  ssh gemazure-francecentre@$IP
+  ~~~
+
+Y para ejecutar el script, solo nos hace falta hacer `sh acopio.sh`. A continuación, se muestra una salida de dicho script, pincha [aquí]() para ver la salida.
