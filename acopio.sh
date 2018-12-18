@@ -8,7 +8,8 @@ az group create --name myResourceGroup-francecentre --location francecentral
 # de recursos, el usuario de dicha máquina y la generación de las clases SSH
 # Además, se extrae la IP pública de la máquina y se guarda en la variable $IP
 echo " ------ Creación de la máquina virtual ------ "
-IP=$(az vm create --resource-group myResourceGroup-francecentre --admin-username gemazure-francecentre --name ubuntuGemaFranceCentre --location francecentral --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060 --generate-ssh-keys --public-ip-address-allocation static| jq -r '.publicIpAddress')
+IP=$(az vm create --resource-group myResourceGroup-francecentre --admin-username gemazure-francecentre --name ubuntuGemaFranceCentre --location francecentral --image Canonical:UbuntuServer:18.04-LTS:18.04.201812060 --size Standard_B1ms --generate-ssh-keys --public-ip-address-allocation static| jq -r '.publicIpAddress')
+# az vm resize --resource-group myResourceGroup-francecentre --name ubuntuGemaFranceCentre --size Standard_B1s
 echo " ------ Máquina virtual creada ------ "
 
 # Una vez creada la máquina virtual, mostramos su nombre y su dirección IP
