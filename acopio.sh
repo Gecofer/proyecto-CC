@@ -22,4 +22,8 @@ az vm open-port --port 80 --resource-group myResourceGroup-francecentre --name u
 
 # Realizar provisionamiento con ansible
 echo " ------ Provisionando con Ansible ------ "
-ansible-playbook -i "$IP," -b provision/Azure/ansible_playbook.yml --user gemazure-francecentre -vvv
+ansible-playbook -i "$IP," -b provision/acopio/ansible_playbook.yml --user gemazure-francecentre -v
+
+# Conectarnos a la máquina virtual
+echo " ------ Accediendo mediante SSH a la máquina virtual ------ "
+ssh gemazure-francecentre@$IP
