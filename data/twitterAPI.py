@@ -18,9 +18,10 @@ from os import environ      # Para obtener las variables de entorno
 import os.path, sys
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 
-# Para la creación del log
+# Para hacer uso de logs
 import logging
-from log import logger      # https://ricveal.com/blog/curso-python-5/
+logger = logging.getLogger("data")
+logging.basicConfig(filename= "../debug.log", filemode='a', format= '%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
 class Trends:
 
@@ -37,7 +38,6 @@ class Trends:
                               environ["TWITTER_ACCESS_TOKEN_SECRET"])
 
         return tweepy.API(auth)
-
 
     '''
     Función que obtiene los trending topics de una ubicación determinada
@@ -66,18 +66,11 @@ class Trends:
 
 if __name__ == '__main__':
 
-    # Para añadir los logs al archivo de la raíz 'debug.log'
-    log = logging.Logger("data")
-    filehandler = logging.FileHandler('../debug.log')
-    format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    filehandler.setFormatter(format)
-    log.addHandler(filehandler)
-
     # Obtener las tendencias de las ubicaciones más cercanas en Twitter
     my_trend = Trends()
     my_api = my_trend.twitter_connection()
-    log.info("Successfully connected API Twitter.")
+    logger.info("Successfully connected API Twitter.")
 
     # Defino para Granada su latitud y longitud
     print(my_trend.get_location_trends(my_api, 37.1833, -3.6))
-    log.info("Successfully obtain location trends.")
+    logger.info("Successfully obtain location trends.")
