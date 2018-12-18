@@ -18,7 +18,7 @@ from data import *
 # Para la creación del log
 import logging
 logger = logging.getLogger("app")
-logging.basicConfig(filename= "debug.log", filemode='a', format= '%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+logging.basicConfig(filename = "debug.log", filemode = 'a', format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s', level = logging.DEBUG)
 
 # Creación de una instancia de la clase Flask
 app = Flask(__name__)
