@@ -14,9 +14,7 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Descipción de los tests en Python (código sin test código roto)](#id7)
 - [Descripción del despliegue](#id8)
   - [Despliegue en PaaS](#id9)
-  - [Despliegue de la infraestructura en máquina virtual local](#id10)
-    - [Vagrant](#id11)
-    - [Ansible](#id12)
+  - [Despliegue de la infraestructura en máquina virtual local:](#id10) en [Vagrant](#id11) y en [Ansible](#id12)
 - [Automatización de tareas en la nube](#id13)
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
@@ -31,7 +29,8 @@ MV: 23.97.225.1
 
 ## Novedades <a name="id0"></a>
 
-- Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente con el hito 4.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para acceder a la documentación trasladada del hito 3.
+- Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente al hito 4.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id0) para ver los pasos para la creación de una instancia en la nube.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id3) para aprender a instalar la CLI de Azure e iniciar sesión y autenticarse.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
@@ -184,9 +183,11 @@ El objetivo de las plataformas de virtualización es, eventualmente, crear y ges
 
 1. En este caso vamos hacer uso de la **CLI de Azure**, para ello primero deberemos instalarla, y una vez instalada iniciar sesión y autenticarse en el mismo, además de unos pequeños comandos para ver el listado de imágenes de máquinas virtuales disponibles (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md) para ver la documentación**_).
 
-2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a razonar la justificación de la **elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_).
+2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a razonar la justificación de la **elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_). En nuestro caso, hemos seleccionado el sistema Ubuntu Server 18.04 LTS.
 
-3. Una vez escogido el sistema operativo, se va a justificar la **elección del centro de datos** en el cual se creará la máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver dicha justificación**_).
+3. Una vez escogido el sistema operativo, se va a justificar la **elección del centro de datos** en el cual se creará la máquina virtual (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id1) para ver dicha justificación**_). En este caso, se ha hecho uso del centro de datos del centro de Francia.
+
+
 
 
 ## Enlaces de Interés <a name="id15"></a>
