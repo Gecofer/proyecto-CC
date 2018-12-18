@@ -64,6 +64,36 @@ Como podemos comprobar, la versión 14.04 LTS termina su mantenimiento en 2019, 
 
 **Por tanto, podemos afirma que el mejor SO para nuestro proyecto es la versión de Ubuntu Server 18.04 LTS.**
 
+## Elección del tamaño de la imagen de la máquina virtual <a name="id11"></a>
+
+A parte de obtener el mejor sistema operativo para nuestro servicio, el centro de datos donde ubicarlos (se verá más adelante), se debe tener en cuenta que estamos desplegando una instancia con un tamaño determinado, con una cantidad de memoria determinada. Es por eso, que cuando creemos la máquina virtual, debemos elegir el tamaño de la misma:
+
+<p align="center">
+  <img width="550" height="260" src="images/hito 4/tam-mv1.png">
+</p>
+
+Como se aprecia en la imagen, disponible desde el panel de control de Azure, es posible cambiar el tamaño de dicha máquina virtual de acorde a unas prestaciones y especificaciones concretas.
+
+<p align="center">
+  <img width="850" height="50" src="images/hito 4/tam-mv2.png">
+</p>
+
+En nuestro caso, la máquina que estamos creando nos está costado alrededor de 55€ al mes, precio que vemos exagerado para el uso que hacemos de ella, es por eso, que vamos a bajar a una máquina más sencilla, en donde el coste sea menor y el almacenamiento también, ya que solamente disponemos en nuestra máquina virtual de una carpeta. Para cambiar el tamaño de la máquina, podemos o modificarlo en el panel de control (con lo que cada vez que lanzáramos el script de aprovisionamiento deberíamos hacerlo) o por línea de comandos, como muestra la [documentación](https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-resize):
+
+~~~
+$az vm resize -g MyResourceGroup -n MyVm --size Standard_DS3_v2
+~~~
+
+Como simplemente queremos lanzar una aplicación, no nos hace falta obtener una máquina virtual con muchas prestaciones. Es por eso, que escogemos la gama más básica:
+
+<p align="center">
+  <img width="850" height="50" src="images/hito 4/tam-mv3.png">
+</p>
+
+~~~
+$az vm resize -g MyResourceGroup -n MyVm --size Standard_DS3_v2
+~~~
+
 
 
 ## Elección del centro de datos <a name="id2"></a>
