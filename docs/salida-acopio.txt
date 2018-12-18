@@ -1,0 +1,80 @@
+$ sh acopio.sh
+
+{
+  "id": "--------------------------------------------",
+  "location": "francecentral",
+  "managedBy": null,
+  "name": "myResourceGroup-francecentre",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
+}
+
+ ------ Creación de la máquina virtual ------
+ ------ Máquina virtual creada ------
+
+ ------ Datos de la máquina virtual creada ------
+-name: ubuntuGemaFranceCentre
+-ip: 40.89.158.208
+
+ ------ Abrir el puerto 80 ------
+{
+  .....
+  
+  "subnets": null,
+  "tags": {},
+  "type": "Microsoft.Network/networkSecurityGroups"
+}
+
+ ------ Provisionando con Ansible ------
+No config file found; using defaults
+
+PLAY [all] *************************************************************************************************************************************
+
+TASK [Instala git] *****************************************************************************************************************************
+ok: [40.89.158.208] => {"cache_update_time": 1545096619, "cache_updated": false, "changed": false}
+
+TASK [Instalar pip3] ***************************************************************************************************************************
+ok: [40.89.158.208] => {"cache_update_time": 1545096619, "cache_updated": false, "changed": false}
+
+TASK [Instalar pip] ****************************************************************************************************************************
+ok: [40.89.158.208] => {"cache_update_time": 1545096619, "cache_updated": false, "changed": false}
+
+TASK [Clonar repositorio] **********************************************************************************************************************
+changed: [40.89.158.208] => {"after": "78df7a9fe300a97b8827594c82e50010bc0ec7c7", "before": "7ae0f60f8dd9e8449fe905afcee2146b242ad58f", "changed": true, "remote_url_changed": false}
+
+TASK [Instalando dependencias del proyecto] ****************************************************************************************************
+ok: [40.89.158.208] => {"changed": false, "cmd": ["/usr/bin/pip3", "install", "-r", "/home/gemazure-francecentre/proyecto-CC/requirements.txt"], "name": null, "requirements": "/home/gemazure-francecentre/proyecto-CC/requirements.txt", "state": "present", "stderr": "", "stderr_lines": [], "stdout": "Requirement already satisfied: Flask==1.0.2 in /usr/local/lib/python3.6/dist-packages (from -r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))\nRequirement already satisfied: requests==2.20.1 in /usr/local/lib/python3.6/dist-packages (from -r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))\nRequirement already satisfied: gunicorn==19.9.0 in /usr/local/lib/python3.6/dist-packages (from -r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 3))\nRequirement already satisfied: Jinja2>=2.10 in /usr/lib/python3/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))\nRequirement already satisfied: itsdangerous>=0.24 in /usr/local/lib/python3.6/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))\nRequirement already satisfied: Werkzeug>=0.14 in /usr/local/lib/python3.6/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))\nRequirement already satisfied: click>=5.1 in /usr/lib/python3/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))\nRequirement already satisfied: idna<2.8,>=2.5 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))\nRequirement already satisfied: urllib3<1.25,>=1.21.1 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))\nRequirement already satisfied: chardet<3.1.0,>=3.0.2 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))\nRequirement already satisfied: certifi>=2017.4.17 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))\n", "stdout_lines": ["Requirement already satisfied: Flask==1.0.2 in /usr/local/lib/python3.6/dist-packages (from -r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))", "Requirement already satisfied: requests==2.20.1 in /usr/local/lib/python3.6/dist-packages (from -r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))", "Requirement already satisfied: gunicorn==19.9.0 in /usr/local/lib/python3.6/dist-packages (from -r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 3))", "Requirement already satisfied: Jinja2>=2.10 in /usr/lib/python3/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))", "Requirement already satisfied: itsdangerous>=0.24 in /usr/local/lib/python3.6/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))", "Requirement already satisfied: Werkzeug>=0.14 in /usr/local/lib/python3.6/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))", "Requirement already satisfied: click>=5.1 in /usr/lib/python3/dist-packages (from Flask==1.0.2->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 1))", "Requirement already satisfied: idna<2.8,>=2.5 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))", "Requirement already satisfied: urllib3<1.25,>=1.21.1 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))", "Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))", "Requirement already satisfied: certifi>=2017.4.17 in /usr/lib/python3/dist-packages (from requests==2.20.1->-r /home/gemazure-francecentre/proyecto-CC/requirements.txt (line 2))"], "version": null, "virtualenv": null}
+
+PLAY RECAP *************************************************************************************************************************************
+40.89.158.208              : ok=5    changed=1    unreachable=0    failed=0
+
+ ------ Accediendo mediante SSH a la máquina virtual ------
+Welcome to Ubuntu 18.04.1 LTS (GNU/Linux 4.15.0-1035-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ System information disabled due to load higher than 1.0
+
+ * MicroK8s is Kubernetes in a snap. Made by devs for devs.
+   One quick install on a workstation, VM, or appliance.
+
+   - https://bit.ly/microk8s
+
+ * Full K8s GPU support is now available!
+
+   - https://blog.ubuntu.com/2018/12/10/using-gpgpus-with-kubernetes
+
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+11 packages can be updated.
+4 updates are security updates.
+
+
+Last login: Tue Dec 18 11:19:09 2018 from 88.5.182.156
+gemazure-francecentre@ubuntuGemaFranceCentre:~$ exit
