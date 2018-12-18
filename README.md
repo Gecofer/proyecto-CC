@@ -34,7 +34,7 @@ MV: 23.97.225.1
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Chef) para ver el resumen realizado sobre el seminario de Chef.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Nube%20desde%20linea%20de%20ordenes) para ver el resumen realizado sobre el seminario de la nube desde línea de órdenes.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para acceder a la documentación trasladada del hito 3.
-- Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente al hito 4.
+- Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente al hito 4 (se explica porque se hace uso de la CLI de Azure).
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id0) para ver los pasos para la creación de una instancia en la nube.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id3) para aprender a instalar la CLI de Azure e iniciar sesión y autenticarse.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
@@ -190,6 +190,8 @@ __*Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/correc
 El objetivo de las plataformas de virtualización es, eventualmente, crear y gestionar una máquina virtual que funcione de forma aislada del resto del sistema y que permita trabajar con sistemas virtualizados de forma flexible, escalable y adaptada a cualquier objetivo. Para ello, usaremos los clientes de línea de órdenes de los servicios en la nube para crear instancias de máquinas virtuales y otros recursos necesarios para las mismas. Estas instancias, posteriormente, se provisionarán y se instalará en ella la aplicación que se ha venido usando hasta ahora.
 
 1. En este caso vamos hacer uso de la **CLI de Azure**, para ello primero deberemos instalarla, y una vez instalada iniciar sesión y autenticarse en el mismo, además de unos pequeños comandos para ver el listado de imágenes de máquinas virtuales disponibles (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md) para ver la documentación**_).
+
+  Se va hacer uso del CLI de Azure, debido a que dispongo de más conocimientos en su manejo, al ser, personalmente más sencillo. Debido a que pedí patrocinio con Amazon Cloud Services mediante la cuenta de la UGR hace unas semanas y aún sigo esperando la respuesta, es por eso que se ha descartado su uso en este hito. Además, hace menos de una semana se nos proporcionó acceso al patrocinio de Google Cloud, sin embargo, no se ha podido llevar a cabo principalmente por un motivo: no he tenido tiempo de llevarlo a cabo debido a que me ha resultado más complejo de primeras, pero espero poder usarlo para el siguiente hito.
 
 2. Una vez que podemos crear máquinas virtuales desde la línea de comandos, vamos a razonar la justificación de la **elección de la imagen** del sistema operativo (_**pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver dicha justificación**_). En nuestro caso, hemos seleccionado el sistema Ubuntu Server 18.04 LTS.
 
