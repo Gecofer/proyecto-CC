@@ -31,6 +31,8 @@ MV: 23.97.225.1
 
 ## Novedades <a name="id0"></a>
 
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Chef) para ver el resumen realizado sobre el seminario de Chef.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Nube%20desde%20linea%20de%20ordenes) para ver el resumen realizado sobre el seminario de la nube desde línea de órdenes.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para acceder a la documentación trasladada del hito 3.
 - Pincha [aquí](#id13) para localizar el nuevo apartado de **automatización de tareas en la nube**, correspondiente al hito 4.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id0) para ver los pasos para la creación de una instancia en la nube.
@@ -38,10 +40,11 @@ MV: 23.97.225.1
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/automatizar-creacion-mv.md#id5) para aprender a listar imágenes de máquinas virtuales con la CLI de Azure.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id0) para ver la justificación de la elección de la imagen del sistema operativo.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id11) para ver la justificación de la elección del tamaño de la imagen de la máquina virtual.
+- Pincha [aquí](https://www.danielstechblog.io/azure-vm-sizes/) para ver que tamaños de imágenes están disponibles en cada ubicación/región.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/eleccion-mv-centro-datos.md#id2) para ver la justificación de la elección del centro de datos.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 4.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el script de aprovisionamiento, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
-- Pincha [aquí]() para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
+- Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito4/objetivosHito4.md) para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
 
 <!----
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
