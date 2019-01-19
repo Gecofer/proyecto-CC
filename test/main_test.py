@@ -90,7 +90,6 @@ class TestTwitterData(unittest.TestCase):
 
         pass
 
-
 # ---------------------------------------------------------------------------- #
 
     # Testear que se crea un elemento
@@ -124,7 +123,6 @@ class TestTwitterData(unittest.TestCase):
 
         pass
 
-
 # ---------------------------------------------------------------------------- #
 
     # Testear que se elimina un elemento
@@ -142,7 +140,6 @@ class TestTwitterData(unittest.TestCase):
         self.assertEqual(result_post2.status_code, 404)
 
         pass
-
 
 # ---------------------------------------------------------------------------- #
 
