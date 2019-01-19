@@ -1,0 +1,68 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: False
+
+  pre_tasks:
+    - name: Instalar Python 2 para Ansible
+      raw: test -e /usr/local/bin/python || (apt -y update && apt install -y python)
+      changed_when: False
+
+    - name: Instalar Python 3 para Ansible
+      raw: test -e /usr/local/bin/python3 || (apt -y update && apt install -y python3)
+      changed_when: False
+
+  tasks:
+    - name: Instala git
+      apt: pkg=git state=present
+
+    - name: Instala python-setuptools
+      apt: pkg=python-setuptools state=present
+
+    - name: Instalar pip3
+      apt:
+        package: python3-pip
+        state: latest
+
+    - name: Instalar pip
+      apt:
+        package: python-pip
+        state: latest
+
+    - name: Instala mysql
+      apt:
+        name: ['python-mysqldb', 'mysql-server']
+        state: present
+
+    - name: Ejecuta mysql
+      service:
+        name: mysql
+        state: started
+        enabled: true
+
+    - name: Instalar libmysqlclient-dev
+      apt:
+        package: libmysqlclient-dev
+        state: latest
+
+    - name: Instalando dependencias del proyecto
+      pip:
+        requirements: /home/vagrant/proyecto/requirements_basesdatos.txt
+        executable: pip3
+
+    - name: Permite la conexión desde cualquier IP
+      replace:
+        path: /etc/mysql/mysql.conf.d/mysqld.cnf
+        regexp: 'bind-address'
+        replace: '#bind-address'
+
+    - name: restart mysql
+      service: name=mysql
+               enabled=yes
+               state=restarted
+
+    - name: Execute the script
+      command: sh /home/vagrant/proyecto/script_usuario.sh
+
+    - name: Execute the script
+      command: sh /home/vagrant/proyecto/script_database.sh
