@@ -11,6 +11,7 @@ from flask import Flask     # importamos la clase Flask
 from flask import jsonify   # https://pypi.org/project/Flask-Jsonpify/
 from flask import request   # https://github.com/requests/requests
 
+# Para la BD
 from flask import render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 
@@ -30,7 +31,7 @@ logger.info("Successfully run Flask application.")
 
 # ---------------------------------------------------------------------------- #
 
-# Mysql Connection
+# Conexión con MYSQL
 app.config['MYSQL_HOST'] = '10.0.0.5'
 app.config['MYSQL_USER'] = 'usuariocc'
 app.config['MYSQL_PASSWORD'] = ''
@@ -42,27 +43,43 @@ app.secret_key = "mysecretkey"
 
 # ---------------------------------------------------------------------------- #
 
-# routes
+# Ruta para visualizar los datos de la BD y la página principal
 @app.route('/BD')
 def Index():
+
+    # Establecemos la conexión con la BD
     cur = mysql.connection.cursor()
+    logger.info("Successfully connection.")
     cur.execute('SELECT * FROM contacts')
+    logger.info("Successfully execute SELECT * FROM contacts.")
     data = cur.fetchall()
-    cur.close()
+    cur.close() # cerramos la conexión
+
     return render_template('index.html', contacts = data, content_type='application/json')
 
 # ---------------------------------------------------------------------------- #
 
+# Ruta para insertar en la BD
 @app.route('/add_bd', methods=['POST'])
 def add_bd():
+
+    # Como vamos a modificar hacemos uso del método POST
     if request.method == 'POST':
+        # Obtenemos las variables a insertar
         name = request.form['name']
         url = request.form['url']
         tweet_volume = request.form['tweet_volume']
+
+        # Establecemos la conexión con la BD
         cur = mysql.connection.cursor()
+        logger.info("Successfully connection.")
         cur.execute("INSERT INTO contacts (name, url, tweet_volume) VALUES ( %s,%s,%s)", (name, url, tweet_volume))
+        logger.info("Successfully execute INSERT INTO contacts (name, url, tweet_volume).")
         mysql.connection.commit()
-        flash('Contact Added successfully')
+
+        flash('Added Successfully')
+        logger.info("Successfully method POST: Added to database.")
+
         return redirect(url_for('Index'))
 
 # ---------------------------------------------------------------------------- #
