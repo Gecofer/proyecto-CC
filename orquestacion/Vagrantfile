@@ -28,8 +28,8 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/main.py", destination: "/home/vagrant/proyecto/main.py"
     machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/data", destination: "/home/vagrant/proyecto/data"
     machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/requirements_principal.txt", destination: "/home/vagrant/proyecto/requirements_principal.txt"
-    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/templates", destination: "/home/vagrant/proyecto/templates"
-    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/static", destination: "/home/vagrant/proyecto/static"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/html/templates", destination: "/home/vagrant/proyecto/templates"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/html/static", destination: "/home/vagrant/proyecto/static"
 
     machine.vm.provider :azure do |azure, override|
 
