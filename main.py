@@ -11,6 +11,9 @@ from flask import Flask     # importamos la clase Flask
 from flask import jsonify   # https://pypi.org/project/Flask-Jsonpify/
 from flask import request   # https://github.com/requests/requests
 
+from flask import render_template, request, redirect, url_for, flash
+from flask_mysqldb import MySQL
+
 import json
 import os
 from data import *
@@ -24,6 +27,43 @@ logging.basicConfig(filename = "debug.log", filemode = 'a', format = '%(asctime)
 app = Flask(__name__)
 
 logger.info("Successfully run Flask application.")
+
+# ---------------------------------------------------------------------------- #
+
+# Mysql Connection
+app.config['MYSQL_HOST'] = '10.0.0.5'
+app.config['MYSQL_USER'] = 'usuariocc'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'twitter'
+mysql = MySQL(app)
+
+# settings
+app.secret_key = "mysecretkey"
+
+# ---------------------------------------------------------------------------- #
+
+# routes
+@app.route('/BD')
+def Index():
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM contacts')
+    data = cur.fetchall()
+    cur.close()
+    return render_template('index.html', contacts = data, content_type='application/json')
+
+# ---------------------------------------------------------------------------- #
+
+@app.route('/add_bd', methods=['POST'])
+def add_bd():
+    if request.method == 'POST':
+        name = request.form['name']
+        url = request.form['url']
+        tweet_volume = request.form['tweet_volume']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO contacts (name, url, tweet_volume) VALUES ( %s,%s,%s)", (name, url, tweet_volume))
+        mysql.connection.commit()
+        flash('Contact Added successfully')
+        return redirect(url_for('Index'))
 
 # ---------------------------------------------------------------------------- #
 
