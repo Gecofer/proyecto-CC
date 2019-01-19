@@ -62,8 +62,8 @@ Vagrant.configure("2") do |config|
 
     # Transferir los archivos necesarios
     machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/requirements_basesdatos.txt", destination: "/home/vagrant/proyecto/requirements_basesdatos.txt"
-    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/script_usuario.sh", destination: "/home/vagrant/proyecto/script_usuario.sh"
-    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/script_database.sh", destination: "/home/vagrant/proyecto/script_database.sh"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/scripts/script_usuario.sh", destination: "/home/vagrant/proyecto/script_usuario.sh"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/scripts/script_database.sh", destination: "/home/vagrant/proyecto/script_database.sh"
 
     machine.vm.provider :azure do |azure, override|
 
