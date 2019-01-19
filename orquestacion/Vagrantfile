@@ -1,0 +1,91 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Para no tener que introducir nuestras credenciales en mac, cada vez
+  # que compartamos y creemos las máquinas virtuales
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "azure"
+
+  # Use local ssh key to connect to remote vagrant box
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+
+  # Hacemos la primera configuración para la máquina
+  config.vm.define "mvprincipal" do |machine|
+
+    # Transferir los archivos necesarios
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/main.py", destination: "/home/vagrant/proyecto/main.py"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/data", destination: "/home/vagrant/proyecto/data"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/requirements_principal.txt", destination: "/home/vagrant/proyecto/requirements_principal.txt"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/templates", destination: "/home/vagrant/proyecto/templates"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/static", destination: "/home/vagrant/proyecto/static"
+
+    machine.vm.provider :azure do |azure, override|
+
+      # each of the below values will default to use the env vars named as below if not specified explicitly
+      azure.tenant_id = ENV['AZURE_TENANT_ID']
+      azure.client_id = ENV['AZURE_CLIENT_ID']
+      azure.client_secret = ENV['AZURE_CLIENT_SECRET']
+      azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+
+      # Configuración de la máquina virtual
+      azure.location = 'francecentral' # Localización donde se va a crear la mv
+      azure.resource_group_name = "recursos-francecentralcc" # El mismo recurso para ambas mv
+      azure.vm_name = "mvprincipalcc" # Nombre de la mv
+      azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:18.04.201812060' # Imagen para el SO
+      azure.vm_size = 'Standard_B1s' # Tamaño más básico
+      azure.tcp_endpoints = 80 # Apertura del puerto 80
+    end
+
+    # Configuración de ansible
+    machine.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible_principal_playbook.yml"
+    end
+  end
+
+  # use local ssh key to connect to remote vagrant box
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+
+  # Hacemos la configuración para la segunda máquina
+  config.vm.define "mvbasedatos" do |machine|
+
+    # Transferir los archivos necesarios
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/requirements_basesdatos.txt", destination: "/home/vagrant/proyecto/requirements_basesdatos.txt"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/script_usuario.sh", destination: "/home/vagrant/proyecto/script_usuario.sh"
+    machine.vm.provision "file", source: "/Users/gema/Documents/Github/proyecto-CC/script_database.sh", destination: "/home/vagrant/proyecto/script_database.sh"
+
+    machine.vm.provider :azure do |azure, override|
+
+      # each of the below values will default to use the env vars named as below if not specified explicitly
+      azure.tenant_id = ENV['AZURE_TENANT_ID']
+      azure.client_id = ENV['AZURE_CLIENT_ID']
+      azure.client_secret = ENV['AZURE_CLIENT_SECRET']
+      azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+
+      # Configuración de la máquina virtual
+      azure.location = 'francecentral' # Localización donde se va a crear la mv
+      azure.resource_group_name = "recursos-francecentralcc"
+      azure.vm_name = "mvbasedatoscc" # Nombre de la mv
+      azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:18.04.201812060'
+      azure.vm_size = 'Standard_B1s' # Tamaño más básico
+      azure.tcp_endpoints = 80 # Abrimos el puerto 80 (HTTP)
+    end
+
+    # Configuración de ansible
+    machine.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible_basesdatos_playbook.yml"
+    end
+  end
+
+end
