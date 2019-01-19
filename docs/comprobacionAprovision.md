@@ -22,10 +22,10 @@ La aplicación funcionando en la primera máquina lo podemos ver en la siguiente
 
 ![8_maquina1_ejecutando](../docs/images/hito5/comprobacionAprovision/8_maquina1_ejecutando.png)
 
-Ya tan solo faltaría que desde nuestra máquina anfitriona comprobaramos que la aplicación está funcionando correctamente. Para ello necesitamos la ip pública de la máquina principal que obtenemos desde azure. Una vez introducida la ip en el navegador obtenemos lo siguiente:
+Ya tan solo faltaría comprobar desde nuestra máquina anfitriona que la aplicación está funcionando correctamente. Para ello necesitamos la ip pública de la máquina principal que obtenemos desde azure. Una vez introducida la ip en el navegador obtenemos lo siguiente:
 
 
-![6_statusOK](../docs/images/hito5/comprobacionAprovision/6_statusOK.png)
+![5_statusOK](../docs/images/hito5/comprobacionAprovision/5_statusOK.png)
 
 Por último, también podemos hacer uso de la interfaz gráfica de la que dispone el proyecto, que como veremos más abajo se actualiza correctamente al añadir información en la base de datos.
 
