@@ -240,14 +240,14 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
 
 2. Añadir un archivo __[.travis.yml](https://github.com/Gecofer/proyecto-CC/blob/master/.travis.yml)__ al repositorio para decirle a Travis CI qué hacer, el cual contiene:
 
-  - El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.7.0 para OSX.
+  - El lenguaje del programación y la versión usada. En este caso he hecho uso de Python 3.6.7 para OSX.
   - El comando para instalar las dependencias, el cual contiene las dependencias a instalar.
   - El comando para ejecutar los tests.
 
     ~~~
     language: python
     python:
-    - "3.7-dev"
+    - "3.6.7"
     install:
     - pip install -r requirements.txt
     script:
