@@ -9,19 +9,31 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Descripción de arquitecturas software](#id2)
   - [Arquitectura seleccionada](#id3)
 - [Descripción de los microservicios a desarrollar](#id4)
-  - [Comunicación entre los microservicios](#id5)
   - [Bibliotecas de Python para la API de Twitter](#id6)
 - [Descipción de los tests en Python (código sin test código roto)](#id7)
 - [Descripción del despliegue](#id8)
   - [Despliegue en PaaS](#id9)
-  - [Despliegue de la infraestructura en máquina virtual local:](#id10) en [Vagrant](#id11) y en [Ansible](#id12)
-- [Automatización de tareas en la nube](#id13)
+  - [Despliegue de la infraestructura en máquina virtual local](#id10)
+- [Orquestación de máquinas virtuales](#id20)
+  - [Pasos para probarlo](#id21)
+  - [Comprobaciones del hito 5](#id22)
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
+<!----
+
+  - [Comunicación entre los microservicios](#id5)
+
+
+- [Descripción del despliegue](#id8)
+  - [Despliegue en PaaS](#id9)
+  - [Despliegue de la infraestructura en máquina virtual local:](#id10) en [Vagrant](#id11) y en [Ansible](#id12)
+- [Automatización de tareas en la nube](#id13)
+
+
 MV2: 40.89.158.208
 
-<!----
+
 Despliegue: https://glacial-castle-84194.herokuapp.com
 
 MV: 23.97.225.1
@@ -31,6 +43,7 @@ MV: 23.97.225.1
 
 ## Novedades <a name="id0"></a>
 
+<!----
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Chef) para ver el resumen realizado sobre el seminario de Chef.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Nube%20desde%20linea%20de%20ordenes) para ver el resumen realizado sobre el seminario de la nube desde línea de órdenes.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para acceder a la documentación trasladada del hito 3.
@@ -46,7 +59,7 @@ MV: 23.97.225.1
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el script de aprovisionamiento, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito4/objetivosHito4.md) para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
 
-<!----
+
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/errores_proyecto.md) para acceder a los errores solucionados a lo largo del hito 3.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 3.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC) para acceder a los ejercicios de la asignatura (resúmenes de charlas, ejercicios, enlaces de interés...).
@@ -88,7 +101,7 @@ Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://ww
 
 1. __Consultar API de Twitter__: en este microservicio solo nos vamos a centrar en acceder, consultar y bajarnos información de la API, información obtenida en un [JSON](https://www.json.org).
 2. __Procesar información__: en este microservicio vamos a quedarnos con los datos referentes a las tendencias según su localización, en un JSON: [`API.trends_place(id[, exclude])`](http://docs.tweepy.org/en/v3.5.0/api.html).
-3. __Almacenar información__: en este microservicio nos vamos a centrar en crear una estructura para los datos que hemos realizado, usando principalmente una BD como [MongoDB](https://www.mongodb.com/es).
+3. __Almacenar información__: en este microservicio nos vamos a centrar en crear una estructura para los datos que hemos realizado, usando principalmente una BD como [MYSQL](https://www.mysql.com).
 4. __Mostrar información__: en este microservicio solo nos interesa mostrar la información relevante de alguna manera específica.
 5. Además, necesitamos un sistema de centralización de [__logs__](https://www.elastic.co/products/logstash), al cual todos deben comunicarse.
 
@@ -96,9 +109,13 @@ Para realizar la arquitectura se va a hacer uso del lenguaje [Python](https://ww
   <img width="460" height="350" src="docs/images/estructura_microservicios.png">
 </p>
 
+<!----
 ### Comunicación entre los microservicios <a name="id5"></a>
 
+
 La comunicación entre servicios será realizada por _brokers_, en concreto con [RabbitMQ](https://www.rabbitmq.com), que es un sistema de manejo de colas.
+--->
+
 
 ### Bibliotecas de Python para la API de Twitter <a name="id6"></a>
 
@@ -138,6 +155,8 @@ _**Pincha [aquí](https://gecofer.github.io/proyecto-CC/#id9), para saber más i
 
 Para el despliegue de la aplicación en una máquina virtual local, se ha hecho uso de Ansible junto con Vagrant. Previamente a la realización de un `clone` a mi repositorio, se debe instalar [Ansible](https://github.com/Gecofer/proyecto-CC/tree/master/provision),  [Vagrant](https://github.com/Gecofer/proyecto-CC/tree/master/provision/vagrant-ubuntu) y [VirtualBox](https://www.virtualbox.org), herramientas necesarias para ejecutar la aplicación. Una vez realizados estos procesos, debemos dirigirnos al directorio `provision > vagrant_ubuntu` y ejecutar la sentencia `vagrant up`, la cual creará una máquina virtual en VirtualBox y ejecutará el _playbook_ con lo indispensable para el despliegue.
 
+<!----
+
 #### Vagrant <a name="id11"></a>
 
 Se ha utilizado la herramienta Vagrant para generar entornos de desarrollo reproducibles y compartibles de forma muy sencilla, ya que crea y configura máquinas virtuales a partir de simples ficheros de configuración. El fichero donde se describe la infraestructura se llama `Vagrantfile` y es utilizado para el despliegue ([enlace](https://github.com/Gecofer/proyecto-CC/blob/master/provision/vagrant-ubuntu/Vagrantfile)).
@@ -156,7 +175,7 @@ Como software para automatizar el proceso de aprovisionamiento se ha utilizado A
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision), para saber más información sobre la gestión de configuraciones con Ansible.**_
 
 _**Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision/Azure), para saber más información sobre el despliegue en Azure.**_
-
+--->
 <!----
 Si no se utiliza Vagrant, también se puede realizar el provisionamiento utilizando órdenes de ansible, es decir, haciendo uso de la orden `ansible-playbook ansible_playbook.yml`.
 
@@ -179,7 +198,7 @@ La dirección IP: 23.97.225.1
 
 MV: [http://23.97.225.1](http://23.97.225.1)
 --->
-
+<!----
 *__Pincha [aquí](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer.md) para ver la comprobación de [@jmv74211](https://github.com/jmv74211/) al aprovisionamiento de [@gecofer](https://github.com/Gecofer).__*
 
 __*Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/corrección_a_%40jmv74211.md#comprobación-de-la-aplicación-en-azure) para ver la comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211/).*__
@@ -201,7 +220,33 @@ El objetivo de las plataformas de virtualización es, eventualmente, crear y ges
 
 5. Por último, ya solo nos hace falta crear el script de aprovisionamiento, para eso pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el código, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
 
+--->
 
+## Orquestación de máquinas virtuales <a name="id20"></a>
+
+Se va a usar `Vagrant` para provisionar una o preferiblemente varias máquinas virtuales usando un proveedor de servicios cloud, en este caso se ha usado Azure.
+
+### Pasos para probarlo <a name="id22"></a>
+
+1. cd/orquestacion && vagrant up --no-parallel —provider=azure
+2. Cuando se terminen de crear y provisional ambas máquinas, abres las dos :
+    1. La maquina principal: ssh vagrant@mvprincipalcc.francecentral.cloudapp.azure.com
+    2. La maquina con la BD: ssh vagrant@mvbasedatoscc.francecentral.cloudapp.azure.com
+3. Lanzas en la máquina principal:
+    1. cd proyecto/
+    2. sudo gunicorn -b :80 main:app
+4. Accedes en el navegador: http://ip_publica_maquina_principal:80/status  (la ip la miras en azure)
+5. Accedes en el navegador: http://ip_publica_maquina_principal:80/BD (la ip la miras en azure)
+
+### Comprobaciones del hito 5 <a name="id22"></a>
+
+- Comprobación de [@jmv74211](https://github.com/jmv74211) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer_hito5.md).
+
+- Comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211) disponible en este [enlace](https://github.com/Gecofer/Proyecto-cloud-computing/blob/master/docs/hitos/comprobacion_hito5_de_%40Gecofer.md).
+
+- Comprobación de [@luiisgallego](https://github.com/luiisgallego/MII_CC_1819) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/comprobacionAprovision.md).
+
+- Comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@luiisgallego](https://github.com/luiisgallego/MII_CC_1819) disponible en este [enlace](https://github.com/luiisgallego/MII_CC_1819/blob/master/docs/comprobacionHito5.md).
 
 ## Enlaces de Interés <a name="id15"></a>
 
@@ -225,7 +270,3 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 *__Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades.*
 
 ---
-
-## Comprobaciones del hito 5
-
-- Comprobación de [@jmv74211](https://github.com/jmv74211) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer_hito5.md).
