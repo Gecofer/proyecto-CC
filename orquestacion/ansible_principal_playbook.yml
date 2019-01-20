@@ -53,7 +53,7 @@
         regexp: 'bind-address'
         replace: '#bind-address'
 
-    - name: restart mysql
+    - name: Reiniciar mysql
       service: name=mysql
                enabled=yes
                state=restarted
