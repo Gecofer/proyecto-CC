@@ -20,11 +20,19 @@
     - [Ansible](#id15)
   - [Despliegue de la infraestructura en Azure](#id16)
 - [Automatización de tareas en la nube](#id165)
+- [Orquestación de máquinas virtuales](#id20)
+  - [Pasos para probarlo](#id21)
+  - [Comprobaciones del hito 5](#id22)
 - [Enlaces de Interés](#id17)
 - [Licencia](#id18)
 
 ## Novedades <a name="id0"></a>
 
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md#id8) para acceder a los avances realizados en el hito 5. En dicho documento explico el proceso seguido para la conexión entre máquinas y como creo la BD e inserto.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC#orquestación-de-máquinas-virtuales-) para ver la orquestación de máquinas virtuales.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC#id22) para ver las comprobaciones realizadas en el hito 5.
+
+<!----
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Chef) para ver el resumen realizado sobre el seminario de Chef.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Nube%20desde%20linea%20de%20ordenes) para ver el resumen realizado sobre el seminario de la nube desde línea de órdenes.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/provision) para acceder a la documentación trasladada del hito 3.
@@ -39,7 +47,7 @@
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md) para acceder a los avances realizados en el hito 4.
 - Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el script de aprovisionamiento, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/blob/master/hito4/objetivosHito4.md) para más información acerca de como se ha redirigido el puerto 5000 usado por Flask al puerto 80.
-
+--->
 ## Descripción del proyecto <a name="id1"></a>
 
 Twitter junto con Instagram son dos de las plataformas sociales más usadas actualmente, por eso mismo, miles de usuarios comparten todo tipo de información en ellas. Este tipo de comportamientos benefician a las empresas dándoles potestad en la obtención de información muy valiosa, cómo por ejemplo ver qué tendencias o _trending topics_ son los más comentados o qué ciudades son las más comentadas en la red. En este caso, yo me voy a centrar en la obtención de datos geolocalizados, es decir,  en la extracción de _trending topics_ o tendencias de los usuarios en Twitter para una región determinada. Para así, poder clasificar las tendencias y establecer la tendencia mayoritaria para una region determinada.
@@ -201,6 +209,11 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   curl -X DELETE https://glacial-castle-84194.herokuapp.com/data_twitter/Rudy
   ~~~
 
+- `/BD` con GET: muestra en HTML la base de datos.
+
+- `/add_bd` con POST: inserta en la base de datos.
+
+
 
 #### Descripción de los ficheros usados <a name="id11"></a>
 
@@ -215,6 +228,10 @@ Despliegue: [https://glacial-castle-84194.herokuapp.com](https://glacial-castle-
   - *url*: link del enlace de la tendencia
   - *query*: nombre de la consultas
   - *tweet_volume*: volumen de tweets dedicados a esa tendencia
+
+- `scripts/`: carpeta que contiene los scripts usados para la creación del usuario, la base de datos y la tabla.
+
+- `html/`: carpeta que contiene las plantillas y los diseños para la visualización de las rutas '/BD' y '/add_bd'.
 
 
 #### Pasos para hacer el despliegue (Github+Travis+Heroku) <a name="id12"></a>
@@ -345,6 +362,43 @@ El objetivo de las plataformas de virtualización es, eventualmente, crear y ges
 5. Por último, ya solo nos hace falta crear el script de aprovisionamiento, para eso pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/acopio.sh) para ver el código, [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/acopio.md) para ver la documentación del mismo y [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/salida-acopio.txt) para ver su salida.
 
 MV2: 40.89.158.208
+
+## Orquestación de máquinas virtuales <a name="id20"></a>
+
+Se usa `Vagrant` para provisionar una o preferiblemente varias máquinas virtuales usando un proveedor de servicios cloud, en este caso se ha usado Azure. En el directorio [orquestacion](https://github.com/Gecofer/proyecto-CC/tree/master/orquestacion) se encuentran los archivos necesarios para llevar a cabo la creación y provisión de las máquinas virtuales y la documentación se encuentra [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/orquestacion/README.md). La documentación donde se explica el proceso para la creación y uso de la base de datos, se puede encontrar [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md#id8).
+
+Despliegue Vagrant: 20.188.32.253
+
+### Pasos para probarlo <a name="id22"></a>
+
+1. Clonar mi repositorio.
+2. Acceder a la carpeta orquestación (`cd orquestacion/`) y ejecutar `vagrant up --no-parallel —provider=azure`.
+3. Cuando se terminen de crear y provisiona ambas máquinas, abrir las dos con SSH:
+
+  ~~~
+  # Para la máquina principal
+  $ ssh vagrant@mvprincipalcc.francecentral.cloudapp.azure.com
+
+  # Para la máquina con la base de datos
+  $ ssh vagrant@mvbasedatoscc.francecentral.cloudapp.azure.com
+  ~~~
+
+4. Dentro de la máquina principal, se accede a la carpeta proyecto (`cd proyecto/`) y se lanza la aplicación en el puerto 80 con (`sudo gunicorn -b :80 main:app`).
+
+5. Accedemos al navegador con la IP pública de la máquina principal (http://ip_publica_maquina_principal:80/status) y obtenemos el _status ok_ (mirar IP en Azure).
+
+6. Accedemos al navegador con la IP pública de la máquina principal (http://ip_publica_maquina_principal:80/BD) y visualizamos la interfaz web, la cual esta conectada con la base de datos.
+
+### Comprobaciones del hito 5 <a name="id22"></a>
+
+- Comprobación de [@jmv74211](https://github.com/jmv74211) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer_hito5.md).
+
+- Comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@jmv74211](https://github.com/jmv74211) disponible en este [enlace](https://github.com/Gecofer/Proyecto-cloud-computing/blob/master/docs/hitos/comprobacion_hito5_de_%40Gecofer.md).
+
+- Comprobación de [@luiisgallego](https://github.com/luiisgallego/MII_CC_1819) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/Gecofer/proyecto-CC/blob/master/docs/comprobacionAprovision.md).
+
+- Comprobación de [@gecofer](https://github.com/Gecofer) al aprovisionamiento de [@luiisgallego](https://github.com/luiisgallego/MII_CC_1819) disponible en este [enlace](https://github.com/luiisgallego/MII_CC_1819/blob/master/docs/comprobacionHito5.md).
+
 
 ## Enlaces de Interés  <a name="id17"></a>
 
