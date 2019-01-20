@@ -46,14 +46,3 @@
       pip:
         requirements: /home/vagrant/proyecto/requirements_principal.txt
         executable: pip3
-
-    - name: Permite la conexión desde cualquier IP
-      replace:
-        path: /etc/mysql/mysql.conf.d/mysqld.cnf
-        regexp: 'bind-address'
-        replace: '#bind-address'
-
-    - name: Reiniciar mysql
-      service: name=mysql
-               enabled=yes
-               state=restarted
