@@ -13,9 +13,6 @@
       changed_when: False
 
   tasks:
-    - name: Instala git
-      apt: pkg=git state=present
-
     - name: Instala python-setuptools
       apt: pkg=python-setuptools state=present
 
@@ -56,13 +53,13 @@
         regexp: 'bind-address'
         replace: '#bind-address'
 
-    - name: restart mysql
+    - name: Reiniciar mysql
       service: name=mysql
                enabled=yes
                state=restarted
 
-    - name: Execute the script
+    - name: Ejecutar el script para crear el usuario
       command: sh /home/vagrant/proyecto/script_usuario.sh
 
-    - name: Execute the script
+    - name: Ejecutar el script para crear la base de datos y la tabla
       command: sh /home/vagrant/proyecto/script_database.sh
