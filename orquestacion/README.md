@@ -2,6 +2,8 @@
 
 En este hito se trata de usar `Vagrant` para provisionar una o preferiblemente varias máquinas virtuales usando un proveedor de servicios cloud, en este caso se ha usado Azure.
 
+---
+
 **Tabla de Contenidos**
 
 - [Comprobando la instalación Vagrant](#id0)
@@ -11,7 +13,13 @@ En este hito se trata de usar `Vagrant` para provisionar una o preferiblemente v
   - [Creación del archivo Vagrantfile](#id4)
     - [Elementos del archivo Vagrantfile](#id5)
 - [Explicación de los playbook usados para el aprovisionamiento](#id6)
+- [Ejecutando el Vagrantfile](#id7)
+  - [Creación y aprovisionamiento de la máquina que contiene el servicio](#id8)
+  - [Creación y aprovisionamiento de la máquina que contiene la base de datos](#id9)
+- [Ejecutando el Vagrantfile](#id10)
+- [Enlaces interesantes](#id11)
 
+---
 
 ## Comprobando la instalación Vagrant <a name="id0"></a>
 
@@ -147,7 +155,7 @@ Vagrant.configure("2") do |config|
 
 1. `Vagrant.configure("2") do |config|`: toda la configuración de Vagrant se realiza a continuación de esta línea. El "2" en Vagrant.configure significa la versión que existe de configuración.
 
-2. `config.vm.synced_folder ".", "/vagrant", disabled: true`: como estamos usando MacOS, debemos desabilitar las carpetas sincronizadas, sino cada vez que realicemos `vagrant up` se nos pondrá la carpeta de _orquestacion_ como compartida, teniendo que borrar la carpeta compartida cada vez que realicemos `vagrant up`. [Aquí]() explico el problema que ocurre en MacOS y como solventarlo [[2][2]].
+2. `config.vm.synced_folder ".", "/vagrant", disabled: true`: como estamos usando MacOS, debemos deshabilitar las carpetas sincronizadas, sino cada vez que realicemos `vagrant up` se nos pondrá la carpeta de _orquestacion_ como compartida, teniendo que borrar la carpeta compartida cada vez que realicemos `vagrant up`. [Aquí](#id7) explico el problema que ocurre en MacOS y como solventarlo [[2][2]].
 
 3. `config.ssh.private_key_path = '~/.ssh/id_rsa'`: usamos la clave SSH para conectarnos por remoto a _vagrant box_.
 
@@ -256,35 +264,64 @@ Se pretende que cada máquina disponga de un aprovisionamiento distinto, en dond
 La máquina que contiene la base de datos, provisiona con ([`ansible_basedatos_playbook.yml`](https://github.com/Gecofer/proyecto-CC/blob/master/orquestacion/ansible_basesdatos_playbook.yml)). En dicho fichero, instalamos `MYSQL`, abriendo el servicio, estableciendo que escuche por cualquier dirección IP y reiniciando el servicio. También, se ejecutan los scripts definidos para la creación del usuario, la base de datos y la tabla.
 
 
+## Ejecutando el Vagrantfile <a name="id7"></a>
 
+Antes de lanzar nuestro Vagrantfile, debemos realizar unos cambios si vamos a ejecutar en MacOS. Debido a que necesitamos compartir la carpeta, sino se comparte nos dá el siguiente error.
 
+![](../docs/images/hito5/error-vagrant1.png)
 
+Para solventar ese error, debemos ir a Preferencias del Sistema > Compartir y activar la compartición de archivos y carpetas usando SMB:
 
+![](../docs/images/hito5/arreglado_error_mac.png)
 
+Con esto ya podemos hacer `vagrant up`, pero cada vez que lo hagamos nos pedirá introducir la contraseña, es por eso que se ha incorporado la línea `config.vm.synced_folder ".", "/vagrant", disabled: true` para deshabilitar las carpetas sincronizadas. Además, de que cada vez que realicemos `vagrant up` se nos pondrá la carpeta de _orquestacion_ como compartida, teniendo que borrar la carpeta compartida cada vez que realicemos `vagrant up` [[4][4]].
 
+Para la ejecución del fichero 'Vagrantfile' se hace en la carpeta 'orquestacion' con `vagrant up --no-parallel --provider=azure`:
 
------
+- `--no-parallel`: las máquinas se deben de crear de forma no paralela, con el fin de establecer ambas en el mismo grupo de recursos, para así poder establecer una comunicación entre ambas por red interna. Ya que si establecemos distintos grupos de recursos, ambas tendrán la misma IP privada (10.0.0.4), y haciéndolo de esta manera, la primera máquina creada será la 10.0.0.4 y la segunda 10.0.0.5. Para que se puedan crear ambas máquinas en el mismo grupo de recurso, se deben de crear de forma no paralela con [[3][3]].
+- `--provider=azure`: estamos definiendo que el _provider_ es azure, esta línea se podría quitar poniendo `require 'azure'` en archivo Vagrantfile.
 
-- Explicar Vagrantfile
+### Creación y aprovisionamiento de la máquina que contiene el servicio <a name="id8"></a>
 
+![](../docs/images/hito5/crearPrincipal.png)
 
+![](../docs/images/hito5/aprovisionaPrincipal.png)
 
+![](../docs/images/hito5/datosPrincipal.png)
 
-en el vagrantfile esto no
-machine.vm.network "private_network", ip: "192.168.50.100", virtualbox__intnet: true
+### Creación y aprovisionamiento de la máquina que contiene la base de datos <a name="id9"></a>
 
-para transpasar ficheros
+![](../docs/images/hito5/crearMaquinaBD.png)
 
-Quitamos clonación de ficheros
+![](../docs/images/hito5/aprovisionaMaquinaBD.png)
 
-https://www.vagrantup.com/docs/provisioning/file.html
+![](../docs/images/hito5/datosMaquinaBD.png)
 
+## Ejecutando el Vagrantfile <a name="id10"></a>
 
-- vagrant up --no-parallel --provider=azure o require 'azure'
+Una vez creadas neustras máquinas accedemos a ellas por SSH y comprobamos el contenido de cada una de ellas:
 
-- los _playbook_
+~~~
+$ ssh vagrant@mvprincipalc.francecentral.cloudapp.azure.com
+~~~
 
-- Avance con la BD en mysql
+![](../docs/images/hito5/SSH_principal.png)
+
+~~~
+$ ssh vagrant@mvbasedatosc.francecentral.cloudapp.azure.com
+~~~
+
+![](../docs/images/hito5/SSH_BD.png)
+
+Nos situamos en nuestra máquina principal y lanzamos nuestro proyecto con `sudo gunicorn -b :80 main:app`, accedemos en el navegador con la IP pública y comprobamos que funciona correctamente.
+
+![](../docs/images/hito5/comprobando1.png)
+
+![](../docs/images/hito5/comprobando2.png)
+
+![](../docs/images/hito5/comprobando3.png)
+
+**_Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md#id8) para saber más acerca de la nueva funcionalidad añadida en el proyecto._**
 
 
 
@@ -292,6 +329,10 @@ https://www.vagrantup.com/docs/provisioning/file.html
 [1]: https://www.returngis.net/2015/11/usa-vagrant-con-microsoft-azure/
 [2]: https://www.vagrantup.com/docs/synced-folders/basic_usage.html
 [3]: https://www.vagrantup.com/docs/cli/up.html
+[4]: https://github.com/hashicorp/vagrant/issues/9567
 
-https://blog.scottlowe.org/2017/12/11/using-vagrant-with-azure/
-https://www.linkedin.com/pulse/azure-devops-vagrant-joão-pedro-soares
+## Enlaces interesantes <a name="id11"></a>
+
+- [Using Vagrant with Azure](https://blog.scottlowe.org/2017/12/11/using-vagrant-with-azure/)
+- [Azure DevOps with Vagrant](https://www.linkedin.com/pulse/azure-devops-vagrant-joão-pedro-soares)
+- [Vagrant - File Provisioner](https://www.vagrantup.com/docs/provisioning/file.html)
