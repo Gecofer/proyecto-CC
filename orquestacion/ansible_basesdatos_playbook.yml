@@ -54,9 +54,16 @@
         replace: '#bind-address'
 
     - name: Reiniciar mysql
-      service: name=mysql
-               enabled=yes
-               state=restarted
+      service:
+        name: mysql
+        state: restarted
+        enabled: yes
+
+    - name: Permite la conexión desde la IP con la máquina principal
+      lineinfile:
+        path: /etc/mysql/mysql.conf.d/mysqld.cnf
+        line: 'bind-address = 10.0.0.4'
+        insertafter: '#bind-address *.'
 
     - name: Ejecutar el script para crear el usuario
       command: sh /home/vagrant/proyecto/script_usuario.sh
