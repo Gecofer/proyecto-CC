@@ -13,9 +13,6 @@
       changed_when: False
 
   tasks:
-    - name: Instala git
-      apt: pkg=git state=present
-
     - name: Instala python-setuptools
       apt: pkg=python-setuptools state=present
 
