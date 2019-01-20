@@ -11,7 +11,10 @@
   - [Avance 1](#id6)
   - [Avance 2](#id7)
 - [Hito 5](#id8)
-
+- [Avance 1](#id9)
+- [Avance 2](#id10)
+- [Avance 3](#id11)
+  
 ### Hito 3 <a name="id0"></a>
 
 #### Avance 1 <a name="id1"></a>
@@ -225,6 +228,106 @@ La incorporación de un sistema centralizado de logs, ha llevado a cabo una revi
 
 ### Hito 5 <a name="id8"></a>
 
+Hasta ahora, siempre hemos usado las tendencias extraídas de la API de Twitter, pero debemos preguntarnos, si esa es la funcionalidad completa que queremos darle a nuestra aplicación. Entonces, llegamos a la conclusión, de que los datos extraídos de la API de Twitter no son modificables, ¿que pasaría si el usuario quiere guardar sus tendencias de Twitter? Para responder a esta pregunta, debemos hacer uso de una base de datos. En donde el usuario puede consultar los datos de twitter en una ruta específica, pero además, puede insertar sus tendencias en otras ruta. Con el fin, de que ambos servicios le sean de utilidad y pueda sacar el máximo provecho a la aplicación.
+
+#### Avance 1 <a name="id9"></a>
+
+Como hemos comentado anteriormente, se ha incorporado una base de datos en MYSQL con el fin de que el usuario pueda guardar sus tendencias en Twitter. En este caso, se ha hecho uso de MySQL, pero se podría haber usado otra, ahora explicamos el porqué:
+
+1. **PostgreSQL vs MySQL**: MySQL resulta ser un sistema más simple y que busca atraer a desarrolladores que quieren trabajar con un poco más de comodidad, con _queries_ simples y bases de datos pequeñas o medianas. Por otro lado, para quienes buscan más funciones y trabajan con bases muy grandes, PostgreSQL se convierte en el aliado indicado [[3][3]].
+
+2. **MySQL vs MongoDB**: MySQL ofrece alto rendimiento, flexibilidad, protección confiable de datos, alta disponibilidad y es fácil de administrar. Si se indexa correctamente puede mejorar notoriamente el rendimiento, facilitar las consultas y mejorar la robustez. Cabe destacar que es aconsejable si el esquema no cambia y se guardan siempre los mismos datos.
+
+Como vamos a trabajar con bases de datos pequeñas y nuestro esquema no va a cambiar, es por eso que vamos hacer uso de MySQL. Además, Flask cuenta con una base de datos MySQL (ver [aquí](https://flask-mysqldb.readthedocs.io/en/latest/)), la cual nos facilita el trabajo. Por lo que simplemente para la conexión con la base de datos necesitamos:
+
+~~~
+# Conexión con MYSQL
+app.config['MYSQL_HOST'] = '10.0.0.5'
+app.config['MYSQL_USER'] = 'usuariocc'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'twitter'
+mysql = MySQL(app)
+~~~
+
+En donde la dirección IP privada de la máquina con la base de datos es la 10.0.0.5 y en la carpeta [scripts](https://github.com/Gecofer/proyecto-CC/tree/master/scripts) podemos encontrar los scripts para la creación del usuario, la base de datos y la tabla.
+
+![](../docs/images/hito5/red.png)
+
+Por tanto, en el fichero `main.py`, hemos añadido dos rutas en HTML [[5][5]]:
+
+1. Una ruta para visualizar los datos de la BD que el usuario introduce por pantallla: '/BD'
+
+~~~
+# Ruta para visualizar los datos de la BD y la página principal
+@app.route('/BD')
+def Index():
+
+    # Establecemos la conexión con la BD
+    cur = mysql.connection.cursor()
+    logger.info("Successfully connection.")
+    cur.execute('SELECT * FROM contacts')
+    logger.info("Successfully execute SELECT * FROM contacts.")
+    data = cur.fetchall()
+    cur.close() # cerramos la conexión
+
+    return render_template('index.html', contacts = data,
+                            content_type='application/json')
+~~~
+
+![](../docs/images/hito5/comprobando2.png)
+
+2. Una ruta para insertar en la base de datos.
+
+~~~
+# Ruta para insertar en la BD
+@app.route('/add_bd', methods=['POST'])
+def add_bd():
+
+    # Como vamos a modificar hacemos uso del método POST
+    if request.method == 'POST':
+        # Obtenemos las variables a insertar
+        name = request.form['name']
+        url = request.form['url']
+        tweet_volume = request.form['tweet_volume']
+
+        # Establecemos la conexión con la BD
+        cur = mysql.connection.cursor()
+        logger.info("Successfully connection.")
+        cur.execute("INSERT INTO contacts (name, url, tweet_volume) VALUES ( %s,%s,%s)", (name, url, tweet_volume))
+        logger.info("Successfully execute INSERT INTO contacts (name, url, tweet_volume).")
+        mysql.connection.commit()
+
+        flash('Added Successfully')
+        logger.info("Successfully method POST: Added to database.")
+
+        return redirect(url_for('Index'))
+~~~
+
+![](../docs/images/hito5/comprobando3.png)
+
+![](../docs/images/hito5/comprobando4.png)
+
+Para comprobar que inserta en la base de datos, simplemente tenemos que dirigirnos a la máquina que contiene la base de datos, acceder a MySQL con `mysql -u usuariocc -p twitter` y mostrar el contenido de la tabla:
+
+![](../docs/images/hito5/comprobando5.png)
+
+
+#### Avance 2 <a name="id10"></a>
+
+Se han añadido más _logs_ a la parte de la base de datos, en donde este sistema de centralización nos ha permitido resolver problemas para la conexión con la base de datos:
+~~~
+logger.info("Successfully connection.")
+~~~
+
+#### Avance 3 <a name="id11"></a>
+
+Como se ve en las imágenes anteriores, se ha puesto un botón de eliminar, con el fin de deshacer filas en la BD, pero dicha funcionalidad se ha pensado añadirla en el siguiente hito, al igual que se han dejado los tests preparado para introducir más test relacionados con la base de datos.
+
+
+
 
 [1]: https://dbi.io/es/blog/que-son-los-logs/
 [2]: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+[3]: https://guiadev.com/postgresql-vs-mysql/
+[4]: https://guiadev.com/mariadb-vs-mysql-cual-debo-elegir/
+[5]: https://github.com/FaztWeb/flask-crud-contacts-app
