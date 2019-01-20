@@ -223,3 +223,9 @@ Proyecto bajo licencia [GNU GLP V3](https://github.com/Gecofer/proyecto-CC/blob/
 
 
 *__Nota__: Se debe tener en cuenta que la realización de un proceso de desarrollo conlleva modificaciones en el futuro, pudiendo modificar la documentación o añadiendo nuevas funcionalidades.*
+
+---
+
+## Comprobaciones del hito 5
+
+- Comprobación de [@jmv74211](https://github.com/jmv74211) al aprovisionamiento de [@gecofer](https://github.com/Gecofer) disponible en este [enlace](https://github.com/jmv74211/Proyecto-cloud-computing/blob/master/docs/hitos/correcci%C3%B3n_a_%40Gecofer_hito5.md).
