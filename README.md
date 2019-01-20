@@ -228,15 +228,23 @@ Se va a usar `Vagrant` para provisionar una o preferiblemente varias máquinas v
 
 ### Pasos para probarlo <a name="id22"></a>
 
-1. cd/orquestacion && vagrant up --no-parallel —provider=azure
-2. Cuando se terminen de crear y provisional ambas máquinas, abres las dos :
-    1. La maquina principal: ssh vagrant@mvprincipalcc.francecentral.cloudapp.azure.com
-    2. La maquina con la BD: ssh vagrant@mvbasedatoscc.francecentral.cloudapp.azure.com
-3. Lanzas en la máquina principal:
-    1. cd proyecto/
-    2. sudo gunicorn -b :80 main:app
-4. Accedes en el navegador: http://ip_publica_maquina_principal:80/status  (la ip la miras en azure)
-5. Accedes en el navegador: http://ip_publica_maquina_principal:80/BD (la ip la miras en azure)
+1. Clonar mi repositorio.
+2. Acceder a la carpeta orquestación (`cd orquestacion/`) y ejecutar `vagrant up --no-parallel —provider=azure`.
+3. Cuando se terminen de crear y provisiona ambas máquinas, abrir las dos con SSH:
+
+  ~~~
+  # Para la máquina principal
+  $ ssh vagrant@mvprincipalcc.francecentral.cloudapp.azure.com
+
+  # Para la máquina con la base de datos
+  $ ssh vagrant@mvbasedatoscc.francecentral.cloudapp.azure.com
+  ~~~
+
+4. Dentro de la máquina principal, se accede a la carpeta proyecto (`cd proyecto/`) y se lanza la aplicación en el puerto 80 con (`sudo gunicorn -b :80 main:app`).
+
+5. Accedemos al navegador con la IP pública de la máquina principal (http://ip_publica_maquina_principal:80/status) y obtenemos el _status ok_ (mirar IP en Azure).
+
+6. Accedemos al navegador con la IP pública de la máquina principal (http://ip_publica_maquina_principal:80/BD) y visualizamos la interfaz web, la cual esta conectada con la base de datos.
 
 ### Comprobaciones del hito 5 <a name="id22"></a>
 
