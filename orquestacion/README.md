@@ -302,13 +302,13 @@ Para la ejecución del fichero 'Vagrantfile' se hace en la carpeta 'orquestacion
 Una vez creadas neustras máquinas accedemos a ellas por SSH y comprobamos el contenido de cada una de ellas:
 
 ~~~
-$ ssh vagrant@mvprincipalc.francecentral.cloudapp.azure.com
+$ ssh vagrant@mvprincipalcc1819.francecentral.cloudapp.azure.com
 ~~~
 
 ![](../docs/images/hito5/SSH_principal.png)
 
 ~~~
-$ ssh vagrant@mvbasedatosc.francecentral.cloudapp.azure.com
+$ ssh vagrant@mvbasedatoscc1819.francecentral.cloudapp.azure.com
 ~~~
 
 ![](../docs/images/hito5/SSH_BD.png)
@@ -321,9 +321,9 @@ Nos situamos en nuestra máquina principal y lanzamos nuestro proyecto con `sudo
 
 ![](../docs/images/hito5/comprobando3.png)
 
+![](../docs/images/hito5/comprobando4.png)
+
 **_Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md#id8) para saber más acerca de la nueva funcionalidad añadida en el proyecto._**
-
-
 
 
 [1]: https://www.returngis.net/2015/11/usa-vagrant-con-microsoft-azure/
