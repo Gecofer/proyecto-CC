@@ -20,6 +20,8 @@ Proyecto de la asignatura Cloud Computing para el curso 2018/2019 del Máster en
 - [Enlaces de Interés](#id15)
 - [Licencia](#id16)
 
+Despliegue Vagrant: 40.89.152.131
+
 <!----
 
   - [Comunicación entre los microservicios](#id5)
@@ -42,6 +44,10 @@ MV: 23.97.225.1
 --->
 
 ## Novedades <a name="id0"></a>
+
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/docs/avance_proyecto.md#id8) para acceder a los avances realizados en el hito 5.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC#orquestación-de-máquinas-virtuales-) para ver la orquestación de máquinas virtuales.
+- Pincha [aquí](https://github.com/Gecofer/proyecto-CC#id22) para ver las comprobaciones realizadas en el hito 5.
 
 <!----
 - Pincha [aquí](https://github.com/Gecofer/ejercicios-CC/tree/master/hito4/Seminarios/Chef) para ver el resumen realizado sobre el seminario de Chef.
@@ -224,7 +230,10 @@ El objetivo de las plataformas de virtualización es, eventualmente, crear y ges
 
 ## Orquestación de máquinas virtuales <a name="id20"></a>
 
-Se va a usar `Vagrant` para provisionar una o preferiblemente varias máquinas virtuales usando un proveedor de servicios cloud, en este caso se ha usado Azure.
+Se usa `Vagrant` para provisionar una o preferiblemente varias máquinas virtuales usando un proveedor de servicios cloud, en este caso se ha usado Azure. En la carpeta [orquestacion](https://github.com/Gecofer/proyecto-CC/tree/master/orquestacion) se encuentran los archivos necesarios para llevarla la creación y provisión de las máquinas virtuales. La documentación correspondiente a la orquestación se encuentra [aquí](https://github.com/Gecofer/proyecto-CC/blob/master/orquestacion/README.md).
+
+
+
 
 ### Pasos para probarlo <a name="id22"></a>
 
