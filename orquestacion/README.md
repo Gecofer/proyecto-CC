@@ -227,7 +227,7 @@ config.vm.define "mvprincipal" do |machine|
 
 14. `azure.tcp_endpoints = 80`: nuestro servicio va a estar desplegado en el puerto 80, es por eso que necesitamos abrirlo.
 
-Por último, que ya tenemos creada nuestra máquina, vamos aprovisionarla con ansible (pincha [aquí]() para ver el aprovisionamiento de la máquina que contiene el servicio).
+Por último, que ya tenemos creada nuestra máquina, vamos aprovisionarla con ansible (pincha [aquí](#id6) para ver el aprovisionamiento de la máquina que contiene el servicio).
 
 ~~~
 # Configuración de ansible
@@ -243,11 +243,21 @@ Inmediatamente después de la creación y aprovisionamiento de la primera máqui
   - El script (`script_usuario.sh`) para la creación del usuario en la base de datos.
   - El script (`script_database.sh`) para la creación de la base de datos y la tabla.
 
-2. Para esta máquina, hacemos uso de archivo de aprovisonamiento - `ansible_basedatos_playbook.yml` (pincha [aquí]() para ver el aprovisionamiento de la máquina que contiene el servicio).
+2. Para esta máquina, hacemos uso de archivo de aprovisonamiento - `ansible_basedatos_playbook.yml` (pincha [aquí](#id6) para ver el aprovisionamiento de la máquina que contiene el servicio).
 
 ## Explicación de los playbook usados para el aprovisionamiento <a name="id6"></a>
 
-Se pretende que cada máquina disponga de un aprovisionamiento distinto, en donde nuestra máquina principal, la que contiene la aplicación a ejecutar provisiona con ([`ansible_principal_playbook.yml`](https://github.com/Gecofer/proyecto-CC/blob/master/orquestacion/ansible_principal_playbook.yml)). En dicho fichero, instalamos
+Se pretende que cada máquina disponga de un aprovisionamiento distinto, en donde la máquina principal, la que contiene la aplicación a ejecutar provisiona con ([`ansible_principal_playbook.yml`](https://github.com/Gecofer/proyecto-CC/blob/master/orquestacion/ansible_principal_playbook.yml)). En dicho fichero, aprovisionamos con:
+
+- `Python 2` y `Python 3`: lenguaje de la aplicación
+- `MYSQL`: necesario instalar mysql, al realizar un _import_ en el `main.py`.
+- `requirements.txt`: instalando requerimientos necesario.
+
+La máquina que contiene la base de datos, provisiona con ([`ansible_basedatos_playbook.yml`](https://github.com/Gecofer/proyecto-CC/blob/master/orquestacion/ansible_basesdatos_playbook.yml)). En dicho fichero, instalamos `MYSQL`, abriendo el servicio, estableciendo que escuche por cualquier dirección IP y reiniciando el servicio. También, se ejecutan los scripts definidos para la creación del usuario, la base de datos y la tabla.
+
+
+
+
 
 
 
