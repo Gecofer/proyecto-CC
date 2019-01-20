@@ -10,6 +10,7 @@
 - [Hito 4](#id5)
   - [Avance 1](#id6)
   - [Avance 2](#id7)
+- [Hito 5](#id8)
 
 ### Hito 3 <a name="id0"></a>
 
@@ -220,6 +221,9 @@ Esta mejora supone un avance sustancial en nuestro servicio, debido a que ahora 
 #### Avance 2 <a name="id7"></a>
 
 La incorporación de un sistema centralizado de logs, ha llevado a cabo una revisión del código que testea nuestro proyecto. Asimismo como una reestructuración de la documentación disponible en Github.
+
+
+### Hito 5 <a name="id8"></a>
 
 
 [1]: https://dbi.io/es/blog/que-son-los-logs/
