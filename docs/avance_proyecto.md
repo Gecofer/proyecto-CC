@@ -11,10 +11,10 @@
   - [Avance 1](#id6)
   - [Avance 2](#id7)
 - [Hito 5](#id8)
-- [Avance 1](#id9)
-- [Avance 2](#id10)
-- [Avance 3](#id11)
-  
+  - [Avance 1](#id9)
+  - [Avance 2](#id10)
+  - [Avance 3](#id11)
+
 ### Hito 3 <a name="id0"></a>
 
 #### Avance 1 <a name="id1"></a>
@@ -228,15 +228,15 @@ La incorporación de un sistema centralizado de logs, ha llevado a cabo una revi
 
 ### Hito 5 <a name="id8"></a>
 
-Hasta ahora, siempre hemos usado las tendencias extraídas de la API de Twitter, pero debemos preguntarnos, si esa es la funcionalidad completa que queremos darle a nuestra aplicación. Entonces, llegamos a la conclusión, de que los datos extraídos de la API de Twitter no son modificables, ¿que pasaría si el usuario quiere guardar sus tendencias de Twitter? Para responder a esta pregunta, debemos hacer uso de una base de datos. En donde el usuario puede consultar los datos de twitter en una ruta específica, pero además, puede insertar sus tendencias en otras ruta. Con el fin, de que ambos servicios le sean de utilidad y pueda sacar el máximo provecho a la aplicación.
+Hasta ahora, siempre hemos usado las tendencias extraídas de la API de Twitter, pero debemos preguntarnos, si esa es la funcionalidad completa que queremos darle a nuestra aplicación. Entonces, llegamos a la conclusión, de que los datos extraídos de la API de Twitter no son modificables, ¿que pasaría si el usuario quiere guardar sus tendencias de Twitter? Para responder a esta pregunta, debemos hacer uso de una base de datos. En donde el usuario puede consultar los datos de twitter en una ruta específica, pero además, puede insertar sus tendencias en otra ruta. Con el fin, de que ambos servicios le sean de utilidad y pueda sacar el máximo provecho a la aplicación.
 
 #### Avance 1 <a name="id9"></a>
 
-Como hemos comentado anteriormente, se ha incorporado una base de datos en MYSQL con el fin de que el usuario pueda guardar sus tendencias en Twitter. En este caso, se ha hecho uso de MySQL, pero se podría haber usado otra, ahora explicamos el porqué:
+Como hemos comentado anteriormente, se ha incorporado una base de datos en MySQL con el fin de que el usuario pueda guardar sus tendencias en Twitter. En este caso, se ha hecho uso de MySQL, pero se podría haber usado otra, ahora explicamos el porqué:
 
 1. **PostgreSQL vs MySQL**: MySQL resulta ser un sistema más simple y que busca atraer a desarrolladores que quieren trabajar con un poco más de comodidad, con _queries_ simples y bases de datos pequeñas o medianas. Por otro lado, para quienes buscan más funciones y trabajan con bases muy grandes, PostgreSQL se convierte en el aliado indicado [[3][3]].
 
-2. **MySQL vs MongoDB**: MySQL ofrece alto rendimiento, flexibilidad, protección confiable de datos, alta disponibilidad y es fácil de administrar. Si se indexa correctamente puede mejorar notoriamente el rendimiento, facilitar las consultas y mejorar la robustez. Cabe destacar que es aconsejable si el esquema no cambia y se guardan siempre los mismos datos.
+2. **MySQL vs MongoDB**: MySQL ofrece alto rendimiento, flexibilidad, protección confiable de datos, alta disponibilidad y es fácil de administrar. Si se indexa correctamente puede mejorar notoriamente el rendimiento, facilitar las consultas y mejorar la robustez. Cabe destacar que es aconsejable si el esquema no cambia y se guardan siempre los mismos datos [[4][4]].
 
 Como vamos a trabajar con bases de datos pequeñas y nuestro esquema no va a cambiar, es por eso que vamos hacer uso de MySQL. Además, Flask cuenta con una base de datos MySQL (ver [aquí](https://flask-mysqldb.readthedocs.io/en/latest/)), la cual nos facilita el trabajo. Por lo que simplemente para la conexión con la base de datos necesitamos:
 
@@ -253,7 +253,32 @@ En donde la dirección IP privada de la máquina con la base de datos es la 10.0
 
 ![](../docs/images/hito5/red.png)
 
-Por tanto, en el fichero `main.py`, hemos añadido dos rutas en HTML [[5][5]]:
+Antes de nada, debemos saber que Azure asigna a la primera máquina (la principal) la dirección IP privada 10.0.0.4 y a la segunda (la de la BD) la dirección IP privada 10.0.0.5. Por tanto, hay que tener en cuenta, que la idea es tener una red interna, en donde la máquina virtual que contiene la base de datos esté escuchando a la IP 10.0.0.4, es por eso que en el archivo de configuración de MySQL (`/etc/mysql/mysql.conf.d/mysqld.cnf`), se debe poner lo siguiente:
+
+~~~
+# Instead of skip-networking the default is now to listen only on
+# localhost which is more compatible and is not less secure.
+#bind-address		= 127.0.0.1
+bind-address = 10.0.0.4
+~~~
+
+Este cambio se realiza automática con el fichero `ansible_basedatos_playbook.yml`:
+
+~~~
+- name: Permite la conexión desde cualquier IP
+  replace:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: 'bind-address'
+    replace: '#bind-address'
+
+- name: Permite la conexión desde la IP con la máquina principal
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    line: 'bind-address = 10.0.0.4'
+    insertafter: '#bind-address *.'
+~~~
+
+A continuación, en el fichero `main.py`, hemos añadido dos rutas en HTML [[5][5]]:
 
 1. Una ruta para visualizar los datos de la BD que el usuario introduce por pantallla: '/BD'
 
@@ -312,6 +337,9 @@ Para comprobar que inserta en la base de datos, simplemente tenemos que dirigirn
 ![](../docs/images/hito5/comprobando5.png)
 
 
+Como se puede observar, se ha hecho uso de HTML para el manejo de la BD en el navegador, se pueden comprobar las plantillas [aquí](https://github.com/Gecofer/proyecto-CC/tree/master/html) [[5][5]]:
+
+
 #### Avance 2 <a name="id10"></a>
 
 Se han añadido más _logs_ a la parte de la base de datos, en donde este sistema de centralización nos ha permitido resolver problemas para la conexión con la base de datos:
@@ -321,7 +349,7 @@ logger.info("Successfully connection.")
 
 #### Avance 3 <a name="id11"></a>
 
-Como se ve en las imágenes anteriores, se ha puesto un botón de eliminar, con el fin de deshacer filas en la BD, pero dicha funcionalidad se ha pensado añadirla en el siguiente hito, al igual que se han dejado los tests preparado para introducir más test relacionados con la base de datos.
+Como se ve en las imágenes anteriores, se ha puesto un botón de eliminar, con el fin de deshacer filas en la BD, pero dicha funcionalidad se ha pensado añadirla en el siguiente hito, al igual que se han dejado los tests preparados para introducir más tests relacionados con la base de datos.
 
 
 
@@ -331,3 +359,4 @@ Como se ve en las imágenes anteriores, se ha puesto un botón de eliminar, con 
 [3]: https://guiadev.com/postgresql-vs-mysql/
 [4]: https://guiadev.com/mariadb-vs-mysql-cual-debo-elegir/
 [5]: https://github.com/FaztWeb/flask-crud-contacts-app
+[6]: https://guiadev.com/mysql-vs-mongodb/
